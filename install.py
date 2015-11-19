@@ -6,5 +6,6 @@ os.system('source /etc/lsb-release && echo "deb http://download.rethinkdb.com/ap
 os.system('wget -qO- https://download.rethinkdb.com/apt/pubkey.gpg | sudo apt-key add -')
 os.system('sudo apt-get -y update')
 os.system('sudo apt-get -y install rethinkdb')
+os.system('sudo apt-get -y install python-pip')
 os.system('git clone https://github.com/peoplesnsallc/peoples_nsa_api.git')
 os.system('cd peoples_nsa_api; python update.py')
