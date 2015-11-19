@@ -41,7 +41,7 @@ class TablesHandler(tornado.web.RequestHandler):
         
  
 app = tornado.web.Application([
-    (r"/tables/", LoginHandler),
+    (r"/login/", LoginHandler),
     (r"/tables/", TablesHandler),
 ])
 
