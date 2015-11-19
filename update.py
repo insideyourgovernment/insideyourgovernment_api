@@ -13,7 +13,7 @@ def setup_rethinkdb():
     except:
         pass
     db = r.db("public")
-    tables_needed = []
+    tables_needed = ["crawling_instructions"]
     existing_tables = db.table_list().run()
     tables_to_create = set(tables_needed) - set(existing_tables) # remove existing tables from what we need
     for table in tables_to_create:
