@@ -9,6 +9,7 @@ import json
 class LoginHandler(tornado.web.RequestHandler):
     def post(self):
         print self.request.body
+        print url
         try:
             print tornado.escape.json_decode(self.request.body) 
         except:
