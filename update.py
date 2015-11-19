@@ -1,6 +1,24 @@
 import os
 import sys
 
+def setup_rethinkdb():
+    import rethinkdb as r
+    r.connect( "localhost", 28015).repl()
+    try:
+        r.db_create("nonpublic").run()
+    except:
+        pass
+    try:
+        r.db_create("public").run()
+    except:
+        pass
+    db = r.db("public")
+    tables_needed = []
+    existing_tables = db.table_list().run()
+    tables_to_create = set(tables_needed) - set(existing_tables) # remove existing tables from what we need
+    for table in tables_to_create:
+        db.table_create(table).run()
+
 def update(force=False):
     fetch_dry_run_results = os.popen('git fetch --dry-run').read()
     
@@ -8,6 +26,7 @@ def update(force=False):
         return
     os.popen('git pull').read()
     os.system('sudo pip install -r requirements.txt')
+    setup_rethinkdb()
 if 'force' in str(sys.argv):
     update(force=True)
 else:
