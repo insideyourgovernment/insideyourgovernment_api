@@ -22,6 +22,6 @@ app = tornado.web.Application([
 ])
 
 if __name__ == "__main__":
-    app = make_app()
+    
     app.listen(3389)
     tornado.ioloop.IOLoop.current().start()
