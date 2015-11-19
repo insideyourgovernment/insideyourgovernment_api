@@ -4,11 +4,11 @@ import tornado.ioloop
 import tornado.web
 import rethinkdb as r
 r.connect( "localhost", 28015).repl()
-
+import json
 class TablesHandler(tornado.web.RequestHandler):
     def get(self):
         response = r.db('public').table_list().run()
-        self.write(response)
+        self.write(json.dumps(response))
         
 class VersionHandler(tornado.web.RequestHandler):
     def get(self):
