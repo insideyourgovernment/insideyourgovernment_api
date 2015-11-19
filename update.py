@@ -13,11 +13,18 @@ def setup_rethinkdb():
     except:
         pass
     db = r.db("public")
-    tables_needed = ["crawling_instructions"]
-    existing_tables = db.table_list().run()
-    tables_to_create = set(tables_needed) - set(existing_tables) # remove existing tables from what we need
-    for table in tables_to_create:
-        db.table_create(table).run()
+    dbs_and_tables = {'nonpublic': ['subscribers'], 'public': ['crawling_instructions']}
+    for database in dbs_and_tables.key():
+        try:
+            r.db_create(database).run()
+        except:
+            pass
+        db = r.db(database)
+        tables_needed = dbs_and_tables[database]
+        existing_tables = db.table_list().run()
+        tables_to_create = set(tables_needed) - set(existing_tables) # remove existing tables from what we need
+        for table in tables_to_create:
+            db.table_create(table).run()
 
 def update(force=False):
     fetch_dry_run_results = os.popen('git fetch --dry-run').read()
