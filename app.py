@@ -5,11 +5,12 @@ import tornado.web
 import rethinkdb as r
 r.connect( "localhost", 28015).repl()
 import json
+import urlparse
 
 class LoginHandler(tornado.web.RequestHandler):
     def post(self):
         print self.request.body
-        print url
+        print urlparse.parse_qs(self.request.body)
         try:
             print tornado.escape.json_decode(self.request.body) 
         except:
