@@ -3,3 +3,4 @@ pdfminer
 pycurl
 futures
 ipython
+rethinkdb
