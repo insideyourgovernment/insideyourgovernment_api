@@ -12,6 +12,7 @@ class LoginHandler(tornado.web.RequestHandler):
         try:
             print tornado.escape.json_decode(self.request.body) 
         except:
+            pass
         # it's assumed that a username is an email address
         #if not is_already_account(request.form['username']):
         #    return Response(json.dumps({'msg': '<strong>Error:</strong> Either email or password is incorrect'}), mimetype="application/json")
