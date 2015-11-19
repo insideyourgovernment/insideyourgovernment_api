@@ -2,7 +2,14 @@ from datetime import date
 import tornado.escape
 import tornado.ioloop
 import tornado.web
- 
+import rethinkdb as r
+r.connect( "localhost", 28015).repl()
+
+class TablesHandler(tornado.webRequestHandler):
+    def get(self):
+        response = r.db('public').table_list().run()
+        self.write(response)
+        
 class VersionHandler(tornado.web.RequestHandler):
     def get(self):
         response = { 'version': '3.5.1',
@@ -17,6 +24,7 @@ class GetGameByIdHandler(tornado.web.RequestHandler):
         self.write(response)
  
 app = tornado.web.Application([
+    (r"/tables/", TablesHandler),
     (r"/getgamebyid/([0-9]+)", GetGameByIdHandler),
     (r"/version", VersionHandler)
 ])

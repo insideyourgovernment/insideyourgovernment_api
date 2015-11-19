@@ -14,7 +14,7 @@ def setup_rethinkdb():
         pass
     db = r.db("public")
     dbs_and_tables = {'nonpublic': ['subscribers'], 'public': ['crawling_instructions']}
-    for database in dbs_and_tables.key():
+    for database in dbs_and_tables.keys():
         try:
             r.db_create(database).run()
         except:
