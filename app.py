@@ -8,7 +8,7 @@ import json
 
 class LoginHandler(tornado.web.RequestHandler):
     def post(self):
-        print dict(self.request.body)
+        print json.loads(self.request.body)
         # it's assumed that a username is an email address
         #if not is_already_account(request.form['username']):
         #    return Response(json.dumps({'msg': '<strong>Error:</strong> Either email or password is incorrect'}), mimetype="application/json")
