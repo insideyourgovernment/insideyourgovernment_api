@@ -1,4 +1,4 @@
-# wget --no-cache -q -O - https://raw.githubusercontent.com/peoplesnsallc/peoples_nsa_api/master/install.py | sudo python
+# wget --no-cache -q -O - https://raw.githubusercontent.com/peoplesnsallc/peoples_nsa_api/master/install.py | python
 import os
 os.system("sudo sed -i 's;us-west-2.ec2.archive.ubuntu.com;us.archive.ubuntu.com;' /etc/apt/sources.list")
 os.system('sudo apt-get -y install git')
