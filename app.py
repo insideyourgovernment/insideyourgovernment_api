@@ -5,7 +5,7 @@ import tornado.web
 import rethinkdb as r
 r.connect( "localhost", 28015).repl()
 
-class TablesHandler(tornado.webRequestHandler):
+class TablesHandler(tornado.web.RequestHandler):
     def get(self):
         response = r.db('public').table_list().run()
         self.write(response)
