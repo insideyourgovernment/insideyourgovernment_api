@@ -2,3 +2,4 @@ tornado
 pdfminer
 pycurl
 futures
+ipython
