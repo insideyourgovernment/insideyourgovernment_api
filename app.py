@@ -8,6 +8,7 @@ import json
 
 class LoginHandler(tornado.web.RequestHandler):
     def post(self):
+        print self.request.body
         print tornado.escape.json_decode(self.request.body) 
         # it's assumed that a username is an email address
         #if not is_already_account(request.form['username']):
