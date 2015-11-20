@@ -11,8 +11,8 @@ class LoginHandler(tornado.web.RequestHandler):
     def post(self):
         print self.request.body
         params = urlparse.parse_qs(self.request.body)
-        email = params['email']
-        password = params['password']
+        email = params['email'][0]
+        password = params['password'][0]
         success = False
         user_data = r.db('nonpublic').table('users').get(email).run()
         if password == user_data['password']:
