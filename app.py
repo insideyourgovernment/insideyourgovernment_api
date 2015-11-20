@@ -6,6 +6,10 @@ import rethinkdb as r
 r.connect( "localhost", 28015).repl()
 import json
 import urlparse
+import random
+import string
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 class LoginHandler(tornado.web.RequestHandler):
     def post(self):
