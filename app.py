@@ -17,7 +17,7 @@ class LoginHandler(tornado.web.RequestHandler):
         user_data = r.db('nonpublic').table('users').get(email).run(conn)
         if password == user_data['password']:
             success = True
-        response = {'success': success}
+        response = {'success': success} 
         self.write(json.dumps(response))
         #try:
         #    print tornado.escape.json_decode(self.request.body) 
