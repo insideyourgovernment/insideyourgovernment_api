@@ -14,7 +14,7 @@ class LoginHandler(tornado.web.RequestHandler):
         email = params['email']
         password = params['password']
         success = False
-        user_data = r.db('nonpublic').table('users').get(email).run(conn)
+        user_data = r.db('nonpublic').table('users').get(email).run()
         if password == user_data['password']:
             success = True
         response = {'success': success} 
