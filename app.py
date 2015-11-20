@@ -10,11 +10,19 @@ import urlparse
 class LoginHandler(tornado.web.RequestHandler):
     def post(self):
         print self.request.body
-        print urlparse.parse_qs(self.request.body)
-        try:
-            print tornado.escape.json_decode(self.request.body) 
-        except:
-            pass
+        params = urlparse.parse_qs(self.request.body)
+        email = params['email']
+        password = params['password']
+        success = False
+        user_data = r.db('nonpublic').table('users').get(email).run(conn)
+        if password == user_data['password']:
+            success = True
+        response = {'success': success}
+        self.write(json.dumps(response))
+        #try:
+        #    print tornado.escape.json_decode(self.request.body) 
+        #except:
+        #    pass
         # it's assumed that a username is an email address
         #if not is_already_account(request.form['username']):
         #    return Response(json.dumps({'msg': '<strong>Error:</strong> Either email or password is incorrect'}), mimetype="application/json")
