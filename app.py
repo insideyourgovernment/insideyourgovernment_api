@@ -21,7 +21,7 @@ class LoginHandler(tornado.web.RequestHandler):
 
         session_id = id_generator(30)
         username = userid
-        print db.table('sessions').insert({'id': session_id, 'userid': e}).run(conn)
+        print db.table('sessions').insert({'id': session_id, 'userid': email}).run(conn)
         resp = make_response(redirect('/'))
         resp.set_cookie('session', session_id)
         self.write(json.dumps(response))
