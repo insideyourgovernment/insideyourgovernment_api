@@ -18,8 +18,6 @@ class LoginHandler(tornado.web.RequestHandler):
         if password == user_data['password']:
             success = True
         response = {'success': success} 
-        userid = db.table('two_factor_codes').get(request.args['two_factor_code']).run(conn)['userid']
-        user_data = db.table('users').get(userid).run(conn)
 
         session_id = id_generator(30)
         username = userid
