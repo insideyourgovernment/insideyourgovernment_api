@@ -27,11 +27,7 @@ class SessionHandler(BaseHandler):
     def get(self):
         params = urlparse.parse_qs(self.request.body)
         print params
-        if not 'session' in params:
-            
-            self.write({"error": "No session"})
-        else:
-            self.write({"user": 'test'})
+        self.write(self.get_argument('session'))
 
 class LoginHandler(BaseHandler):
     def post(self):
