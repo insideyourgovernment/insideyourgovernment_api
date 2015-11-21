@@ -52,6 +52,7 @@ class LoginHandler(BaseHandler):
         #resp = make_response(redirect('/'))
         #resp.set_cookie('session', session_id)
         self.set_cookie("session", session_id)
+        self.set_header("Content-Type", 'application/json')
         self.write(json.dumps(response))
         #try:
         #    print tornado.escape.json_decode(self.request.body) 
