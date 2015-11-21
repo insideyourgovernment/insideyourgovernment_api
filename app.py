@@ -14,7 +14,11 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 
 class SessionHandler(tornado.web.RequestHandler):
     def get(self):
-        
+        if not self.get_cookie("session"):
+            self.set_cookie("mycookie", "myvalue")
+            self.write("Your cookie was not set yet!")
+        else:
+            self.write("Your cookie was set!")
 
 class LoginHandler(tornado.web.RequestHandler):
     def post(self):
