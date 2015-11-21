@@ -80,6 +80,7 @@ class TablesHandler(tornado.web.RequestHandler):
         
  
 app = tornado.web.Application([
+    (r"/get_session_info/", SessionHandler),
     (r"/login/", LoginHandler),
     (r"/tables/", TablesHandler),
 ])
