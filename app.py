@@ -30,7 +30,7 @@ class LoginHandler(tornado.web.RequestHandler):
         response['session_id'] = session_id
         #resp = make_response(redirect('/'))
         #resp.set_cookie('session', session_id)
-        self.set_cookie("mycookie", "myvalue")
+        self.set_cookie("session", session_id)
         self.write(json.dumps(response))
         #try:
         #    print tornado.escape.json_decode(self.request.body) 
