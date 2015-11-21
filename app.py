@@ -26,7 +26,7 @@ class BaseHandler(tornado.web.RequestHandler):
 class SessionHandler(BaseHandler):
     def get(self):
         params = urlparse.parse_qs(self.request.body)
-       
+        print params
         if not 'session' in params:
             
             self.write({"error": "No session"})
