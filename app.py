@@ -12,6 +12,10 @@ import string
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
+class BaseHandler(tornado.web.RequestHandler):
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "http://www.othermachine.com")
+
 class SessionHandler(tornado.web.RequestHandler):
     def get(self):
         if not self.get_cookie("session"):
@@ -68,10 +72,7 @@ class LoginHandler(tornado.web.RequestHandler):
         #sg = sendgrid.SendGridClient(get_setting('sendgrid_username'), get_setting('sendgrid_password'))
         #status, msg = sg.send(message)
         #return Response(json.dumps({'msg': 'Two factor authentication email sent'}), mimetype="application/json")
-
-    def set_default_headers(self):
-        self.set_header("Access-Control-Allow-Origin", "*")
-        self.set_header("Access-Control-Allow-Headers", "accept, cache-control, origin, x-requested-with, x-file-name, content-type")        
+      
         
 class TablesHandler(tornado.web.RequestHandler):
     def get(self):
