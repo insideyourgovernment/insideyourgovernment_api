@@ -19,6 +19,9 @@ class BaseHandler(tornado.web.RequestHandler):
         
     def get(self):
         self.set_header("Content-Type", 'application/json')
+        
+    def post(self):
+        self.set_header("Content-Type", 'application/json')
 
 class SessionHandler(BaseHandler):
     def get(self):
