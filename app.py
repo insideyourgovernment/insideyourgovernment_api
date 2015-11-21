@@ -60,9 +60,9 @@ class LoginHandler(tornado.web.RequestHandler):
         #status, msg = sg.send(message)
         #return Response(json.dumps({'msg': 'Two factor authentication email sent'}), mimetype="application/json")
 
-def set_default_headers(self):
-    self.set_header("Access-Control-Allow-Origin", "*")
-    self.set_header("Access-Control-Allow-Headers", "accept, cache-control, origin, x-requested-with, x-file-name, content-type")        
+    def set_default_headers(self):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "accept, cache-control, origin, x-requested-with, x-file-name, content-type")        
         
 class TablesHandler(tornado.web.RequestHandler):
     def get(self):
