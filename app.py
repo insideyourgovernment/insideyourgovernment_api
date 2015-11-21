@@ -19,8 +19,10 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class SessionHandler(BaseHandler):
     def get(self):
-        if not self.get_cookie("session"):
-            self.set_cookie("mycookie", "myvalue")
+        params = urlparse.parse_qs(self.request.body)
+       
+        if not 'session' in params:
+            
             self.write({"error": "No session"})
         else:
             self.write({"user": 'test'})
