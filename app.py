@@ -14,7 +14,8 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 
 class BaseHandler(tornado.web.RequestHandler):
     def set_default_headers(self):
-        self.set_header("Access-Control-Allow-Origin", "http://www.othermachine.com")
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "accept, cache-control, origin, x-requested-with, x-file-name, content-type")  
 
 class SessionHandler(tornado.web.RequestHandler):
     def get(self):
