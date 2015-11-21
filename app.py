@@ -16,9 +16,9 @@ class SessionHandler(tornado.web.RequestHandler):
     def get(self):
         if not self.get_cookie("session"):
             self.set_cookie("mycookie", "myvalue")
-            self.write("Your cookie was not set yet!")
+            self.write({"error": "No session"})
         else:
-            self.write("Your cookie was set!")
+            self.write({"user": 'test'})
 
 class LoginHandler(tornado.web.RequestHandler):
     def post(self):
