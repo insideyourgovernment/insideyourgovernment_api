@@ -17,7 +17,7 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Access-Control-Allow-Headers", "accept, cache-control, origin, x-requested-with, x-file-name, content-type")  
 
-class SessionHandler(tornado.web.RequestHandler):
+class SessionHandler(BaseHandler):
     def get(self):
         if not self.get_cookie("session"):
             self.set_cookie("mycookie", "myvalue")
@@ -25,7 +25,7 @@ class SessionHandler(tornado.web.RequestHandler):
         else:
             self.write({"user": 'test'})
 
-class LoginHandler(tornado.web.RequestHandler):
+class LoginHandler(BaseHandler):
     def post(self):
         print self.request.body
         params = urlparse.parse_qs(self.request.body)
@@ -75,7 +75,7 @@ class LoginHandler(tornado.web.RequestHandler):
         #return Response(json.dumps({'msg': 'Two factor authentication email sent'}), mimetype="application/json")
       
         
-class TablesHandler(tornado.web.RequestHandler):
+class TablesHandler(BaseHandler):
     def get(self):
         response = r.db('public').table_list().run()
         self.write(json.dumps(response))
