@@ -18,7 +18,7 @@ class BaseHandler(tornado.web.RequestHandler):
         self.set_header("Access-Control-Allow-Headers", "accept, cache-control, origin, x-requested-with, x-file-name, content-type")  
         
    def get(self):
-       self.set_header("Content-Type", 'application/json'
+       self.set_header("Content-Type", 'application/json')
 
 class SessionHandler(BaseHandler):
     def get(self):
