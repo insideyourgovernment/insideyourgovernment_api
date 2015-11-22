@@ -33,7 +33,7 @@ class SessionHandler(BaseHandler):
     def get(self):
         params = urlparse.parse_qs(self.request.body)
         print params
-        self.write(get_user_info_from_sessioself.get_argument('session'))
+        self.write(get_user_info_from_session(self.get_argument('session')))
 
 class LoginHandler(BaseHandler):
     def post(self):
