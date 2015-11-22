@@ -89,13 +89,38 @@ class LoginHandler(BaseHandler):
 class TablesHandler(BaseHandler):
     def get(self):
         response = r.db('public').table_list().run()
+        self.set_header("Content-Type", 'application/json')
         self.write(json.dumps(response))
         
- 
+def table_create(payload):
+    return r.db('public').table_create(payload['name']).run()
+
+def insert(payload):
+    pass
+
+def update(payload):
+    pass
+
+class ModifyDBHandler(BaseHandler):
+    def post(self):
+        # For now user needs to be an admin
+        params = urlparse.parse_qs(self.request.body)
+        session = params['session'][0]
+        user_info = get_user_info_from_session(session)
+        if user_info['is_admin']:
+            payload = json.loads(params['payload'])
+            action = payload['action']
+            actions = {'table_create': create_table,
+                       'insert': insert,
+                       'update': update}
+            self.write(actions[action](payload))
+            
+            
 app = tornado.web.Application([
     (r"/get_session_info/", SessionHandler),
     (r"/login/", LoginHandler),
     (r"/tables/", TablesHandler),
+    (r"/modify_db/", ModifyDBHandler),
 ])
 
 if __name__ == "__main__":
