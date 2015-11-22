@@ -14,7 +14,8 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 
 def get_user_info_from_session(session_id):
     userid = r.db('nonpublic').table('sessions').get(session_id).run()['userid']
-    user_data = r.db('nonpublic').table('users').get(
+    user_data = r.db('nonpublic').table('users').get(userid).run().copy()
+    del user_data['password']
     return 
 
 class BaseHandler(tornado.web.RequestHandler):
