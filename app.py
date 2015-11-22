@@ -16,7 +16,7 @@ def get_user_info_from_session(session_id):
     userid = r.db('nonpublic').table('sessions').get(session_id).run()['userid']
     user_data = r.db('nonpublic').table('users').get(userid).run().copy()
     del user_data['password']
-    return 
+    return user_data
 
 class BaseHandler(tornado.web.RequestHandler):
     def set_default_headers(self):
@@ -33,7 +33,7 @@ class SessionHandler(BaseHandler):
     def get(self):
         params = urlparse.parse_qs(self.request.body)
         print params
-        self.write(self.get_argument('session'))
+        self.write(get_user_info_from_sessioself.get_argument('session'))
 
 class LoginHandler(BaseHandler):
     def post(self):
