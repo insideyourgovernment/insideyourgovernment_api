@@ -13,7 +13,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 def get_user_info_from_session(session_id):
-    user_id = r.db
+    user_id = r.db('nonpublic').table('users').get(session_id).run()['user_id']
     return 
 
 class BaseHandler(tornado.web.RequestHandler):
