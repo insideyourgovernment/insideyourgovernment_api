@@ -32,7 +32,7 @@ def setup_rethinkdb():
         if 'police' in table:
             category = 'policing'
         else:
-            category = 'Pe
+            category = 'People's NS
         r.db('public').table('tables').insert({'id': table, 'name': table.replace('_', ' ').capitalize(), 'categories': [category]}, conflict='update').run()
 
 def update(force=False):
