@@ -173,7 +173,7 @@ class RetriveHandler(BaseHandler):
             elif payload['action'] == 'get_set':
                 results = list(set([item[payload['field']] for item in list(r.db('public').table(payload['table']).pluck(payload['field']).run())]))
             elif payload['action'] == 'do_basic_mapping':
-                itemdbobj = getattr(dbobj, 'pluck')(payload['field_for_key'], payload['field_for_value'])
+                dbobj = getattr(dbobj, 'pluck')(payload['field_for_key'], payload['field_for_value'])
                 dbobj.run()
         else:
             results = list(dbobj.run())
