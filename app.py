@@ -123,7 +123,7 @@ class RetriveHandler(BaseHandler):
         table = payload['table']
         if 'filter' in payload:
             self.set_header("Content-Type", 'application/json')
-            self.write(list(r.db('public').table(table).filter(payload['filter']).run()))
+            self.write(json.dumps(list(r.db('public').table(table).filter(payload['filter']).run())))
 
                         
 app = tornado.web.Application([
