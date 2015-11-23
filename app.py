@@ -139,8 +139,8 @@ class RetriveHandler(BaseHandler):
         if 'action' in payload:
             if payload['action'] == 'get_fields':
                 fields = [row.keys() for row in rows]
-                fields = list(itertools.chain.from_iterable(keys))
-            f['tables_to_keys'][database+'_'+table] = sorted(list(set(keys)))
+                fields = list(itertools.chain.from_iterable(fields))
+                results = sorted(list(set(fields)))
         self.write(json.dumps(results))
 
                         
