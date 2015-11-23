@@ -17,7 +17,7 @@ def setup_rethinkdb():
     for table in dbs_and_tables:
         tables_ids = [item['id'] for item in r.db('public').table('tables').run()]
         if not table in tables_ids:
-            r.db('publ
+            r.db('public').insert
     for database in dbs_and_tables.keys():
         try:
             r.db_create(database).run()
