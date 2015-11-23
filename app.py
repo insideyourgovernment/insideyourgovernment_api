@@ -175,7 +175,7 @@ class RetriveHandler(BaseHandler):
             elif payload['action'] == 'do_basic_mapping':
                 payload['field_for_key']
                 payload['field_for_value']
-                dbobg = getattr(dbobj, 'pluck')(payload['field_for_key'], payload['field_for_value'])
+                dbobj = getattr(dbobj, 'pluck')(payload['field_for_key'], payload['field_for_value'])
                 dbo
         else:
             results = list(dbobj.run())
