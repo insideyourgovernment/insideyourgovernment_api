@@ -2,6 +2,10 @@ import requests
 import re
 import os
 base = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../')
+import rethinkdb as r
+conn = r.connect( "localhost", 28015).repl()
+db = r.db('public')
+organization_id = list(db.table('organizations').filter({'name': 'Seattle Police Department'}).run(conn))[0]['id']
 
 def parse_txt_files(txt_files=None):
     import re
@@ -17,7 +21,7 @@ def parse_txt_files(txt_files=None):
         if not opa_file:
             continue
         print opa_file
-        opa_file_dict = {}
+        opa_file_dict = {'agency_id': organization_id}
         regex =  re.search('Complaint Number(?P<num>.*?)Issued', opa_file)
 
         opa_file_dict['Complaint number'] = regex.group('num').strip(' :').replace(' ', '') if regex else filename[:filename.find('ccs')]
@@ -92,10 +96,7 @@ def parse_txt_files(txt_files=None):
     reload(sys)  
     sys.setdefaultencoding('utf8')
     print opa_files
-    import rethinkdb as r
-    conn = r.connect( "localhost", 28015).repl()
-    db = r.db('public')
-    organization_id = list(db.table('organizations').filter({'name': 'Seattle Police Department'}).run(conn))[0]['id']
+    
     
     db.table('closed_case_summaries').insert(opa_files, conflict='update').run(conn)
     the_html = '<table style="font-size:.9em;vertical-align:top;">'
