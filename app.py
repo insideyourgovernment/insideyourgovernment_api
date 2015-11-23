@@ -192,7 +192,8 @@ class RetriveHandler(BaseHandler):
             elif payload['action'] == 'do_row_mapping':
                 
                 items = list(dbobj.run())
-                table_fields = 
+                table_fields = [row.keys() for row in items]
+                table_fields = list(itertools.chain.from_iterable(table_fields))
                 d = {}
                 for item in items:
                     if type(item[payload['field_for_key']]) is list:
