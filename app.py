@@ -174,7 +174,8 @@ class RetriveHandler(BaseHandler):
                 results = list(set([item[payload['field']] for item in list(r.db('public').table(payload['table']).pluck(payload['field']).run())]))
             elif payload['action'] == 'do_basic_mapping':
                 dbobj = getattr(dbobj, 'pluck')(payload['field_for_key'], payload['field_for_value'])
-                dbobj.run()
+                items = dbobj.run()
+                keys = [item[payload['field_for_key']
         else:
             results = list(dbobj.run())
         self.write(json.dumps(results))
