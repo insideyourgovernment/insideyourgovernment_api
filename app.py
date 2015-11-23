@@ -120,7 +120,7 @@ class RetriveHandler(BaseHandler):
         params = urlparse.parse_qs(self.request.body)
         print params
         payload = json.loads(self.get_argument('payload'))
-        dbobj = r.db('public')
+        dbobj = r.db('public').table(payload['table'])
         for key in payload.keys():
             if key in ['get', 'filter', 'has_fields']:
                 if type(payload[key]) is list and key in ['has_fields']:
