@@ -164,6 +164,8 @@ class RetriveHandler(BaseHandler):
                 else:
                     percentage = 'Error: No denominator'    
                 results = {'numerator': numerator, 'denominator': denominator, 'percentage': percentage}
+            elif payload['action'] == 'get_list':
+                results = r.db('public').table(payload['t
         else:
             results = list(dbobj.run())
         self.write(json.dumps(results))
