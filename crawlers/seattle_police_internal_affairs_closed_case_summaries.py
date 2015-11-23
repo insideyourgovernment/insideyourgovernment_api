@@ -9,7 +9,7 @@ def parse_txt_files(txt_files=None):
     files = sorted([f for f in os.listdir('/home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts')])
     #print files[:10]
     opa_files = []
-    for filename in new_files:
+    for filename in t_files:
     #for filename in files:
         f = open('txts/'+filename, 'r')
 
