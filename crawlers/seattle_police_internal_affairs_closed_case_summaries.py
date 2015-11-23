@@ -7,13 +7,12 @@ def download():
     os.system('mkdir %s.crawler_data/seattle_police_internal_affairs_closed_cases/' % (base))
     os.system('mkdir %s.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs/' % (base))
     os.system('mkdir %s.crawler_data/seattle_police_internal_affairs_closed_cases/txts/' % (base))
-
     html = requests.get('http://www.seattle.gov/opa/closed-case-summaries').text
     os.system('mkdir pdfs')
     files = re.findall('ClosedCaseSummaries/(?P<filename>.*?)\.pdf', html)
     print files
     for f in files:
-        if not f+'.pdf' in os.listdir('/home/ubuntu/redactvideodotorg/opa_closed_case_summaries/pdfs'):
+        if not f+'.pdf' in os.listdir(base+'seattle_police_internal_affairs_closed_cases/pdfs'):
             os.system('wget -O /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/pdfs/%s.pdf http://www.seattle.gov/Documents/Departments/OPA/ClosedCaseSummaries/%s.pdf' % (f, f))
     import os
     #os.system('rm /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts/*')
