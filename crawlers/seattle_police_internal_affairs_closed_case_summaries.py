@@ -120,13 +120,13 @@ def download():
         if not f+'.pdf' in os.listdir(base+'seattle_police_internal_affairs_closed_cases/pdfs'):
             os.system('wget -O %sseattle_police_internal_affairs_closed_cases/pdfs/%s.pdf http://www.seattle.gov/Documents/Departments/OPA/ClosedCaseSummaries/%s.pdf' % (base, f, f))
     import os
-    files = sorted([f for f in os.listdir('/home/ubuntu/redactvideodotorg/opa_closed_case_summaries/pdfs')])
+    files = sorted([f for f in os.listdir(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs')])
     new_files = []
     for filename in files:
         print filename
-        if not filename[:-4]+'.txt' in os.listdir('/home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts'):
+        if not filename[:-4]+'.txt' in os.listdir(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/txts'):
             print 'converting'
-            os.system('pdf2txt.py -A /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/pdfs/%s > /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts/%s' % (filename, filename[:-4]+'.txt'))
+            os.system('pdf2txt.py -A base+'.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs/%s > /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts/%s' % (filename, filename[:-4]+'.txt'))
             new_files.append(filename[:-4]+'.txt')
     parse_txt_files(new_files)
     
