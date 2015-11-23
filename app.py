@@ -138,7 +138,9 @@ class RetriveHandler(BaseHandler):
         results = list(dbobj.run())
         if 'action' in payload:
             if payload['action'] == 'get_fields':
-                
+                fields = [row.keys() for row in rows]
+                fields = list(itertools.chain.from_iterable(keys))
+            f['tables_to_keys'][database+'_'+table] = sorted(list(set(keys)))
         self.write(json.dumps(results))
 
                         
