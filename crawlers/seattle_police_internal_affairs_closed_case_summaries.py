@@ -52,7 +52,7 @@ def parse_txt_files(txt_files=None):
         opa_file_dict['pdf'] = filename[:-4]+'.pdf'
         try:
             # Get the entire findings section
-            f = open('txts/'+filename, 'r')
+            f = open(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/txts/'+filename, 'r')
 
             opa_file2 = f.read()
             import re
