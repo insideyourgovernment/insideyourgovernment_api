@@ -121,7 +121,8 @@ class ModifyDBHandler(BaseHandler):
         print params
         payload = json.loads(self.get_argument('payload'))
         table = payload['table']
-        if 'filter'
+        if 'filter' in payload:
+            
 
                         
 app = tornado.web.Application([
