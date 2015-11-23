@@ -99,7 +99,7 @@ def parse_txt_files(txt_files=None):
     print opa_files
     
     
-    db.table('police_internal_affairs_cases').insert(opa_files, conflict='update').run(conn)
+    db.table('police_internal_affairs_cases').insert(opa_files, conflict='replace').run(conn)
     the_html = '<table style="font-size:.9em;vertical-align:top;">'
     columns = ['Issued date', 'Complaint number', 'Complaint', 'Incident synopsis', 'Investigation', 'Analysis and conclusion', 'OPA finding', 'Final discipline']
     from dateutil.parser import parse
