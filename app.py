@@ -179,6 +179,7 @@ class RetriveHandler(BaseHandler):
                 for item in items:
                     if type(item[payload['field_for_key']]) is list:
                         for k in item[payload['field_for_key']]:
+                            
                     else:
                         if not item[payload['field_for_key']] in d:
                             d[item[payload['field_for_key']]] = [item[payload['field_for_value']]]
