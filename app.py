@@ -129,7 +129,7 @@ class RetriveHandler(BaseHandler):
                 elif key == 'match':
                     dbobj = getattr(dbobj, 'filter')(lambda case: case[payload['match']['field']].match(payload['match']['value']))
                 elif key == 'has_string':
-                    dbobj = getattr(dbobj, 'filter')(lambda case: case[payload['has_string']['field']].match(payload['has_string']['value']))
+                    dbobj = getattr(dbobj, 'filter')(lambda case: case[payload['has_string']['field']].match('.payload['has_string']['value']))
                 else:
                     dbobj = getattr(dbobj, key)(payload[key])
         if 'pluck' in payload:
