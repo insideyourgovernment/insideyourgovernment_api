@@ -154,7 +154,7 @@ class RetriveHandler(BaseHandler):
                     base = r.db('public').table(payload['table']).filter(lambda case: case[payload['has_string']['field']].match(payload['has_string']['field']))
                 denominator = base.count().run(conn)
 
-                numerator = base.filter({payload['field_for_numerator']: payload['numerator_boolean']}).count().run(conn) 
+                numerator = base.filter({payload['numerator'][': payload['numerator_boolean']}).count().run(conn) 
 
                 if denominator:
                     percentage = float(numerator)/denominator
