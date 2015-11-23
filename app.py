@@ -177,7 +177,7 @@ class RetriveHandler(BaseHandler):
                 items = dbobj.run()
                 d = {}
                 for item in items:
-                    
+                    if type(item[payload['field_for_key']]) is list:
         else:
             results = list(dbobj.run())
         self.write(json.dumps(results))
