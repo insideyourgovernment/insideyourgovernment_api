@@ -95,7 +95,8 @@ def parse_txt_files(txt_files=None):
     import rethinkdb as r
     conn = r.connect( "localhost", 28015).repl()
     db = r.db('public')
-    organization_id = db.table('organizations').filter({'name': 'Seattle Police Department'})
+    organization_id = list(db.table('organizations').filter({'name': 'Seattle Police Department'}).run(conn))[0]['id']
+    
     db.table('closed_case_summaries').insert(opa_files, conflict='update').run(conn)
     the_html = '<table style="font-size:.9em;vertical-align:top;">'
     columns = ['Issued date', 'Complaint number', 'Complaint', 'Incident synopsis', 'Investigation', 'Analysis and conclusion', 'OPA finding', 'Final discipline']
