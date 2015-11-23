@@ -15,7 +15,7 @@ def parse_txt_files(txt_files=None):
     opa_files = []
     for filename in txt_files:
     #for filename in files:
-        f = open('txts/'+filename, 'r')
+        f = open(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/txts/'+filename, 'r')
 
         opa_file = str(f.read()).replace('\n', ' ').replace('  ', ' ')
         if not opa_file:
