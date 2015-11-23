@@ -131,7 +131,7 @@ class RetriveHandler(BaseHandler):
                 elif key == 'has_string':
                     dbobj = getattr(dbobj, 'filter')(lambda case: case[payload['has_string']['field']].match('.*?'+payload['has_string']['value']+'.*?'))
                 elif key == 'match_any_field':
-                    r.db('database').table('table).filter(function(doc) {
+                    dbobj = getattr(dbobj, 'filter')(lambda doc) {
   return doc.coerceTo('string').match('querystring');
 });
                 else:
