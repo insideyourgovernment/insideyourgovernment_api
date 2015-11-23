@@ -83,8 +83,8 @@ def parse_txt_files(txt_files=None):
                         current['final_discipline'] = lines[i+2].strip()               
                 structured_version.append(current)
             opa_file_dict['Summarized results'] = structured_version
-        except:
-            opa_file_dict['error'] = 
+        except Exception, e:
+            opa_file_dict['error'] =   Exception, e
         opa_files.append(opa_file_dict)
         f.close()
     import sys  
