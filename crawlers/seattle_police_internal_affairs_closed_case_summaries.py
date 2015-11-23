@@ -2,7 +2,8 @@ import requests
 import re
 import os
 base = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../')
-os.system('mkdir %s
+os.system('mkdir %s.crawler_data' % (base))
+os.system('mkdir %s.crawler_data/base/' % (base))
 if False:
     html = requests.get('http://www.seattle.gov/opa/closed-case-summaries').text
     os.system('mkdir pdfs')
