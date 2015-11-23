@@ -133,7 +133,7 @@ class RetriveHandler(BaseHandler):
                 else:
                     dbobj = getattr(dbobj, key)(payload[key])
         if 'pluck' in payload:
-            print
+            
             dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
         
                 
