@@ -27,9 +27,9 @@ def setup_rethinkdb():
         for table in tables_to_create:
             db.table_create(table).run()
     for table in dbs_and_tables:
-        tables_ids = [item['id'] for item in r.db('public').table('tables').run()]
-        if not table in tables_ids:
-            r.db('public').table('tables').insert({'id': table, 'name': table.replace('_', ' ').capitalize()}).run()
+        #tables_ids = [item['id'] for item in r.db('public').table('tables').run()]
+        #if not table in tables_ids:
+        r.db('public').table('tables').insert({'id': table, 'name': table.replace('_', ' ').capitalize()}, conflict='update').run()
 
 def update(force=False):
     fetch_dry_run_results = os.popen('git fetch --dry-run').read()
