@@ -191,7 +191,8 @@ class RetriveHandler(BaseHandler):
                 results = d
             elif payload['action'] == 'do_row_mapping':
                 
-                items = dbobj.run()
+                items = list(dbobj.run())
+                table_fields = 
                 d = {}
                 for item in items:
                     if type(item[payload['field_for_key']]) is list:
@@ -205,7 +206,7 @@ class RetriveHandler(BaseHandler):
                             d[item[payload['field_for_key']]] = [item]
                         else:
                             d[item[payload['field_for_key']]].append(item)
-                results = {'data': d, 'table_fields': }
+                results = {'data': d, 'table_fields': table_fields}
         else:
             results = list(dbobj.run())
         self.write(json.dumps(results))
