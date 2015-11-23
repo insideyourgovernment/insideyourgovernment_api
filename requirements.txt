@@ -4,3 +4,4 @@ pycurl
 futures
 ipython
 rethinkdb
+python-dateutil

@@ -10,6 +10,7 @@ organization_id = list(db.table('organizations').filter({'name': 'Seattle Police
 def parse_txt_files(txt_files=None):
     import re
     import os
+    import dateutil
     if not txt_files:
         txt_files = sorted([f for f in os.listdir(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/txts')])
     opa_files = []
