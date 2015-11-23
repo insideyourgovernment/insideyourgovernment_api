@@ -125,6 +125,8 @@ class RetriveHandler(BaseHandler):
             if key in ['get', 'filter', 'has_fields']:
                 if type(payload[key]) is list and key in ['has_fields']:
                     dbobj = getattr(dbobj, key)(*payload[key])
+                elif key == 'match':
+                    
                 else:
                     dbobj = getattr(dbobj, key)(payload[key])
         if 'pluck' in payload:
