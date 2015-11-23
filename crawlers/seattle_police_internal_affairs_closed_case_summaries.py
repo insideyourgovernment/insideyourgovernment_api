@@ -126,7 +126,7 @@ def download():
         print filename
         if not filename[:-4]+'.txt' in os.listdir(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/txts'):
             print 'converting'
-            os.system('pdf2txt.py -A %s'.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs/%s > /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts/%s' % (filename, filename[:-4]+'.txt'))
+            os.system('pdf2txt.py -A %s'.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs/%s > /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts/%s' % (base, filename, filename[:-4]+'.txt'))
             new_files.append(filename[:-4]+'.txt')
     parse_txt_files(new_files)
     
