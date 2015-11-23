@@ -26,6 +26,7 @@ def download():
             print 'converting'
             os.system('pdf2txt.py -A /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/pdfs/%s > /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts/%s' % (filename, filename[:-4]+'.txt'))
             new_files.append(filename[:-4]+'.txt')
+    parse_txt_files(new
     import re
     import os
     files = sorted([f for f in os.listdir('/home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts')])
