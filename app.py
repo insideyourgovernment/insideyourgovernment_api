@@ -121,6 +121,7 @@ app = tornado.web.Application([
     (r"/login/", LoginHandler),
     (r"/tables/", TablesHandler),
     (r"/modify_db/", ModifyDBHandler),
+    (r"/retrive/", RetriveHandler),
 ])
 
 if __name__ == "__main__":
