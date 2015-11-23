@@ -122,6 +122,7 @@ class ModifyDBHandler(BaseHandler):
         payload = json.loads(self.get_argument('payload'))
         table = payload['table']
         if 'filter' in payload:
+            self.set_header("Content-Type", 'application/json')
             self.write(list(r.db('public').table(table).filter(payload['filter']).run()))
 
                         
