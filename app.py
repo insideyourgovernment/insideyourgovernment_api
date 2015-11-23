@@ -178,6 +178,10 @@ class RetriveHandler(BaseHandler):
                 d = {}
                 for item in items:
                     if type(item[payload['field_for_key']]) is list:
+                        
+                    else:
+                        if not item[payload['field_for_key']] in d:
+                            d[
         else:
             results = list(dbobj.run())
         self.write(json.dumps(results))
