@@ -15,8 +15,9 @@ def setup_rethinkdb():
     db = r.db("public")
     dbs_and_tables = {'nonpublic': ['third_party_creds', 'subscribers', 'users', 'sessions'], 'public': ['crawling_instructions', 'apps', 'police_internal_affairs_cases', 'organizations', 'tables']}
     for table in dbs_and_tables:
-        tables_ids = [item['id'] for item in r.db('public').tables(
-        if not table
+        tables_ids = [item['id'] for item in r.db('public').table('tables').run()]
+        if not table in tables_ids:
+            r.db('publ
     for database in dbs_and_tables.keys():
         try:
             r.db_create(database).run()
