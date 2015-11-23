@@ -138,14 +138,16 @@ class RetriveHandler(BaseHandler):
         
                 
         self.set_header("Content-Type", 'application/json')
-        results = list(dbobj.run())
         if 'action' in payload:
             if payload['action'] == 'get_fields':
                 results = list(dbobj.run())
                 fields = [row.keys() for row in results]
                 fields = list(itertools.chain.from_iterable(fields))
                 results = sorted(list(set(fields)))
-        e
+            elif payload['action'] == 'count':
+                results = {'cou
+        else:
+            results = list(dbobj.run())
         self.write(json.dumps(results))
 
                         
