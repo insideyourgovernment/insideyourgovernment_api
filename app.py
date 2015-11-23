@@ -137,7 +137,8 @@ class RetriveHandler(BaseHandler):
         self.set_header("Content-Type", 'application/json')
         results = list(dbobj.run())
         if 'action' in payload:
-            if payload['action'] == 'get_f
+            if payload['action'] == 'get_fields':
+                
         self.write(json.dumps(results))
 
                         
