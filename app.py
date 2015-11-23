@@ -130,6 +130,10 @@ class RetriveHandler(BaseHandler):
                     dbobj = getattr(dbobj, 'filter')(lambda case: case[payload['match']['field']].match(payload['match']['value']))
                 elif key == 'has_string':
                     dbobj = getattr(dbobj, 'filter')(lambda case: case[payload['has_string']['field']].match('.*?'+payload['has_string']['value']+'.*?'))
+                elif key == 'match_any_field':
+                    r.db('database').table('table).filter(function(doc) {
+  return doc.coerceTo('string').match('querystring');
+});
                 else:
                     dbobj = getattr(dbobj, key)(payload[key])
         if 'pluck' in payload:
