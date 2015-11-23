@@ -147,6 +147,8 @@ class RetriveHandler(BaseHandler):
             elif payload['action'] == 'count':
                 results = {'count': dbobj.count().run()}
             elif payload['action'] == 'percentage_simple_matching':
+                if 'match' in payload:
+                else:
                 base = r.db('public').table(payload['table']).filter(lambda case: case[payload['column_to_match']].match(payload['match_what']))
                 denominator = base.count().run(conn)
 
