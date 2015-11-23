@@ -147,17 +147,17 @@ class RetriveHandler(BaseHandler):
             elif payload['action'] == 'count':
                 results = {'count': dbobj.count().run()}
             elif payload['action'] == 'percentage_simple_matching':
-                base = r.db(request.args['database']).table(payload['table']).filter(lambda case: case[request.args['column_to_match']].match(request.args['match_what']))
+                base = r.db(pay['database']).table(payload['table']).filter(lambda case: case[request.args['column_to_match']].match(payload['match_what']))
                 denominator = base.count().run(conn)
 
-                numerator = base.filter({request.args['column_for_numerator']: bool(request.args['numerator_boolean'])}).count().run(conn) 
+                numerator = base.filter({payload['column_for_numerator']: payload(request.args['numerator_boolean'])}).count().run(conn) 
 
                 if denominator:
                     percentage = float(numerator)/denominator
                     percentage = "{:.0%}".format(percentage)+' (%s/%s)' % (numerator, denominator)
                 else:
                     percentage = 'Error: No denominator'    
-                results = {'numerator': numerator, 'denominator': denominator, 'percentage': percentage, 'request': request.args}
+                results = {'numerator': numerator, 'denominator': denominator, 'percentage': percentage}
         else:
             results = list(dbobj.run())
         self.write(json.dumps(results))
