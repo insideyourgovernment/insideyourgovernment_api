@@ -120,8 +120,6 @@ def download():
         if not f+'.pdf' in os.listdir(base+'seattle_police_internal_affairs_closed_cases/pdfs'):
             os.system('wget -O %sseattle_police_internal_affairs_closed_cases/pdfs/%s.pdf http://www.seattle.gov/Documents/Departments/OPA/ClosedCaseSummaries/%s.pdf' % (base, f, f))
     import os
-    #os.system('rm /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts/*')
-    os.system('mkdir /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts')
     files = sorted([f for f in os.listdir('/home/ubuntu/redactvideodotorg/opa_closed_case_summaries/pdfs')])
     new_files = []
     for filename in files:
