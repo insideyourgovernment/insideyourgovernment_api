@@ -145,7 +145,7 @@ class RetriveHandler(BaseHandler):
                 fields = list(itertools.chain.from_iterable(fields))
                 results = sorted(list(set(fields)))
             elif payload['action'] == 'count':
-                results = {'count': dbobj
+                results = {'count': dbobj.count().run()}
         else:
             results = list(dbobj.run())
         self.write(json.dumps(results))
