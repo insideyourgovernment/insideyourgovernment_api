@@ -126,7 +126,6 @@ def download():
     new_files = []
     for filename in files:
         print filename
-        #os.system('pdf2txt.py pdfs/%s > txts/%s' % (filename, filename[:-4]+'.txt'))
         if not filename[:-4]+'.txt' in os.listdir('/home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts'):
             print 'converting'
             os.system('pdf2txt.py -A /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/pdfs/%s > /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts/%s' % (filename, filename[:-4]+'.txt'))
