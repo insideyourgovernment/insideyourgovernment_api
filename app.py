@@ -123,7 +123,7 @@ class RetriveHandler(BaseHandler):
         dbobj = r.db('public')
         for key in payload.keys():
             if key in ['get', 'filter', 'has_fields']:
-                if type(payload(key)) is list and key in ['has_fields']:
+                if type(payload[key]) is list and key in ['has_fields']:
                     dbobj = getattr(dbobj, key)(*payload[key])
                 else:
                     dbobj = getattr(dbobj, key)(payload[key])
