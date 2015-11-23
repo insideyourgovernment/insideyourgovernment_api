@@ -115,7 +115,20 @@ class ModifyDBHandler(BaseHandler):
                        'update': update}
             self.write(actions[action](payload))
             
-            
+class ModifyDBHandler(BaseHandler):
+    def get(self):
+        # For now user needs to be an admin
+        params = urlparse.parse_qs(self.request.body)
+        session = params['session'][0]
+        user_info = get_user_info_from_session(session)
+        if user_info['is_admin']:
+            payload = json.loads(params['payload'])
+            action = payload['action']
+            actions = {'table_create': create_table,
+                       'insert': insert,
+                       'update': update}
+            self.write(actions[action](payload))
+                        
 app = tornado.web.Application([
     (r"/get_session_info/", SessionHandler),
     (r"/login/", LoginHandler),
