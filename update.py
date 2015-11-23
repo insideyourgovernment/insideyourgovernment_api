@@ -29,7 +29,10 @@ def setup_rethinkdb():
     for table in dbs_and_tables:
         #tables_ids = [item['id'] for item in r.db('public').table('tables').run()]
         #if not table in tables_ids:
-        r.db('public').table('tables').insert({'id': table, 'name': table.replace('_', ' ').capitalize()}, conflict='update').run()
+        if 'police' in table:
+            category = 'policing'
+        else
+        r.db('public').table('tables').insert({'id': table, 'name': table.replace('_', ' ').capitalize(), 'categories': [category]}, conflict='update').run()
 
 def update(force=False):
     fetch_dry_run_results = os.popen('git fetch --dry-run').read()
