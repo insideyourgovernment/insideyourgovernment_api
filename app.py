@@ -146,6 +146,7 @@ class RetriveHandler(BaseHandler):
                 results = sorted(list(set(fields)))
             elif payload['action'] == 'count':
                 results = {'count': dbobj.count().run()}
+            elif payload['action'] == 'percentage_simple_match
         else:
             results = list(dbobj.run())
         self.write(json.dumps(results))
