@@ -94,15 +94,8 @@ def parse_txt_files(txt_files=None):
     print opa_files
     import rethinkdb as r
     conn = r.connect( "localhost", 28015).repl()
-    db = r.db('opa')
-    try:
-        db.table_create('closed_case_summaries', primary_key='Complaint number').run(conn)
-    except:
-        pass
-    try:
-        db.table_create('closed_case_summaries_subscribers', primary_key='email').run(conn)
-    except:
-        pass
+    db = r.db('public')
+    
     db.table('closed_case_summaries').insert(opa_files, conflict='update').run(conn)
     the_html = '<table style="font-size:.9em;vertical-align:top;">'
     columns = ['Issued date', 'Complaint number', 'Complaint', 'Incident synopsis', 'Investigation', 'Analysis and conclusion', 'OPA finding', 'Final discipline']
