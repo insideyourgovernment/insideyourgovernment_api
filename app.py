@@ -176,7 +176,7 @@ class RetriveHandler(BaseHandler):
                 payload['field_for_key']
                 payload['field_for_value']
                 dbobj = getattr(dbobj, 'pluck')(payload['field_for_key'], payload['field_for_value'])
-                dbo
+                dbobj.run()
         else:
             results = list(dbobj.run())
         self.write(json.dumps(results))
