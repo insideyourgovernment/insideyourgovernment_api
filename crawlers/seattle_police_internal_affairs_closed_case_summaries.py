@@ -84,7 +84,7 @@ def parse_txt_files(txt_files=None):
                 structured_version.append(current)
             opa_file_dict['Summarized results'] = structured_version
         except:
-            pass
+            opa_file_dict['error'
         opa_files.append(opa_file_dict)
         f.close()
     import sys  
