@@ -1,6 +1,7 @@
 import requests
 import re
 import os
+print os.path.realpath(__file__)  
 html = requests.get('http://www.seattle.gov/opa/closed-case-summaries').text
 os.system('mkdir pdfs')
 files = re.findall('ClosedCaseSummaries/(?P<filename>.*?)\.pdf', html)
@@ -119,7 +120,6 @@ try:
     db.table_create('closed_case_summaries_subscribers', primary_key='email').run(conn)
 except:
     pass
-#db.table('closed_case_summaries').delete().run(conn)
 db.table('closed_case_summaries').insert(opa_files, conflict='update').run(conn)
 the_html = '<table style="font-size:.9em;vertical-align:top;">'
 columns = ['Issued date', 'Complaint number', 'Complaint', 'Incident synopsis', 'Investigation', 'Analysis and conclusion', 'OPA finding', 'Final discipline']
