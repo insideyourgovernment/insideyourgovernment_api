@@ -120,7 +120,7 @@ class ModifyDBHandler(BaseHandler):
         params = urlparse.parse_qs(self.request.body)
         print params
         payload = json.loads(self.get_argument('payload'))
-        table = pa
+        table = payload('table'
 
                         
 app = tornado.web.Application([
