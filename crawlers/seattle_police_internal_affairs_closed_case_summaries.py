@@ -136,7 +136,7 @@ if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:
         if sys.argv[1] == 'start_over':
-            r.db
+            db.table('police_internal_affairs_cases').delete().run(conn)
         parse_txt_files()
         print 'parsed txt'
     else:
