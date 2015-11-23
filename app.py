@@ -147,7 +147,7 @@ class RetriveHandler(BaseHandler):
             elif payload['action'] == 'count':
                 results = {'count': dbobj.count().run()}
             elif payload['action'] == 'percentage_simple_matching':
-                base = r.db(request.args['database']).table(request.args['table']).filter(lambda case: case[request.args['column_to_match']].match(request.args['match_what']))
+                base = r.db(request.args['database']).table(payload['table']).filter(lambda case: case[request.args['column_to_match']].match(request.args['match_what']))
                 denominator = base.count().run(conn)
 
                 numerator = base.filter({request.args['column_for_numerator']: bool(request.args['numerator_boolean'])}).count().run(conn) 
