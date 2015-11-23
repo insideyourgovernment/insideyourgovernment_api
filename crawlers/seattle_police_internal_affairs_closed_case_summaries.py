@@ -17,12 +17,12 @@ def parse_txt_files(txt_files=None):
     for filename in txt_files:
     #for filename in files:
         f = open(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/txts/'+filename, 'r')
-
-        opa_file = str(f.read()).replace('\n', ' ').replace('  ', ' ')
+        parsed_txt = f.read()
+        opa_file = str(parsed_txt).replace('\n', ' ').replace('  ', ' ')
         if not opa_file:
             continue
         print opa_file
-        opa_file_dict = {'organization_id': organization_id, 'parsed_txt': f.read()}
+        opa_file_dict = {'organization_id': organization_id, 'parsed_txt': parsed_txt}
         regex =  re.search('Complaint Number(?P<num>.*?)Issued', opa_file)
 
         opa_file_dict['Complaint number'] = regex.group('num').strip(' :').replace(' ', '') if regex else filename[:filename.find('ccs')]
