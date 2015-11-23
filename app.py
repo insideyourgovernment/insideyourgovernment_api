@@ -123,7 +123,7 @@ class RetriveHandler(BaseHandler):
         payload = json.loads(self.get_argument('payload'))
         dbobj = r.db('public').table(payload['table'])
         for key in payload.keys():
-            if key in ['get', 'filter', 'has_fields']:
+            if key in ['get', 'filter', 'has_fields', 'match']:
                 if type(payload[key]) is list and key in ['has_fields']:
                     dbobj = getattr(dbobj, key)(*payload[key])
                 elif key == 'match':
