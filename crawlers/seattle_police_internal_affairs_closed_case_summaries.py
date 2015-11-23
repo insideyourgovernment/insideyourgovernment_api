@@ -7,7 +7,7 @@ def download():
     os.system('mkdir %s.crawler_data/seattle_police_internal_affairs_closed_cases/' % (base))
     os.system('mkdir %s.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs/' % (base))
     os.system('mkdir %s.crawler_data/seattle_police_internal_affairs_closed_cases/txts/' % (base))
-if False:
+
     html = requests.get('http://www.seattle.gov/opa/closed-case-summaries').text
     os.system('mkdir pdfs')
     files = re.findall('ClosedCaseSummaries/(?P<filename>.*?)\.pdf', html)
