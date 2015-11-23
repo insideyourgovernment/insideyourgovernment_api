@@ -120,6 +120,7 @@ class RetriveHandler(BaseHandler):
         params = urlparse.parse_qs(self.request.body)
         print params
         payload = json.loads(self.get_argument('payload'))
+        
         table = payload['table']
         if 'filter' in payload:
             self.set_header("Content-Type", 'application/json')
