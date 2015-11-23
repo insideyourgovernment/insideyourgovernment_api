@@ -120,11 +120,21 @@ class RetriveHandler(BaseHandler):
         params = urlparse.parse_qs(self.request.body)
         print params
         payload = json.loads(self.get_argument('payload'))
+        dbobj = r.db('public')
+        dbobj = getattr(dbobj, "table")(payload['tree'])
+        for key in payload.keys():
+            if key in ['get', 'filter', 'has_fields']:
+                if type(payload(key)) is list and key in ['has_fields']:
+                    dbobj = getattr(dbobj, key)(*payload[key])
+                else:
+                    dbobj = getattr(dbobj, key)(payload[key])
+        if 'pluck' in payload:
+            print 'plucking'
+            dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
         
-        table = payload['table']
-        if 'filter' in payload:
-            self.set_header("Content-Type", 'application/json')
-            self.write(json.dumps(list(r.db('public').table(table).filter(payload['filter']).run())))
+                
+        self.set_header("Content-Type", 'application/json')
+        self.write(json.dumps(list(dbobj.run())))
 
                         
 app = tornado.web.Application([
