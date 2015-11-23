@@ -121,7 +121,6 @@ class RetriveHandler(BaseHandler):
         print params
         payload = json.loads(self.get_argument('payload'))
         dbobj = r.db('public')
-        dbobj = getattr(dbobj, "table")(payload['tree'])
         for key in payload.keys():
             if key in ['get', 'filter', 'has_fields']:
                 if type(payload(key)) is list and key in ['has_fields']:
