@@ -4,7 +4,7 @@ import os
 base = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../')
 
 def parse_txt_files(txt_files=None):
-        import re
+    import re
     import os
     files = sorted([f for f in os.listdir('/home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts')])
     #print files[:10]
