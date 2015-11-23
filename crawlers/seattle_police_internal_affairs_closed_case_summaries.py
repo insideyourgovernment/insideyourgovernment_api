@@ -135,6 +135,8 @@ def download():
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:
+        if sys.argv[1] == 'start_over':
+            r.db
         parse_txt_files()
         print 'parsed txt'
     else:
