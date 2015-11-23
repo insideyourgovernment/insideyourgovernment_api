@@ -7,7 +7,7 @@ def parse_txt_files(txt_files=None):
     import re
     import os
     if not txt_files:
-        txt_files = sorted([f for f in os.listdir(base+'/home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts')])
+        txt_files = sorted([f for f in os.listdir(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/txts')])
     opa_files = []
     for filename in txt_files:
     #for filename in files:
