@@ -115,7 +115,7 @@ class ModifyDBHandler(BaseHandler):
                        'update': update}
             self.write(actions[action](payload))
             
-class ModifyDBHandler(BaseHandler):
+class RetriveHandler(BaseHandler):
     def get(self):
         params = urlparse.parse_qs(self.request.body)
         print params
