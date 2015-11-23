@@ -108,6 +108,7 @@ def parse_txt_files(txt_files=None):
 
 
 def download():
+    import os
     os.system('mkdir %s.crawler_data' % (base))
     os.system('mkdir %s.crawler_data/seattle_police_internal_affairs_closed_cases/' % (base))
     os.system('mkdir %s.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs/' % (base))
