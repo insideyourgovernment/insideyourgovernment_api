@@ -119,7 +119,7 @@ def download():
     print files
     for f in files:
         if not f+'.pdf' in os.listdir(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs'):
-            os.system('wget -O %sseattle_police_internal_affairs_closed_cases/pdfs/%s.pdf http://www.seattle.gov/Documents/Departments/OPA/ClosedCaseSummaries/%s.pdf' % (base, f, f))
+            os.system('wget -O %s.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs/%s.pdf http://www.seattle.gov/Documents/Departments/OPA/ClosedCaseSummaries/%s.pdf' % (base, f, f))
     import os
     files = sorted([f for f in os.listdir(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs')])
     new_files = []
