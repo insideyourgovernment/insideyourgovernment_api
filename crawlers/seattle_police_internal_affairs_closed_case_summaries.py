@@ -2,7 +2,7 @@ import requests
 import re
 import os
 base = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../')
-def download()
+def download():
 os.system('mkdir %s.crawler_data' % (base))
 os.system('mkdir %s.crawler_data/seattle_police_internal_affairs_closed_cases/' % (base))
 os.system('mkdir %s.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs/' % (base))
