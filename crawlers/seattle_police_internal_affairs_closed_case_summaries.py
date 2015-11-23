@@ -1,7 +1,7 @@
 import requests
 import re
 import os
-print os.path.realpath(__file__)
+print os.path.dirname(os.path.realpath(__file__))
 html = requests.get('http://www.seattle.gov/opa/closed-case-summaries').text
 os.system('mkdir pdfs')
 files = re.findall('ClosedCaseSummaries/(?P<filename>.*?)\.pdf', html)
