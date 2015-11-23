@@ -133,5 +133,5 @@ def download():
     
 if __name__ == "__main__":
     import sys
-    len(sys.argv) > 1:
+    if len(sys.argv) > 1:
     download()
