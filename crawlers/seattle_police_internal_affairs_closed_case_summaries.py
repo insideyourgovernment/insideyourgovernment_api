@@ -132,4 +132,6 @@ def download():
     parse_txt_files(new_files)
     
 if __name__ == "__main__":
+    import sys
+    len(sys.argv) > 1:
     download()
