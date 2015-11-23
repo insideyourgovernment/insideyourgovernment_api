@@ -26,7 +26,7 @@ def parse_txt_files(txt_files=None):
         regex =  re.search('Complaint Number(?P<num>.*?)Issued', opa_file)
 
         opa_file_dict['Complaint number'] = regex.group('num').strip(' :').replace(' ', '') if regex else filename[:filename.find('ccs')]
-        opa_file_dict['id'] = organzation_id+'_'+opa_file_dict['Complaint number']
+        opa_file_dict['id'] = organization_id+'_'+opa_file_dict['Complaint number']
         regex = re.search('Issued Date(?P<date>.*?)Named', opa_file)
         opa_file_dict['Issued date'] = regex.group('date').strip(' :') if regex else None
         regex = re.search('lssued Date(?P<date>.*?)Named', opa_file)
