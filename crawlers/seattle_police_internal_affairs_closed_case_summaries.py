@@ -6,9 +6,8 @@ base = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../')
 def parse_txt_files(txt_files=None):
     import re
     import os
-    files = sorted([f for f in os.listdir('/home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts')])
     if not txt_files:
-        txt_files = 
+        txt_files = sorted([f for f in os.listdir('/home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts')])
     opa_files = []
     for filename in txt_files:
     #for filename in files:
@@ -138,3 +137,6 @@ def download():
             os.system('pdf2txt.py -A /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/pdfs/%s > /home/ubuntu/redactvideodotorg/opa_closed_case_summaries/txts/%s' % (filename, filename[:-4]+'.txt'))
             new_files.append(filename[:-4]+'.txt')
     parse_txt_files(new_files)
+    
+if __name__ == "__main__":
+    download()
