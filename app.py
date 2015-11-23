@@ -151,7 +151,7 @@ class RetriveHandler(BaseHandler):
                     base = r.db('public').table(payload['table']).filter(lambda case: case[payload['match']['field']].match(payload['match']['value']))
                 
                 else:
-                    base = r.db('public').table(payload['table']).filter(lambda case: case[payload['has_string']['field']].match(payload['has_string']['field']))
+                    base = r.db('public').table(payload['table']).filter(lambda case: case[payload['has_string']['field']].match('.*?'+payload['has_string']['value']+'.*?'))
                 denominator = base.count().run()
 
                 numerator = base.filter({payload['numerator']['field']: payload['numerator']['value']}).count().run() 
