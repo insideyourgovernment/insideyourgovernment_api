@@ -183,7 +183,7 @@ class RetriveHandler(BaseHandler):
                         if not item[payload['field_for_key']] in d:
                             d[item[payload['field_for_key']]] = [item[payload['field_for_value']]]
                         else:
-                            
+                            d[item[payload['field_for_key']]].append(item[payload['field_for_value']])
         else:
             results = list(dbobj.run())
         self.write(json.dumps(results))
