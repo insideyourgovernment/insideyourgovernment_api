@@ -189,6 +189,23 @@ class RetriveHandler(BaseHandler):
                         else:
                             d[item[payload['field_for_key']]].append(item[payload['field_for_value']])
                 results = d
+            elif payload['action'] == 'do_basic_mapping':
+                dbobj = getattr(dbobj, 'pluck')(payload['field_for_key'], payload['field_for_value'])
+                items = dbobj.run()
+                d = {}
+                for item in items:
+                    if type(item[payload['field_for_key']]) is list:
+                        for k in item[payload['field_for_key']]:
+                            if not k in d:
+                                d[k] = [item[payload['field_for_value']]]
+                            else:
+                                d[k].append(item[payload['field_for_value']])
+                    else:
+                        if not item[payload['field_for_key']] in d:
+                            d[item[payload['field_for_key']]] = [item[payload['field_for_value']]]
+                        else:
+                            d[item[payload['field_for_key']]].append(item[payload['field_for_value']])
+                results = d
         else:
             results = list(dbobj.run())
         self.write(json.dumps(results))
