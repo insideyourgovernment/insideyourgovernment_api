@@ -175,7 +175,9 @@ class RetriveHandler(BaseHandler):
             elif payload['action'] == 'do_basic_mapping':
                 dbobj = getattr(dbobj, 'pluck')(payload['field_for_key'], payload['field_for_value'])
                 items = dbobj.run()
-                keys = [item[payload['field_for_key']
+                d = {}
+                for item in items:
+                    
         else:
             results = list(dbobj.run())
         self.write(json.dumps(results))
