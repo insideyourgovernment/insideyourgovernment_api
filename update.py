@@ -14,7 +14,7 @@ def setup_rethinkdb():
         pass
     db = r.db("public")
     dbs_and_tables = {'nonpublic': ['third_party_creds', 'subscribers', 'users', 'sessions'], 'public': ['crawling_instructions', 'apps', 'police_internal_affairs_cases', 'organizations', 'tables']}
-    for table in dbs_
+    for table in dbs_and_tables
     for database in dbs_and_tables.keys():
         try:
             r.db_create(database).run()
