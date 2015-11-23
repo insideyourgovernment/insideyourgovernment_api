@@ -14,10 +14,7 @@ def setup_rethinkdb():
         pass
     db = r.db("public")
     dbs_and_tables = {'nonpublic': ['third_party_creds', 'subscribers', 'users', 'sessions'], 'public': ['crawling_instructions', 'apps', 'police_internal_affairs_cases', 'organizations', 'tables']}
-    for table in dbs_and_tables:
-        tables_ids = [item['id'] for item in r.db('public').table('tables').run()]
-        if not table in tables_ids:
-            r.db('public').insert({'id': table, 'name': table.replace('_', ' ').capitalize()}).run()
+    
     for database in dbs_and_tables.keys():
         try:
             r.db_create(database).run()
@@ -29,6 +26,10 @@ def setup_rethinkdb():
         tables_to_create = set(tables_needed) - set(existing_tables) # remove existing tables from what we need
         for table in tables_to_create:
             db.table_create(table).run()
+    for table in dbs_and_tables:
+        tables_ids = [item['id'] for item in r.db('public').table('tables').run()]
+        if not table in tables_ids:
+            r.db('public').insert({'id': table, 'name': table.replace('_', ' ').capitalize()}).run()
 
 def update(force=False):
     fetch_dry_run_results = os.popen('git fetch --dry-run').read()
