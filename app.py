@@ -135,7 +135,8 @@ class RetriveHandler(BaseHandler):
         
                 
         self.set_header("Content-Type", 'application/json')
-        self.write(json.dumps(list(dbobj.run())))
+        results = list(dbobj.run())
+        self.write(json.dumps(results))
 
                         
 app = tornado.web.Application([
