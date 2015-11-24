@@ -140,7 +140,7 @@ class RetriveHandler(BaseHandler):
             if type(payload['pluck']) is list:
                 dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
             else:
-                dbobg = getattr(dbobj, 'pluck')(payload['pluck'])
+                dbobj = getattr(dbobj, 'pluck')(payload['pluck'])
         
                 
         self.set_header("Content-Type", 'application/json')
