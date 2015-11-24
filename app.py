@@ -210,7 +210,7 @@ class RetriveHandler(BaseHandler):
                 results = {'data': d, 'table_fields': table_fields, 'keys': d.keys()}
         else:
             results = {'data': list(dbobj.run())}
-            results['table'] = r
+            results['table'] = r.db('public'
         self.write(json.dumps(results))
 
                         
