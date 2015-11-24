@@ -211,6 +211,8 @@ class RetriveHandler(BaseHandler):
         else:
             results = {'data': list(dbobj.run())}
             results['table'] = r.db('public').table('tables').get(payload['table']).run()
+            results['fields'] = fields = [row.keys() for row in results['data']]
+            results['fields'] = list(itertools.chain.from_iterable(results['fields']))
         self.write(json.dumps(results))
 
                         
