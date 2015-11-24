@@ -209,7 +209,7 @@ class RetriveHandler(BaseHandler):
                             d[item[payload['field_for_key']]].append(item)
                 results = {'data': d, 'table_fields': table_fields, 'keys': d.keys()}
         else:
-            results = list(dbobj.run())
+            results = {'data': list(dbobj.run())
         self.write(json.dumps(results))
 
                         
