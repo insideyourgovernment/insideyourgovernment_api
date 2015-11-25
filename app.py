@@ -221,7 +221,7 @@ class RetriveHandler(BaseHandler):
             # if 'pluck' in payload:
             #if type(payload['pluck']) is list:
             #    dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
-            results 
+            results = []
             results['table'] = r.db('public').table('tables').get(payload['table']).run()
             results['fields'] = fields = [row.keys() for row in results['data']]
             results['fields'] = list(set(list(itertools.chain.from_iterable(results['fields']))))
