@@ -218,7 +218,7 @@ class RetriveHandler(BaseHandler):
                             d[item[payload['field_for_key']]].append(item)
                 results = {'data': d, 'table_fields': table_fields, 'keys': d.keys()}
         else:
-            results = {'data': list(dbobj.run())}
+            results = {'data': list(dbobj.run(time_format="raw"))}
             results['table'] = r.db('public').table('tables').get(payload['table']).run()
             results['fields'] = fields = [row.keys() for row in results['data']]
             results['fields'] = list(set(list(itertools.chain.from_iterable(results['fields']))))
