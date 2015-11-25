@@ -129,7 +129,7 @@ class RetriveHandler(BaseHandler):
         params = urlparse.parse_qs(self.request.body)
         print params
         payload = json.loads(self.get_argument('payload'))
-        r.db('public').table('queries').insert({'datetime': 'payload': payload}).run()
+        r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run()
         dbobj = r.db('public').table(payload['table'])
         for key in payload.keys():
             if key in ['get', 'filter', 'has_fields', 'match', 'has_string', 'match_any_field', 'has_string_in_any_field']:
