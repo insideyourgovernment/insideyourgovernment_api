@@ -223,7 +223,7 @@ class RetriveHandler(BaseHandler):
             #    dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
             results = []
             results['table'] = r.db('public').table('tables').get(payload['table']).run()
-            results = {'data': list(dbobj.run(time_format="raw"))}
+            results['data'] = list(dbobj.run(time_format="raw"))
             results['fields'] = fields = [row.keys() for row in results['data']]
             results['fields'] = list(set(list(itertools.chain.from_iterable(results['fields']))))
             results['number_of_rows'] = len(results['data'])
