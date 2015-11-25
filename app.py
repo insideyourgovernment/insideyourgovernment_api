@@ -128,6 +128,7 @@ class RetriveHandler(BaseHandler):
         params = urlparse.parse_qs(self.request.body)
         print params
         payload = json.loads(self.get_argument('payload'))
+        
         dbobj = r.db('public').table(payload['table'])
         for key in payload.keys():
             if key in ['get', 'filter', 'has_fields', 'match', 'has_string', 'match_any_field', 'has_string_in_any_field']:
@@ -231,6 +232,7 @@ class RetriveHandler(BaseHandler):
                 percentage = "{:.0%}".format(percentage)+' (%s/%s)' % (numerator, denominator)
                 results['percentages'].append({'field': field, 'value': True, 'percentage': percentage})
             results['payload'] = payload
+            
         self.write(json.dumps(results))
 
                         
