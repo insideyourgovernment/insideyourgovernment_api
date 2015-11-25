@@ -107,7 +107,7 @@ def get_field(l, field):
     for d in l:
         if field in d:
             results.append(d[field])
-     
+    return results
 
 class ModifyDBHandler(BaseHandler):
     def post(self):
