@@ -221,7 +221,7 @@ class RetriveHandler(BaseHandler):
             # if 'pluck' in payload:
             #if type(payload['pluck']) is list:
             #    dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
-            results = []
+            results = {}
             results['table'] = r.db('public').table('tables').get(payload['table']).run()
             if 'default_order_by' in results['table']:
                 dbobj = getattr(dbobj, 'order_by')(r.desc(results['table']['default_order_by']['field']))
