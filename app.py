@@ -9,6 +9,7 @@ import urlparse
 import random
 import string
 import itertools
+import datetime
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -128,7 +129,7 @@ class RetriveHandler(BaseHandler):
         params = urlparse.parse_qs(self.request.body)
         print params
         payload = json.loads(self.get_argument('payload'))
-        
+        r.db('public').table('queries').insert({'payload'
         dbobj = r.db('public').table(payload['table'])
         for key in payload.keys():
             if key in ['get', 'filter', 'has_fields', 'match', 'has_string', 'match_any_field', 'has_string_in_any_field']:
