@@ -104,7 +104,8 @@ def update(payload):
 
 def get_field(l, field):
     results = []
-    for d in l
+    for d in l:
+        if 
 
 class ModifyDBHandler(BaseHandler):
     def post(self):
