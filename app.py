@@ -224,7 +224,7 @@ class RetriveHandler(BaseHandler):
             results = []
             results['table'] = r.db('public').table('tables').get(payload['table']).run()
             if 'default_order_by' in results['table']:
-                dbobj = getattr(dbobj, 
+                dbobj = getattr(dbobj, 'order_by')(
             results['data'] = list(dbobj.run(time_format="raw"))
             results['fields'] = fields = [row.keys() for row in results['data']]
             results['fields'] = list(set(list(itertools.chain.from_iterable(results['fields']))))
