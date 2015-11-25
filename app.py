@@ -225,7 +225,7 @@ class RetriveHandler(BaseHandler):
             likely_boolean_fields = [field for field in results['fields'] if field.startswith('is_')]
             for field in likely_boolean_fields:
                 items_in_field = get_field(results['data'])
-                
+                results['percentages'].append({'items_in_field.count(True)
             results['payload'] = payload
         self.write(json.dumps(results))
 
