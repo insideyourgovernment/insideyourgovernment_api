@@ -213,7 +213,7 @@ class RetriveHandler(BaseHandler):
             results['table'] = r.db('public').table('tables').get(payload['table']).run()
             results['fields'] = fields = [row.keys() for row in results['data']]
             results['fields'] = list(set(list(itertools.chain.from_iterable(results['fields']))))
-            results[
+            results['number_of_rows'] = len(results['data'])
         self.write(json.dumps(results))
 
                         
