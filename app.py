@@ -214,6 +214,7 @@ class RetriveHandler(BaseHandler):
             results['fields'] = fields = [row.keys() for row in results['data']]
             results['fields'] = list(set(list(itertools.chain.from_iterable(results['fields']))))
             results['number_of_rows'] = len(results['data'])
+            results['percentages'] = []
             results['payload'] = payload
         self.write(json.dumps(results))
 
