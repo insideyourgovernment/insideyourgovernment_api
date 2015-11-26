@@ -241,7 +241,7 @@ class RetriveHandler(BaseHandler):
                 sentence = '%s of %s are %s.' % (percentage, row_name, field[3:])
                 results['percentages'].append({'field': field, 'value': True, 'percentage': percentage, 'sentence': sentence})
             results['payload'] = payload
-            
+            results['name_for_rows'] = payload['table'].split('_')[-1]
         self.write(json.dumps(results))
 
                         
