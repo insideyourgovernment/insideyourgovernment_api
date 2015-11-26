@@ -238,6 +238,7 @@ class RetriveHandler(BaseHandler):
                 percentage = float(numerator)/denominator
                 percentage = "{:.0%}".format(percentage)+' (%s/%s)' % (numerator, denominator)
                 row_name = payload['table'].replace('_', ' ')
+                if payload['has_string-
                 sentence = '%s of %s are %s.' % (percentage, row_name, field[3:])
                 results['percentages'].append({'field': field, 'value': True, 'percentage': percentage, 'sentence': sentence})
             results['payload'] = payload
