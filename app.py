@@ -248,7 +248,7 @@ class RetriveHandler(BaseHandler):
             results['field_selectors'] = []
             for field in results['fields']:
                 if field.startswith('is_'):
-                    results['field_selectors'].append({'selector': 'checkbox', 'name': field[3:].capitalize()})
+                    results['field_selectors'].append({'selector': 'checkbox', 'name': field, 'display_name': field[3:].capitalize()})
         self.write(json.dumps(results))
 
                         
