@@ -237,7 +237,8 @@ class RetriveHandler(BaseHandler):
                 denominator = len(items_in_field)
                 percentage = float(numerator)/denominator
                 percentage = "{:.0%}".format(percentage)+' (%s/%s)' % (numerator, denominator)
-                results['percentages'].append({'field': field, 'value': True, 'percentage': percentage})
+                sentence = 'For the table %s, '
+                results['percentages'].append({'field': field, 'value': True, 'percentage': percentage, 'sentence': sentence})
             results['payload'] = payload
             
         self.write(json.dumps(results))
