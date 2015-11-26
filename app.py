@@ -253,7 +253,7 @@ class RetriveHandler(BaseHandler):
 
 class TablesHandler(BaseHandler):
     def get(self):
-def convert_pdf_to_text():
+
     import uuid
     filename = str(uuid.uuid4()) + '.pdf'
     print 'downloading'
