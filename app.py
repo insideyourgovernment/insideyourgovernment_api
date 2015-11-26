@@ -269,7 +269,7 @@ app = tornado.web.Application([
     (r"/tables/", TablesHandler),
     (r"/modify_db/", ModifyDBHandler),
     (r"/retrive/", RetriveHandler),
-    (r"/convert_pdf_to_txt/", ConvertPDF2TxtHandler
+    (r"/convert_pdf_to_txt/", ConvertPDF2TxtHandler),
 ])
 
 if __name__ == "__main__":
