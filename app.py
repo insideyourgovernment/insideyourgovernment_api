@@ -263,8 +263,8 @@ def download_file(url, local_filename):
         
 class ConvertPDF2TxtHandler(BaseHandler):
     def get(self):
-        print self.request.body
-        print 'pdf2txt', urlparse.parse_qs(self.request.body)
+        print self.request.uri
+        print 'pdf2txt', urlparse.parse_qs(self.request.uri)
         url = urlparse.parse_qs(self.request.body)['url']
         import uuid
         filename = str(uuid.uuid4()) + '.pdf'
