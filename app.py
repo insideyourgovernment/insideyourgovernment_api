@@ -226,7 +226,7 @@ class RetriveHandler(BaseHandler):
             if 'default_order_by' in results['table']:
                 dbobj = getattr(dbobj, 'order_by')(r.desc(results['table']['default_order_by']['field']))
             results['data'] = list(dbobj.run(time_format="raw"))
-            results['fields'] = fields = [row.keys() for row in results['data']]
+            results['fields'] = [row.keys() for row in results['data']]
             results['fields'] = list(set(list(itertools.chain.from_iterable(results['fields']))))
             results['number_of_rows'] = len(results['data'])
             results['percentages'] = []
