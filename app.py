@@ -254,14 +254,14 @@ class RetriveHandler(BaseHandler):
 class TablesHandler(BaseHandler):
     def get(self):
 
-    import uuid
-    filename = str(uuid.uuid4()) + '.pdf'
-    print 'downloading'
-    download_file(request.args['url'], filename)
-    print 'downloaded'
-    f = {'results': os.popen('pdf2txt.py %s' % (filename)).read()}
-    os.system('rm %s' % (filename))
-    return jsonify(**f)        
+        import uuid
+        filename = str(uuid.uuid4()) + '.pdf'
+        print 'downloading'
+        download_file(request.args['url'], filename)
+        print 'downloaded'
+        f = {'results': os.popen('pdf2txt.py %s' % (filename)).read()}
+        os.system('rm %s' % (filename))
+        return jsonify(**f)        
                         
 app = tornado.web.Application([
     (r"/get_session_info/", SessionHandler),
