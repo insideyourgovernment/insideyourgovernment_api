@@ -251,6 +251,15 @@ class RetriveHandler(BaseHandler):
                     results['field_selectors'].append({'selector': 'checkbox', 'name': field, 'display_name': field[3:].capitalize()})
         self.write(json.dumps(results))
 
+def download_file(url, local_filename):
+    # NOTE the stream=True parameter
+    r = requests.get(url, stream=True)
+    with open(local_filename, 'wb') as f:
+        for chunk in r.iter_content(chunk_size=1024): 
+            if chunk: # filter out keep-alive new chunks
+                f.write(chunk)
+                #f.flush() commented by recommendation from J.F.Sebastian
+        
 class ConvertPDF2TxtHandler(BaseHandler):
     def get(self):
         url = urlparse.parse_qs(self.request.body)
