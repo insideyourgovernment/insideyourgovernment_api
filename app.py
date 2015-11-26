@@ -261,7 +261,7 @@ class TablesHandler(BaseHandler):
         print 'downloaded'
         f = {'results': os.popen('pdf2txt.py %s' % (filename)).read()}
         os.system('rm %s' % (filename))
-        return jsonify(**f)        
+        self.write(f)
                         
 app = tornado.web.Application([
     (r"/get_session_info/", SessionHandler),
