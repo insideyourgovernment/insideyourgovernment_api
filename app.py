@@ -251,6 +251,17 @@ class RetriveHandler(BaseHandler):
                     results['field_selectors'].append({'selector': 'checkbox', 'name': field, 'display_name': field[3:].capitalize()})
         self.write(json.dumps(results))
 
+class TablesHandler(BaseHandler):
+    def get(self):
+def convert_pdf_to_text():
+    import uuid
+    filename = str(uuid.uuid4()) + '.pdf'
+    print 'downloading'
+    download_file(request.args['url'], filename)
+    print 'downloaded'
+    f = {'results': os.popen('pdf2txt.py %s' % (filename)).read()}
+    os.system('rm %s' % (filename))
+    return jsonify(**f)        
                         
 app = tornado.web.Application([
     (r"/get_session_info/", SessionHandler),
