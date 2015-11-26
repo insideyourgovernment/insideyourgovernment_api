@@ -247,7 +247,8 @@ class RetriveHandler(BaseHandler):
             results['name_for_rows'] = payload['table'].split('_')[-1]
             results['field_selectors'] = []
             for field in results['fields']:
-                
+                if field.startswith('is_'):
+                    
         self.write(json.dumps(results))
 
                         
