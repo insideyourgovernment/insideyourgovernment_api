@@ -251,7 +251,7 @@ class RetriveHandler(BaseHandler):
                     results['field_selectors'].append({'selector': 'checkbox', 'name': field, 'display_name': field[3:].capitalize()})
         self.write(json.dumps(results))
 
-class TablesHandler(BaseHandler):
+class ConvertPDF2TxtHandler(BaseHandler):
     def get(self):
         url = urlparse.parse_qs(self.request.body)
         import uuid
@@ -269,6 +269,7 @@ app = tornado.web.Application([
     (r"/tables/", TablesHandler),
     (r"/modify_db/", ModifyDBHandler),
     (r"/retrive/", RetriveHandler),
+    (r"/convert_pdf_to_txt/", ConvertPDF2TxtHandler
 ])
 
 if __name__ == "__main__":
