@@ -245,6 +245,8 @@ class RetriveHandler(BaseHandler):
                 results['percentages'].append({'field': field, 'value': True, 'percentage': percentage, 'sentence': sentence})
             results['payload'] = payload
             results['name_for_rows'] = payload['table'].split('_')[-1]
+            results['field_selectors'] = []
+            for field in results[fie
         self.write(json.dumps(results))
 
                         
