@@ -248,7 +248,7 @@ class RetriveHandler(BaseHandler):
             results['field_selectors'] = []
             for field in results['fields']:
                 if field.startswith('is_'):
-                    
+                    results['field_selectors'].append({'selector': 'checkbox', '
         self.write(json.dumps(results))
 
                         
