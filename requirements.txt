@@ -5,3 +5,4 @@ futures
 ipython
 rethinkdb
 python-dateutil
+BeautifulSoup4

@@ -40,7 +40,8 @@ def update(force=False):
     
     #if not fetch_dry_run_results and not force:
     #    return
-    os.popen('git pull').read()
+    git_pull = os.popen('git pull').read()
+    print git_pull
     os.system('sudo pip install -r requirements.txt')
     setup_rethinkdb()
 if 'force' in str(sys.argv):
