@@ -32,8 +32,8 @@ def get_text_of_all_pdfs_linked_from(url):
     for doc in docs:
         doc['filename'] = doc['url'].split('/')[-1]
     for doc in docs:
-        if True:
-        #if not doc['filename'] in os.listdir(base+'.crawler_data/'+url_hash+'/pdfs'):
+        
+        if not doc['filename'] in os.listdir(base+'.crawler_data/'+url_hash+'/pdfs'):
             os.system('wget -O %s.crawler_data/%s/pdfs/%s %s' % (base, url_hash, doc['filename'], doc['url']))
      
             os.system('pdf2txt.py -A %s.crawler_data/%s/pdfs/%s > %s.crawler_data/%s/txts/%s' % (base, url_hash, doc['filename'], base, url_hash, doc['filename'][:-4]+'.txt'))
