@@ -30,9 +30,9 @@ def setup_rethinkdb():
         #tables_ids = [item['id'] for item in r.db('public').table('tables').run()]
         #if not table in tables_ids:
         if 'police' in table:
-            category = "policing"
+            category = "Policing"
         else:
-            category = "People's NSA"
+            category = "Inside Your Government"
         r.db('public').table('tables').insert({'id': table, 'name': table.replace('_', ' ').capitalize(), 'categories': [category]}, conflict='update').run()
 
 def update(force=False):
