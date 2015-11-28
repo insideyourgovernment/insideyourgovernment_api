@@ -266,6 +266,18 @@ def download_file(url, local_filename):
                 f.write(chunk)
                 #f.flush() commented by recommendation from J.F.Sebastian
         
+class ConvertAllPDFs2TxtHandler(BaseHandler):
+    def get(self):
+        url = urlparse.parse_qs(self.request.uri)['/convert_all_pdf_to_txt/?url'][0]
+        import uuid
+        filename = str(uuid.uuid4()) + '.pdf'
+        print 'downloading'
+        download_file(url, filename)
+        print 'downloaded'
+        f = {'results': os.popen('pdf2txt.py %s' % (filename)).read()}
+        os.system('rm %s' % (filename))
+        self.write(f)        
+        
 class ConvertPDF2TxtHandler(BaseHandler):
     def get(self):
         url = urlparse.parse_qs(self.request.uri)['/convert_pdf_to_txt/?url'][0]
