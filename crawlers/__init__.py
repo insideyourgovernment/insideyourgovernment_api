@@ -15,7 +15,7 @@ def get_text_of_all_pdfs_linked_from(url):
     os.system('mkdir %s.crawler_data/%s/txts/' % (base, url_hash))
     soup = BeautifulSoup(requests.get(url).text)
     
-    docs = [{'url': urlparse.urljoin(url, link['href']) if link['href'].startswith('/') else urlparse.urljoin(url, link['href']), 'tag': link.contents[0]} for link in soup.find_all('a', href=True) if link['href'].endswith('.pdf')]
+    docs = [{'url': urlparse.urljoin(urlparse.urlparse(), link['href']) if link['href'].startswith('/') else urlparse.urljoin(url, link['href']), 'tag': link.contents[0]} for link in soup.find_all('a', href=True) if link['href'].endswith('.pdf')]
     for doc in docs:
         doc['filename'] = doc['url'].split('/')[-1]
     for doc in docs:
