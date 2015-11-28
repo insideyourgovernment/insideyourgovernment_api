@@ -270,7 +270,7 @@ class ConvertAllPDFs2TxtHandler(BaseHandler):
     def get(self):
         url = urlparse.parse_qs(self.request.uri)['/convert_all_pdfs_to_txt/?url'][0]
         import crawlers
-        f = crawlers.get_text_of_all_pdfs_linked_from(ur
+        f = crawlers.get_text_of_all_pdfs_linked_from(url)
         self.write(f)        
         
 class ConvertPDF2TxtHandler(BaseHandler):
