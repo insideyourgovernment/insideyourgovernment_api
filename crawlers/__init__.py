@@ -8,8 +8,8 @@ import re
 base = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../')
 
 def process_url(base_url, url):
-    print base_url, url
-    return 'http://'+urlparse.urljoin(urlparse.urlparse(base_url)['netloc'], url) if url.startswith('/') else urlparse.urljoin(base_url, url)
+    new_url = 'http://'+urlparse.urljoin(urlparse.urlparse(base_url)['netloc'], url) if url.startswith('/') else urlparse.urljoin(base_url, url)
+    return new_url
  
 def get_text_of_all_pdfs_linked_from(url):
     url_hash = hash_object = hashlib.md5(url)
@@ -25,9 +25,10 @@ def get_text_of_all_pdfs_linked_from(url):
     m = re.search('<base href="(?P<url>.*?)"', html)
     if m:
         base_url = m.group('url')
-    
+    print base_url
     
     docs = [{'url': process_url(base_url, link['href']), 'tag': link.contents[0]} for link in soup.find_all('a', href=True) if link['href'].endswith('.pdf')]
+    print docs
     for doc in docs:
         doc['filename'] = doc['url'].split('/')[-1]
     for doc in docs:
