@@ -36,10 +36,10 @@ def setup_rethinkdb():
         r.db('public').table('tables').insert({'id': table, 'name': table.replace('_', ' ').capitalize(), 'categories': [category]}, conflict='update').run()
 
 def update(force=False):
-    fetch_dry_run_results = os.popen('git fetch --dry-run').read()
+    #fetch_dry_run_results = os.popen('git fetch --dry-run').read()
     
-    if not fetch_dry_run_results and not force:
-        return
+    #if not fetch_dry_run_results and not force:
+    #    return
     os.popen('git pull').read()
     os.system('sudo pip install -r requirements.txt')
     setup_rethinkdb()
