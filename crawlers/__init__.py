@@ -17,7 +17,7 @@ def get_text_of_all_pdfs_linked_from(url):
     
     docs = [{'url': urlparse.urljoin(url, link['href']), 'tag': link.contents[0]} for link in soup.find_all('a', href=True) if link['href'].endswith('.pdf')]
     for doc in docs:
-        doc['filename'] = doc['ur'].split('/')[-1]
+        doc['filename'] = doc['url'].split('/')[-1]
     for doc in docs:
         if not doc['filename'] in os.listdir(base+'.crawler_data/'+url_hash+'/pdfs'):
             os.system('wget -O %s.crawler_data/%s/pdfs/%s %s' % (base, url_hash, doc['filename'], doc['url']))
