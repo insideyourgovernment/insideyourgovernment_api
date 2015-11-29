@@ -153,6 +153,11 @@ class RetriveHandler(BaseHandler):
             else:
                 dbobj = getattr(dbobj, 'pluck')(payload['pluck'])
         
+        results_for_fields = list(dbobj.run())
+        fields = [row.keys() for row in results]
+        fields = list(itertools.chain.from_iterable(fields))
+        fields = sorted(list(set(fields)))
+        
         #joined_data = list(r.db("public").table("police_internal_affairs_allegations").eq_join("organization_id", r.db("public").table("organizations")).map({"right":{
         #        "organization_id": r.row["right"]["id"],
         #        "organization_name": r.row["right"]["name"]
