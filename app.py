@@ -168,9 +168,9 @@ class RetriveHandler(BaseHandler):
             
             # get the fields of the table 
             results_for_fields = list(dbobj.run())
-            fields = [row.keys() for row in results_for_fields]
-            fields = list(itertools.chain.from_iterable(fields))
-            fields = sorted(list(set(fields)))
+            right_fields = [row.keys() for row in results_for_fields]
+            fields = list(itertools.chain.from_iterable(right_fields))
+            right_fields = sorted(list(set(right_fields)))
             dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(field[:-3]))
             d = {"left": r.row["left"], "right": {}}
             for right_field in 
