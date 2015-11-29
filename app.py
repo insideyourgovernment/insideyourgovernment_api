@@ -153,7 +153,7 @@ class RetriveHandler(BaseHandler):
             else:
                 dbobj = getattr(dbobj, 'pluck')(payload['pluck'])
         
-        ids_for_other_tables = 
+        ids_for_other_tables = []
         modified_joined_data = []
         for data in joined_data:
             d = {}
