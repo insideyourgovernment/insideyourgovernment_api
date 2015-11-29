@@ -174,7 +174,7 @@ class RetriveHandler(BaseHandler):
             dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(field[:-3]))
             d = {"left": r.row["left"], "right": {}}
             for right_field in right_fields:
-                
+                d[field[:-2]+right_field] = r.row["right"][right_field]
         #for data in joined_data:
         #    d = {}
         #    d.update(data['left'])
