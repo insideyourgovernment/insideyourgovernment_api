@@ -154,7 +154,7 @@ class RetriveHandler(BaseHandler):
                 dbobj = getattr(dbobj, 'pluck')(payload['pluck'])
         
         results_for_fields = list(dbobj.run())
-        fields = [row.keys() for row in results]
+        fields = [row.keys() for row in results_for_fields]
         fields = list(itertools.chain.from_iterable(fields))
         fields = sorted(list(set(fields)))
         
@@ -168,10 +168,11 @@ class RetriveHandler(BaseHandler):
             
             # get the fields of the table 
             results_for_fields = list(dbobj.run())
-            fields = [row.keys() for row in results]
+            fields = [row.keys() for row in results_for_fields]
             fields = list(itertools.chain.from_iterable(fields))
             fields = sorted(list(set(fields)))
             dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(field[:-3]))
+            d = {"left": r.row{
         #for data in joined_data:
         #    d = {}
         #    d.update(data['left'])
