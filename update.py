@@ -13,7 +13,7 @@ def setup_rethinkdb():
     except:
         pass
     db = r.db("public")
-    dbs_and_tables = {'nonpublic': ['third_party_creds', 'subscribers', 'users', 'sessions'], 'public': ['crawling_instructions', 'apps', 'police_internal_affairs_cases', 'police_internal_affairs_allegations', 'organizations', 'tables', 'queries']}
+    dbs_and_tables = {'nonpublic': ['third_party_creds', 'subscribers', 'users', 'sessions'], 'public': ['crawling_instructions', 'apps', 'police_internal_affairs_cases', 'police_internal_affairs_allegations', 'organizations', 'tables', 'queries', 'people']}
     
     for database in dbs_and_tables.keys():
         try:
