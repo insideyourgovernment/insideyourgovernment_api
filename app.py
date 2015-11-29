@@ -164,13 +164,15 @@ class RetriveHandler(BaseHandler):
         #    }, "left": r.row["left"]}).zip().run())
         ids_for_other_tables = [field for field in fields if field.endswith('_id')]
         modified_joined_data = []
-        for data in joined_data:
-            d = {}
-            d.update(data['left'])
-            new_right_side = data['right'].items()
-            new_right_side = dict([('organization_'+item[0], item[1]) for item in new_right_side])
-            d.update(new_right_side)
-            modified_joined_data.append(d)
+        for field in ids_for_others_tables:
+            
+        #for data in joined_data:
+        #    d = {}
+        #    d.update(data['left'])
+        #    new_right_side = data['right'].items()
+        #    new_right_side = dict([('organization_'+item[0], item[1]) for item in new_right_side])
+        #    d.update(new_right_side)
+        #    modified_joined_data.append(d)
                 
         self.set_header("Content-Type", 'application/json')
         if 'action' in payload:
