@@ -236,7 +236,8 @@ class RetriveHandler(BaseHandler):
             # remove if the field in a filter
             if 'filter' in payload:
                 for field in payload['filter'].keys():
-                    likely_boolean_fields.remove(field)
+                    if field in likely_boolean_fields:
+                        likely_boolean_fields.remove(field)
             for field in likely_boolean_fields:
                 items_in_field = get_field(results['data'], field)
                 numerator = items_in_field.count(True)
