@@ -176,6 +176,7 @@ class RetriveHandler(BaseHandler):
             for right_field in right_fields:
                 d[field[:-2]+right_field] = r.row["right"][right_field]
             
+            
         #for data in joined_data:
         #    d = {}
         #    d.update(data['left'])
