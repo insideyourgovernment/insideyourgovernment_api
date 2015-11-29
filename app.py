@@ -165,7 +165,7 @@ class RetriveHandler(BaseHandler):
         ids_for_other_tables = [field for field in fields if field.endswith('_id')]
         modified_joined_data = []
         for field in ids_for_other_tables:
-            
+            print field
             # get the fields of the table 
             results_for_fields = r.db('public').table(field[:-3]+'s').run()
             right_fields = [row.keys() for row in results_for_fields]
