@@ -11,7 +11,7 @@ def process_url(base_url, url):
     new_url = 'http://'+urlparse.urljoin(urlparse.urlparse(base_url)['netloc'], url) if url.startswith('/') else urlparse.urljoin(base_url, url)
     return new_url
  
-def get_text_of_all_pdfs_linked_from(url): 
+def get_text_of_all_pdfs_linked_from(url):
     url_hash = hash_object = hashlib.md5(url)
     url_hash = hash_object.hexdigest()
     os.system('mkdir %s.crawler_data' % (base))
