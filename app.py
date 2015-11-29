@@ -162,7 +162,7 @@ class RetriveHandler(BaseHandler):
         #        "organization_id": r.row["right"]["id"],
         #        "organization_name": r.row["right"]["name"]
         #    }, "left": r.row["left"]}).zip().run())
-        ids_for_other_tables = []
+        ids_for_other_tables = [field for field in fields if field.endswith('_id')]
         modified_joined_data = []
         for data in joined_data:
             d = {}
