@@ -175,7 +175,7 @@ class RetriveHandler(BaseHandler):
             d = {"left": r.row["left"], "right": {}}
             for right_field in right_fields:
                 d[field[:-2]+right_field] = r.row["right"][right_field]
-            dbobj = getattr(dbobj, 'map')(d)
+            dbobj = dbobj
             dbobj = dbobj.zip()
             
             
