@@ -171,7 +171,7 @@ class RetriveHandler(BaseHandler):
             right_fields = [row.keys() for row in results_for_fields]
             right_fields = list(itertools.chain.from_iterable(right_fields))
             right_fields = sorted(list(set(right_fields)))
-            dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(field[:-3]))
+            dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(field[:-3]+'s'))
             d = {"left": r.row["left"], "right": {}}
             for right_field in right_fields:
                 d[field[:-2]+right_field] = r.row["right"][right_field]
