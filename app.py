@@ -164,7 +164,7 @@ class RetriveHandler(BaseHandler):
         #    }, "left": r.row["left"]}).zip().run())
         ids_for_other_tables = [field for field in fields if field.endswith('_id')]
         modified_joined_data = []
-        for field in ids_for_others_tables:
+        for field in ids_for_other_tables:
             
             # get the fields of the table 
             results_for_fields = list(dbobj.run())
