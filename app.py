@@ -166,6 +166,8 @@ class RetriveHandler(BaseHandler):
         modified_joined_data = []
         for field in ids_for_others_tables:
             dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(field[:-3]))
+            # get the fields of the table 
+            
         #for data in joined_data:
         #    d = {}
         #    d.update(data['left'])
