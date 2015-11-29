@@ -153,6 +153,7 @@ class RetriveHandler(BaseHandler):
             else:
                 dbobj = getattr(dbobj, 'pluck')(payload['pluck'])
         
+        ids_for_other_tables = 
                 
         self.set_header("Content-Type", 'application/json')
         if 'action' in payload:
