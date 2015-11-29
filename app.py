@@ -165,12 +165,13 @@ class RetriveHandler(BaseHandler):
         ids_for_other_tables = [field for field in fields if field.endswith('_id')]
         modified_joined_data = []
         for field in ids_for_others_tables:
-            dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(field[:-3]))
+            
             # get the fields of the table 
-            results = list(dbobj.run())
+            results_for_fields = list(dbobj.run())
             fields = [row.keys() for row in results]
             fields = list(itertools.chain.from_iterable(fields))
-            results = sorted(list(set(fields)))
+            fields = sorted(list(set(fields)))
+            dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(field[:-3]))
         #for data in joined_data:
         #    d = {}
         #    d.update(data['left'])
