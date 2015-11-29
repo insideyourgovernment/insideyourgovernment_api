@@ -166,6 +166,7 @@ class RetriveHandler(BaseHandler):
         modified_joined_data = []
         for field in ids_for_other_tables:
             print field
+            print field[:-3]+'s'
             # get the fields of the table 
             results_for_fields = r.db('public').table(field[:-3]+'s').run()
             right_fields = [row.keys() for row in results_for_fields]
@@ -174,7 +175,7 @@ class RetriveHandler(BaseHandler):
             dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(field[:-3]+'s'))
             d = {"left": r.row["left"], "right": {}}
             for right_field in right_fields:
-                d[field[:-2]+right_field] = r.row["right"][right_field]
+                d["right"field[:-2]+right_field] = r.row["right"][right_field]
             dbobj = dbobj.map(d)
             dbobj = dbobj.zip()
             
