@@ -167,7 +167,7 @@ class RetriveHandler(BaseHandler):
         for field in ids_for_other_tables:
             
             # get the fields of the table 
-            results_for_fields = list(dbobj.run())
+            results_for_fields = r.db('public').table(field[:-3]+'s').run()
             right_fields = [row.keys() for row in results_for_fields]
             right_fields = list(itertools.chain.from_iterable(right_fields))
             right_fields = sorted(list(set(right_fields)))
