@@ -154,6 +154,14 @@ class RetriveHandler(BaseHandler):
                 dbobj = getattr(dbobj, 'pluck')(payload['pluck'])
         
         ids_for_other_tables = 
+        modified_joined_data = []
+        for data in joined_data:
+            d = {}
+            d.update(data['left'])
+            new_right_side = data['right'].items()
+            new_right_side = dict([('organization_'+item[0], item[1]) for item in new_right_side])
+            d.update(new_right_side)
+            modified_joined_data.append(d)
                 
         self.set_header("Content-Type", 'application/json')
         if 'action' in payload:
