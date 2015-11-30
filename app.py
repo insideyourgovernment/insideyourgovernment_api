@@ -287,7 +287,7 @@ class RetriveHandler(BaseHandler):
             results['fields'] = list(set(list(itertools.chain.from_iterable(results['fields']))))
             results['number_of_rows'] = len(results['data'])
             results['percentages'] = []
-            results['group_
+            results['group_counts'] = 
             likely_boolean_fields = [field for field in results['fields'] if field.startswith('is_')]
             # remove if the field in a filter
             if 'filter' in payload:
