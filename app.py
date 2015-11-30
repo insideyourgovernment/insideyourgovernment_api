@@ -269,7 +269,7 @@ class RetriveHandler(BaseHandler):
                 dbobj = getattr(dbobj, 'order_by')(r.desc(results['table']['default_order_by']['field']))
             results['data'] = list(dbobj.run(time_format="raw"))
             if 'linked_tables' in results['table']:
-                for linked_table in results['table']:
+                for linked_table in results['table']['linked_tables']:
                     for row in results['data']:
                         row[linked_table] = []
             results['fields'] = [row.keys() for row in results['data']]
