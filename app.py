@@ -164,6 +164,7 @@ class RetriveHandler(BaseHandler):
         #    }, "left": r.row["left"]}).zip().run())
         ids_for_other_tables = [field for field in fields if field.endswith('_id')]
         modified_joined_data = []
+        special_names = {'person': 'people'}
         for field in ids_for_other_tables:
             #print field
             #print field[:-3]+'s'
@@ -172,7 +173,7 @@ class RetriveHandler(BaseHandler):
             #right_fields = [row.keys() for row in results_for_fields]
             #right_fields = list(itertools.chain.from_iterable(right_fields))
             #right_fields = sorted(list(set(right_fields)))
-            special_names = {'person': 'people'}
+            
             t = special_names[field[:-3]] if field[:-3] in special_names else field[:-3]+'s'
             print field, t
             dbobj = dbobj.eq_join(field, r.db("public").table(t))
@@ -268,7 +269,6 @@ class RetriveHandler(BaseHandler):
             if 'default_order_by' in results['table']:
                 dbobj = getattr(dbobj, 'order_by')(r.desc(results['table']['default_order_by']['field']))
             results['data'] = list(dbobj.run(time_format="raw"))
-            t = special_names[field[:-3]] if field[:-3] in special_names else field[:-3]+'s'
             if 'linked_tables' in results['table']:
                 for linked_table in results['table']['linked_tables']:
                     for row in results['data']:
