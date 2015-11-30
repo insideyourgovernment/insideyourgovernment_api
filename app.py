@@ -290,7 +290,7 @@ class RetriveHandler(BaseHandler):
             results['group_counts'] = {}
             for field in results['fields']:
                 results['group_counts'][field] = dbobj.group(field).count().run().items()
-                sorted(allegations_by_perso, key=lambda x:x[1], reverse=True)
+                sorted(dbobj.group(field).count().run().items(), key=lambda x:x[1], reverse=True)
             likely_boolean_fields = [field for field in results['fields'] if field.startswith('is_')]
             # remove if the field in a filter
             if 'filter' in payload:
