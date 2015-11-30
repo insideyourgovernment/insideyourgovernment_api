@@ -268,7 +268,7 @@ class RetriveHandler(BaseHandler):
             results['table'] = r.db('public').table('tables').get(payload['table']).run()
             if 'default_order_by' in results['table']:
                 dbobj = getattr(dbobj, 'order_by')(r.desc(results['table']['default_order_by']['field']))
-            special_ = {value: key for key, value in tag_vocab.items()}
+            special_names = {value: key for key, value in special_names.items()}
             results['data'] = list(dbobj.run(time_format="raw"))
             if 'linked_tables' in results['table']:
                 for linked_table in results['table']['linked_tables']:
