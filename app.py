@@ -270,7 +270,7 @@ class RetriveHandler(BaseHandler):
                 dbobj = getattr(dbobj, 'order_by')(r.desc(results['table']['default_order_by']['field']))
             special_names_reversed = {value: key for key, value in special_names.items()}
             t = payload['table']
-            t = special_names[t] if t in special_names else t[:-1]
+            t = special_names_reversed[t] if t in special_names_reversed else t[:-1]
             t = t + '_id'
             results['data'] = list(dbobj.run(time_format="raw"))
             if 'linked_tables' in results['table']:
