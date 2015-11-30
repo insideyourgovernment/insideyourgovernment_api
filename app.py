@@ -274,7 +274,7 @@ class RetriveHandler(BaseHandler):
             t = t + '_id'
             results['data'] = list(dbobj.run(time_format="raw"))
             if 'linked_tables' in results['table']:
-                linked_tab
+                linked_table_data =
                 for linked_table in results['table']['linked_tables']:
                     for i, row in enumerate(results['data']):
                         print i
