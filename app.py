@@ -271,6 +271,7 @@ class RetriveHandler(BaseHandler):
             special_names = {value: key for key, value in special_names.items()}
             t = payload['table']
             t = special_names[t] if t in special_names else t[:-1]
+            t = t
             results['data'] = list(dbobj.run(time_format="raw"))
             if 'linked_tables' in results['table']:
                 for linked_table in results['table']['linked_tables']:
