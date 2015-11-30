@@ -289,6 +289,8 @@ class RetriveHandler(BaseHandler):
             results['percentages'] = []
             results['group_counts'] = {}
             for field in results['fields']:
+                if not field.endswith('_id'):
+                    continue
                 results['group_counts'][field] = [[item[0], item[1]] for item in list(sorted(dbobj.group(field).count().run().items(), key=lambda x:x[1], reverse=True))]
                 
             likely_boolean_fields = [field for field in results['fields'] if field.startswith('is_')]
