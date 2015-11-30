@@ -268,6 +268,7 @@ class RetriveHandler(BaseHandler):
             if 'default_order_by' in results['table']:
                 dbobj = getattr(dbobj, 'order_by')(r.desc(results['table']['default_order_by']['field']))
             results['data'] = list(dbobj.run(time_format="raw"))
+            t = special_names[field[:-3]] if field[:-3] in special_names else field[:-3]+'s'
             if 'linked_tables' in results['table']:
                 for linked_table in results['table']['linked_tables']:
                     for row in results['data']:
