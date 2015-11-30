@@ -268,7 +268,7 @@ class RetriveHandler(BaseHandler):
             results['table'] = r.db('public').table('tables').get(payload['table']).run()
             if 'default_order_by' in results['table']:
                 dbobj = getattr(dbobj, 'order_by')(r.desc(results['table']['default_order_by']['field']))
-            special_names = {value: key for key, value in special_names.items()}
+            special_names_reversed = {value: key for key, value in special_names.items()}
             t = payload['table']
             t = special_names[t] if t in special_names else t[:-1]
             t = t + '_id'
@@ -291,7 +291,7 @@ class RetriveHandler(BaseHandler):
             for field in results['fields']:
                 if not field.endswith('_id'):
                     continue
-                
+                g = r.db('public').table(
                 results['group_counts'][field] = [[item[0], item[1]] for item in list(sorted(dbobj.group(field).count().run().items(), key=lambda x:x[1], reverse=True))]
                 
             likely_boolean_fields = [field for field in results['fields'] if field.startswith('is_')]
