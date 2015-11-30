@@ -288,6 +288,8 @@ class RetriveHandler(BaseHandler):
             results['number_of_rows'] = len(results['data'])
             results['percentages'] = []
             results['group_counts'] = {}
+            for field in results['fields']:
+                
             likely_boolean_fields = [field for field in results['fields'] if field.startswith('is_')]
             # remove if the field in a filter
             if 'filter' in payload:
