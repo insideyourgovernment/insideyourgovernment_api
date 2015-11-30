@@ -182,9 +182,7 @@ class RetriveHandler(BaseHandler):
             #dbobj = dbobj.map(d)
             dbobj = dbobj.merge(  lambda row: {'new': row['right'].coerce_to('array').map(
                           lambda pair: [r.expr(field[:-2]) + pair[0], pair[1]]
-                        ).coerce_to('object')}).without(lambda row: {'row': row['right'].coerce_to('array').map(
-                          lambda pair: [pair[0], True]
-                       ).coerce_to('object')}).zip()
+                        ).coerce_to('object')}).zip()
             #dbobj = dbobj
             
             
