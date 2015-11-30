@@ -172,13 +172,15 @@ class RetriveHandler(BaseHandler):
             #right_fields = [row.keys() for row in results_for_fields]
             #right_fields = list(itertools.chain.from_iterable(right_fields))
             #right_fields = sorted(list(set(right_fields)))
+            special_names = {'person': 'people'}
+            
             dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(field[:-3]+'s'))
             #d = {"left": r.row["left"], "right": {}}
             #for right_field in right_fields:
             #    d["right"][field[:-2]+right_field] = r.row["right"][right_field]
             #dbobj = dbobj.map(d)
             dbobj = dbobj.merge(  lambda row: {'right': row['right'].coerce_to('array').map(
-                          lambda pair: [r.expr('organization_') + pair[0], pair[1]]
+                          lambda pair: [r.expr(field[:-2]) + pair[0], pair[1]]
                         ).coerce_to('object')})
             dbobj = dbobj.zip()
             
