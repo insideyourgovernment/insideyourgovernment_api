@@ -275,7 +275,7 @@ class RetriveHandler(BaseHandler):
             if 'linked_tables' in results['table']:
                 for linked_table in results['table']['linked_tables']:
                     for row in results['data']:
-                        row[linked_table] = list(r.db('public').table(linked_table).filter({t: row['id']}).run(raw=True))
+                        row[linked_table] = list(r.db('public').table(linked_table).filter({t: row['id']}).run(time_format="raw"))
                         
             results['fields'] = [row.keys() for row in results['data']]
             results['fields'] = list(set(list(itertools.chain.from_iterable(results['fields']))))
