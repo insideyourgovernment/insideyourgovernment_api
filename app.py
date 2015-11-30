@@ -274,8 +274,9 @@ class RetriveHandler(BaseHandler):
             t = t + '_id'
             results['data'] = list(dbobj.run(time_format="raw"))
             if 'linked_tables' in results['table']:
-                linked_table_data = list(r.db('public').table(linked_table).filter({t: row['id']}).run(time_format="raw"))
+                
                 for linked_table in results['table']['linked_tables']:
+                    linked_table_data = list(r.db('public').table(linked_table).filter({t: row['id']}).run(time_format="raw"))
                     for i, row in enumerate(results['data']):
                         print i
                         row[linked_table] = [item for item in linked_table_data if linked_table_data.get(t) == row['id']]
