@@ -165,18 +165,19 @@ class RetriveHandler(BaseHandler):
         ids_for_other_tables = [field for field in fields if field.endswith('_id')]
         modified_joined_data = []
         for field in ids_for_other_tables:
-            print field
-            print field[:-3]+'s'
+            #print field
+            #print field[:-3]+'s'
             # get the fields of the table 
-            results_for_fields = r.db('public').table(field[:-3]+'s').run()
-            right_fields = [row.keys() for row in results_for_fields]
-            right_fields = list(itertools.chain.from_iterable(right_fields))
-            right_fields = sorted(list(set(right_fields)))
+            #results_for_fields = r.db('public').table(field[:-3]+'s').run()
+            #right_fields = [row.keys() for row in results_for_fields]
+            #right_fields = list(itertools.chain.from_iterable(right_fields))
+            #right_fields = sorted(list(set(right_fields)))
             dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(field[:-3]+'s'))
-            d = {"left": r.row["left"], "right": {}}
-            for right_field in right_fields:
-                d["right"][field[:-2]+right_field] = r.row["right"][right_field]
-            dbobj = dbobj.map(d)
+            #d = {"left": r.row["left"], "right": {}}
+            #for right_field in right_fields:
+            #    d["right"][field[:-2]+right_field] = r.row["right"][right_field]
+            #dbobj = dbobj.map(d)
+            dbob
             dbobj = dbobj.zip()
             
             
