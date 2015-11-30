@@ -183,7 +183,7 @@ class RetriveHandler(BaseHandler):
             #              lambda pair: [r.expr(field[:-2]) + pair[0], pair[1]]
             #            ).coerce_to('array')})
             #            )})
-            dbobj = dbobj
+            #dbobj = dbobj
             
             
         #for data in joined_data:
