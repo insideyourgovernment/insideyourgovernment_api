@@ -270,7 +270,8 @@ class RetriveHandler(BaseHandler):
             results['data'] = list(dbobj.run(time_format="raw"))
             if 'linked_tables' in results['table']:
                 for linked_table in results['table']:
-                    for row in results['data']
+                    for row in results['data']:
+                        
             results['fields'] = [row.keys() for row in results['data']]
             results['fields'] = list(set(list(itertools.chain.from_iterable(results['fields']))))
             results['number_of_rows'] = len(results['data'])
