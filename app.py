@@ -174,6 +174,7 @@ class RetriveHandler(BaseHandler):
             #right_fields = sorted(list(set(right_fields)))
             special_names = {'person': 'people'}
             t = special_names[field[:-3]] if field[:-3] in special_names else field[:-3]+'s'
+            print field, t
             dbobj = dbobj.eq_join(field, r.db("public").table(t)).zip().coerceTo('array')
             #d = {"left": r.row["left"], "right": {}}
             #for right_field in right_fields:
