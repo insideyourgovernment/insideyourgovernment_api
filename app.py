@@ -280,6 +280,7 @@ class RetriveHandler(BaseHandler):
                     for i, row in enumerate(results['data']):
                         print i
                         row[linked_table] = [item for item in linked_table_data if item.get(t) == row['id']]
+                        # consider using group e.g. r.db('public').table('police_internal_affairs_allegations').group('person_id').run()
                         #row[linked_table] = list(r.db('public').table(linked_table).filter({t: row['id']}).run(time_format="raw"))
                         
             results['fields'] = [row.keys() for row in results['data']]
