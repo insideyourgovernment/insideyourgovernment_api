@@ -173,8 +173,8 @@ class RetriveHandler(BaseHandler):
             #right_fields = list(itertools.chain.from_iterable(right_fields))
             #right_fields = sorted(list(set(right_fields)))
             special_names = {'person': 'people'}
-            
-            dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(field[:-3]+'s'))
+            t = special_names[field[:-3]] if field[:-3] in special_names else field[:-3]+'s'
+            dbobj = getattr(dbobj, 'eq_join')(field, r.db("public").table(t))
             #d = {"left": r.row["left"], "right": {}}
             #for right_field in right_fields:
             #    d["right"][field[:-2]+right_field] = r.row["right"][right_field]
