@@ -287,13 +287,13 @@ class RetriveHandler(BaseHandler):
             results['fields'] = list(set(list(itertools.chain.from_iterable(results['fields']))))
             results['number_of_rows'] = len(results['data'])
             results['percentages'] = []
-            results['group_counts'] = {}
+            results['group_counts'] = []
             for field in results['fields']:
                 if not field.endswith('_id'):
                     continue
                 t = special_names[field[:-3]] if field[:-3] in special_names else field[:-3]+'s'
                 g = r.db('public').table(t).group('id').run()
-                results['group_counts'][t] = [[g[item[0]], item[1]] for item in list(sorted(dbobj.group(field).count().run().items(), key=lambda x:x[1], reverse=True))][:10]
+                results['group_counts'].append([t, [[g[item[0]], item[1]] for item in list(sorted(dbobj.group(field).count().run().items(), key=lambda x:x[1], reverse=True))][:10]])
                 
             likely_boolean_fields = [field for field in results['fields'] if field.startswith('is_')]
             # remove if the field in a filter
