@@ -179,11 +179,11 @@ class RetriveHandler(BaseHandler):
             #for right_field in right_fields:
             #    d["right"][field[:-2]+right_field] = r.row["right"][right_field]
             #dbobj = dbobj.map(d)
-            dbobj = dbobj.merge(  lambda row: {'right': row['right'].coerce_to('object').map(
+            dbobj = dbobj.merge(  lambda row: {'right': row['right'].coerce_to('array').map(
                           lambda pair: [r.expr(field[:-2]) + pair[0], pair[1]]
-                        ).coerce_to('object')})
+                        ).coerce_to('array')})
             #            )})
-            dbobj = dbobj.zip()
+            dbobj = dbobj.zip().coerce_to('array')
             
             
         #for data in joined_data:
