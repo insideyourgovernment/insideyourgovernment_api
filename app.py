@@ -147,9 +147,7 @@ class RetriveHandler(BaseHandler):
                     dbobj = getattr(dbobj, 'filter')(lambda doc: doc.coerce_to('string').match('(?i).*?'+payload['has_string_in_any_field']+'.*?'))
                 else:
                     dbobj = getattr(dbobj, key)(payload[key])
-        if 'filter' in payload:
-            key = 'filter'
-            dbobj = getattr(dbobj, key)(*payload[key])
+        
         if 'pluck' in payload:
             if type(payload['pluck']) is list:
                 dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
