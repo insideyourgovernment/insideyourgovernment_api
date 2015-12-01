@@ -321,7 +321,7 @@ class RetriveHandler(BaseHandler):
                 if field.startswith('is_'):
                     results['field_selectors'].append({'selector': 'checkbox', 'name': field, 'display_name': field[3:].capitalize()})
                     
-     self.write(json.dumps(results))
+        self.write(json.dumps(results))
 
 def download_file(url, local_filename):
     # NOTE the stream=True parameter
