@@ -186,7 +186,10 @@ class RetriveHandler(BaseHandler):
                           lambda pair: [r.expr(field[:-2]) + pair[0], pair[1]]
                         ).coerce_to('object')}).without({'right': True}).zip()
             #dbobj = dbobj
-            
+        
+        if 'filter' in payload:
+            key = 'filter'
+            dbobj = getattr(dbobj, key)(*payload[key])
             
         #for data in joined_data:
         #    d = {}
