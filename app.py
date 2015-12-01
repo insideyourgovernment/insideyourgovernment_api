@@ -322,7 +322,7 @@ class RetriveHandler(BaseHandler):
                     results['field_selectors'].append({'selector': 'checkbox', 'name': field, 'display_name': field[3:].capitalize()})
             results['dropdowns'] = []
             for field in results['fields']:
-                results['dropdowns'] = sorted(list(set([row[field] if isinstance(row[field], basestring) for row in results['data'] if field in row])))
+                results['dropdowns'] = sorted(list(set([row[field] if isinstance(row[field], basestring) else '' for row in results['data'] if field in row])))
         self.write(json.dumps(results))
 
 def download_file(url, local_filename):
