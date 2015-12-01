@@ -148,7 +148,7 @@ class RetriveHandler(BaseHandler):
                 else:
                     dbobj = getattr(dbobj, key)(payload[key])
         if 'filter' in payload:
-            key = filter'
+            key = 'filter'
             dbobj = getattr(dbobj, key)(*payload[key])
         if 'pluck' in payload:
             if type(payload['pluck']) is list:
