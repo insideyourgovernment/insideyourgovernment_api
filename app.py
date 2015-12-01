@@ -318,7 +318,9 @@ class RetriveHandler(BaseHandler):
             results['name_for_rows'] = payload['table'].split('_')[-1]
             results['field_selectors'] = []
             for field in results['fields']:
-                if field.startswith('is_'):
+                if field == 'id':
+                    continue
+                elif field.startswith('is_'):
                     results['field_selectors'].append({'selector': 'checkbox', 'name': field, 'display_name': field[3:].capitalize()})
                 else:
                     items = sorted(list(set([row[field] if isinstance(row[field], basestring) else '' for row in results['data'] if field in row])))
