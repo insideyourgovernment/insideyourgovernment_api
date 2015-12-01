@@ -321,8 +321,9 @@ class RetriveHandler(BaseHandler):
                 if field.startswith('is_'):
                     results['field_selectors'].append({'selector': 'checkbox', 'name': field, 'display_name': field[3:].capitalize()})
                 else:
-                    if len(items) > 
-                    results['field_selectors'].append({'selector': 'dropdown', 'name': field, 'display_name': field.replace('_', ' ').capitalize(), 'items': sorted(list(set([row[field] if isinstance(row[field], basestring) else '' for row in results['data'] if field in row])))})
+                    items = sorted(list(set([row[field] if isinstance(row[field], basestring) else '' for row in results['data'] if field in row])))
+                    if len(items) < 100:
+                        results['field_selectors'].append({'selector': 'dropdown', 'name': field, 'display_name': field.replace('_', ' ').capitalize(), 'items': items})
         self.write(json.dumps(results))
 
 def download_file(url, local_filename):
