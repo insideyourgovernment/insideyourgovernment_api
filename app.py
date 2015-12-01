@@ -324,7 +324,7 @@ class RetriveHandler(BaseHandler):
                     results['field_selectors'].append({'selector': 'checkbox', 'name': field, 'display_name': field[3:].capitalize()})
                 else:
                     items = sorted(list(set([row[field] if isinstance(row[field], basestring) else '' for row in results['data'] if field in row])))
-                    if len(items) < 100:
+                    if len(items) < 100 and not items == ['']:
                         results['field_selectors'].append({'selector': 'dropdown', 'name': field, 'display_name': field.replace('_', ' ').capitalize(), 'items': items})
         self.write(json.dumps(results))
 
