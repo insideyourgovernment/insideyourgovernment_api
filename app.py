@@ -134,7 +134,7 @@ class RetriveHandler(BaseHandler):
         r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run()
         dbobj = r.db('public').table(payload['table'])
         for key in payload.keys():
-            if key in ['get', 'filter', 'has_fields', 'match', 'has_string', 'match_any_field', 'has_string_in_any_field']:
+            if key in ['get', 'has_fields', 'match', 'has_string', 'match_any_field', 'has_string_in_any_field']:
                 if type(payload[key]) is list and key in ['has_fields']:
                     dbobj = getattr(dbobj, key)(*payload[key])
                 elif key == 'match':
@@ -147,6 +147,8 @@ class RetriveHandler(BaseHandler):
                     dbobj = getattr(dbobj, 'filter')(lambda doc: doc.coerce_to('string').match('(?i).*?'+payload['has_string_in_any_field']+'.*?'))
                 else:
                     dbobj = getattr(dbobj, key)(payload[key])
+        if 'filter' in payload:
+            
         if 'pluck' in payload:
             if type(payload['pluck']) is list:
                 dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
