@@ -190,7 +190,7 @@ class RetriveHandler(BaseHandler):
         if 'filter' in payload:
             key = 'filter'
             dbobj = getattr(dbobj, key)(*payload[key])
-            
+        print dbobj    
         #for data in joined_data:
         #    d = {}
         #    d.update(data['left'])
