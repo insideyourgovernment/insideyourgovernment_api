@@ -323,7 +323,7 @@ class RetriveHandler(BaseHandler):
             #results['dropdowns'] = {}
             #for field in results['fields']:
                 else:
-                    results['field_selectors'].append({'selector': 'dropdown', 'name': field, 'display_name': field.replace('_', ' ').capitalize(), item = sorted(list(set([row[field] if isinstance(row[field], basestring) else '' for row in results['data'] if field in row])))
+                    results['field_selectors'].append({'selector': 'dropdown', 'name': field, 'display_name': field.replace('_', ' ').capitalize(), 'items': sorted(list(set([row[field] if isinstance(row[field], basestring) else '' for row in results['data'] if field in row])))
         self.write(json.dumps(results))
 
 def download_file(url, local_filename):
