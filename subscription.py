@@ -14,7 +14,8 @@ def print_changes(table):
 @gen.coroutine
 def main():
     conn = yield r.connect(host="localhost", port=28015)
-    for table in r.db('public').table_list().run(yield conn):
+    l = yield r.db('public').table_list().run(conn)
+    for table in l:
         ioloop.IOLoop.current().add_callback(print_changes, table)
         
 if __name__ == "__main__":
