@@ -215,4 +215,4 @@ def handle_query(payload, run=True):
                 if len(items) < 100 and not items == ['']:
                     results['field_selectors'].append({'selector': 'dropdown', 'name': field, 'display_name': field.replace('_', ' ').capitalize(), 'items': items})
         if not run:
-            return db
+            return dbobj
