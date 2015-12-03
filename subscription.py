@@ -15,7 +15,7 @@ def print_changes(q):
 @gen.coroutine
 def main():
     q = handle_query({'table': 'test_table'}).changes()
-    
+    ioloop.IOLoop.current().add_callback(print_changes, q)
     
         
 if __name__ == "__main__":
