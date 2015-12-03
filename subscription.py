@@ -11,6 +11,6 @@ def print_changes(table):
         change = feed.next()
         print(change)
 
-conn = yield r.connect(host="localhost", port=28015)
+conn = r.connect(host="localhost", port=28015)
 for table in r.db('public').table_list().run():
     ioloop.IOLoop.current().add_callback(print_changes, table)
