@@ -148,6 +148,8 @@ def handle_query(payload, run=True):
                         d[item[payload['field_for_key']]].append(item)
             results = {'data': d, 'table_fields': table_fields, 'keys': d.keys()}
     else:
+        if not run:
+            return dbobg
         # if 'pluck' in payload:
         #if type(payload['pluck']) is list:
         #    dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
