@@ -14,7 +14,7 @@ def print_changes(table):
 
 @gen.coroutine
 def main():
-    handle_query({'table'
+    handle_query({'table': 'test_tabl
         
 if __name__ == "__main__":
     ioloop.IOLoop.current().run_sync(main)
