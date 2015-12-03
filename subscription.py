@@ -1,6 +1,6 @@
 import rethinkdb as r
 from tornado import ioloop, gen
-from search import handl
+from search import handle_query
 r.set_loop_type("tornado")
 
 @gen.coroutine
