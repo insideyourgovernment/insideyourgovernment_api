@@ -149,7 +149,7 @@ def handle_query(payload, run=True):
             results = {'data': d, 'table_fields': table_fields, 'keys': d.keys()}
     else:
         if not run:
-            return dbob
+            return dbobj
         # if 'pluck' in payload:
         #if type(payload['pluck']) is list:
         #    dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
