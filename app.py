@@ -131,7 +131,7 @@ class RetriveHandler(BaseHandler):
     def get(self):
         params = urlparse.parse_qs(self.request.body)
         print params
-        payload = json.loads(self.get_argument('payload'), run=False)
+        payload = json.loads(self.get_argument('payload'))
         results = handle_query(payload)
         self.set_header("Content-Type", 'application/json')
         self.write(json.dumps(results))
