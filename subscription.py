@@ -12,5 +12,5 @@ def print_changes(table):
         print(change)
 
 conn = r.connect(host="localhost", port=28015)
-for table in r.db('public').table_list().run():
+for table in r.db('public').table_list().run(conn):
     ioloop.IOLoop.current().add_callback(print_changes, table)
