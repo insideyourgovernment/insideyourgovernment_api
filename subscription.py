@@ -1,6 +1,6 @@
 import rethinkdb as r
 from tornado import ioloop, gen
-
+from search import handl
 r.set_loop_type("tornado")
 
 @gen.coroutine
@@ -13,10 +13,7 @@ def print_changes(table):
 
 @gen.coroutine
 def main():
-    conn = yield r.connect(host="localhost", port=28015)
-    l = yield r.db('public').table_list().run(conn)
-    for table in l:
-        ioloop.IOLoop.current().add_callback(print_changes, table)
+    
         
 if __name__ == "__main__":
     ioloop.IOLoop.current().run_sync(main)
