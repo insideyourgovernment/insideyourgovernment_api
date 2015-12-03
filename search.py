@@ -83,7 +83,6 @@ def handle_query(payload, run=True):
     #    d.update(new_right_side)
     #    modified_joined_data.append(d)
 
-    self.set_header("Content-Type", 'application/json')
     if 'action' in payload:
         if payload['action'] == 'get_fields':
             results = list(dbobj.run())
