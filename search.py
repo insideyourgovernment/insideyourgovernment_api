@@ -1,3 +1,18 @@
+from datetime import date
+import tornado.escape
+import tornado.ioloop
+import tornado.web
+import rethinkdb as r
+r.connect( "localhost", 28015).repl()
+import json
+import urlparse
+import random
+import string
+import itertools
+from datetime import datetime
+import requests
+import os
+
 def handle_query(payload, run=True):
     if run:
         r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run()
@@ -199,3 +214,5 @@ def handle_query(payload, run=True):
                 items = sorted(list(set([row[field] if isinstance(row[field], basestring) else '' for row in results['data'] if field in row])))
                 if len(items) < 100 and not items == ['']:
                     results['field_selectors'].append({'selector': 'dropdown', 'name': field, 'display_name': field.replace('_', ' ').capitalize(), 'items': items})
+        if not run:
+            r
