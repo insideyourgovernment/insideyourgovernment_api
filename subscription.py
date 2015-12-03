@@ -6,7 +6,7 @@ r.set_loop_type("tornado")
 @gen.coroutine
 def print_changes(table):
     conn = yield r.connect(host="localhost", port=28015)
-    feed = yield r.db('public').table(table).changes().run(yield conn)
+    feed = yield r.db('public').table(table).changes().run(conn)
     while (yield feed.fetch_next()):
         change = yield feed.next()
         print(change)
