@@ -5,7 +5,7 @@ from search import handle_query
 r.set_loop_type("tornado")
 
 @gen.coroutine
-def print_changes(table):
+def print_changes(q):
     conn = yield r.connect(host="localhost", port=28015)
     feed = yield r.db('public').table(table).changes().run(conn)
     while (yield feed.fetch_next()):
@@ -14,7 +14,8 @@ def print_changes(table):
 
 @gen.coroutine
 def main():
-    q = handle_query({'table': 'test_table'})
+    q = handle_query({'table': 'test_table'}).changes()
+    
     
         
 if __name__ == "__main__":
