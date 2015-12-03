@@ -11,10 +11,7 @@ def print_changes(table):
         change = yield feed.next()
         print(change)
 
-conn = r.connect(host="localhost", port=28015)
-for table in r.db('public').table_list().run(conn):
-    ioloop.IOLoop.current().add_callback(print_changes, table)
-    
+
 @gen.coroutine
 def main():
     """ Async main method. It needed to be async due to r.connect is async . """
