@@ -214,5 +214,7 @@ def handle_query(payload, run=True):
                 items = sorted(list(set([row[field] if isinstance(row[field], basestring) else '' for row in results['data'] if field in row])))
                 if len(items) < 100 and not items == ['']:
                     results['field_selectors'].append({'selector': 'dropdown', 'name': field, 'display_name': field.replace('_', ' ').capitalize(), 'items': items})
-        if not run:
-            return dbobj
+        if run:
+            return results
+        return dbobj
+        
