@@ -11,5 +11,5 @@ def print_changes():
         change = yield feed.next()
         print(change)
 
-
+conn = yield r.connect(host="localhost", port=28015)
 ioloop.IOLoop.current().add_callback(print_changes)
