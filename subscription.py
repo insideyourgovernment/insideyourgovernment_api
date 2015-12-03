@@ -16,6 +16,6 @@ if __name__ == "__main__":
     conn = r.connect(host="localhost", port=28015)
     for table in r.db('public').table_list().run(conn):
         ioloop.IOLoop.current().add_callback(print_changes, table)
-        IOLoop.current().start()
+        #IOLoop.current().start()
     #IOLoop.current().run_sync(main)
     IOLoop.current().start()
