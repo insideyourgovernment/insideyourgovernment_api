@@ -18,5 +18,5 @@ def main():
         ioloop.IOLoop.current().add_callback(print_changes, table)
         
 if __name__ == "__main__":
-    IOLoop.current().run_sync(main)
+    ioloop.IOLoop.current().run_sync(main)
     IOLoop.current().start()
