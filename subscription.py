@@ -12,5 +12,5 @@ def print_changes():
         print(change)
 
 conn = yield r.connect(host="localhost", port=28015)
-for tabl
+for table in 
 ioloop.IOLoop.current().add_callback(print_changes)
