@@ -8,7 +8,7 @@ def print_changes(table):
     conn = r.connect(host="localhost", port=28015)
     feed = r.db('public').table(table).changes().run(conn)
     while (feed.fetch_next()):
-        change = ield feed.next()
+        change = feed.next()
         print(change)
 
 conn = yield r.connect(host="localhost", port=28015)
