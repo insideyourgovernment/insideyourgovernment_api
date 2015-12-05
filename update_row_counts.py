@@ -12,11 +12,12 @@ def update_row_counts(table):
     while (yield feed.fetch_next()):
         change = yield feed.next()
         print change
-        number_of_rows = r.db('public').table(table).count()
-        number_of_rows = yield number_of_rows.run(conn)
-        query = r.db('public').table('tables').get(table).update({'number_of_rows': number_of_rows})
-        q = yield query.run(conn)
-        print table, query, q
+        if not change['new_val'] or not change['old_val']:
+            number_of_rows = r.db('public').table(table).count()
+            number_of_rows = yield number_of_rows.run(conn)
+            query = r.db('public').table('tables').get(table).update({'number_of_rows': number_of_rows})
+            q = yield query.run(conn)
+            print table, query, q
 @gen.coroutine
 def main():
     conn = yield r.connect(host="localhost", port=28015)
