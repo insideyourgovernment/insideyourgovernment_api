@@ -83,6 +83,13 @@ def handle_query(payload, run=True):
     #    d.update(new_right_side)
     #    modified_joined_data.append(d)
 
+    if 'order_by' in payload:
+        for o in payload['order_by']:
+            if o['direction'] == 'desc':
+                dbobj = getattr(dbobj, 'order_by')(r.desc(o['field']))
+            else:
+                dbobj = getattr(dbobj, 'order_by')(o['field']) 
+    
     if 'action' in payload:
         if payload['action'] == 'get_fields':
             results = list(dbobj.run())

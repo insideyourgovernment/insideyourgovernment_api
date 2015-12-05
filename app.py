@@ -53,7 +53,6 @@ class LoginHandler(BaseHandler):
         response = {'success': success} 
 
         session_id = id_generator(30)
-        
         r.db('nonpublic').table('sessions').insert({'id': session_id, 'userid': email}).run()
         response['session_id'] = session_id
         #resp = make_response(redirect('/'))
