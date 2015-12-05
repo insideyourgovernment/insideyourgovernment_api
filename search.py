@@ -154,6 +154,7 @@ def handle_query(payload, run=True):
                     else:
                         d[item[payload['field_for_key']]].append(item)
             results = {'data': d, 'table_fields': table_fields, 'keys': d.keys()}
+            return results
     else:
         if not run:
             return dbobj
