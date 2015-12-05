@@ -12,6 +12,7 @@ def update_row_counts(table):
     while (yield feed.fetch_next()):
         change = yield feed.next()
         number_of_rows = yield q.run(conn)
+        number_of_rows = yield q.run(conn)
         q = yield r.table('tables').get(table).update({'number_of_rows': number_of_rows})
         q = yield q.run(conn)
 
