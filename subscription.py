@@ -22,7 +22,8 @@ def print_changes(q):
         message.set_from('tim@insideyourgovernment.com')
         p = r.db('nonpublic').table('third_party_creds').get('sendgrid')
         p = yield p.run(conn)
-        sg = sendgrid.SendGridClient(username, password)
+        
+        sg = sendgrid.SendGridClient(p['username'], p['password'])
         print sg.send(message)
 
 @gen.coroutine
