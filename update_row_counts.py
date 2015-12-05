@@ -10,10 +10,12 @@ def print_changes(q):
     feed = yield q.run(conn)
     while (yield feed.fetch_next()):
         change = yield feed.next()
-        print(change)
+        
 
 @gen.coroutine
 def main():
+    conn = yield r.connect(host="localhost", port=28015)
+    
     q = handle_query({'table': 'test_table'}, run=False).changes()
     ioloop.IOLoop.current().add_callback(print_changes, q)
     
