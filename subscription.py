@@ -15,7 +15,7 @@ def print_changes(q):
         message = sendgrid.Mail()
         message.add_to(email)
         message.add_to('tim@insideyourgovernment.com')
-        message.set_subject('Public disclosure request to %s for records created in response to my pdrs' % (city))
+        message.set_subject('Table change')
         message.set_text(content)
         message.set_html(content.replace('\n', '<br/>'))
         message.set_from('tim@insideyourgovernment.com')
