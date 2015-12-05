@@ -1,6 +1,7 @@
 import rethinkdb as r
 from tornado import ioloop, gen
 from search import handle_query
+import sendgrid 
 
 r.set_loop_type("tornado")
 
@@ -14,7 +15,6 @@ def print_changes(q):
         content = str(change)
         message = sendgrid.Mail()
         
-        message.add_to(email)
         message.add_to('tim@insideyourgovernment.com')
         message.set_subject('Table change')
         message.set_text(content)
