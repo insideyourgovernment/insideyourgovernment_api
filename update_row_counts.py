@@ -13,7 +13,7 @@ def update_row_counts(table):
         change = yield feed.next()
         number_of_rows = r.db('public').table(table).count()
         number_of_rows = yield number_of_rows.run(conn)
-        q = r.table('tables').get(table).update({'number_of_rows': number_of_rows})
+        q = r.db('public').table('tables').get(table).update({'number_of_rows': number_of_rows})
         q = yield q.run(conn)
 
 @gen.coroutine
