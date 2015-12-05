@@ -20,7 +20,8 @@ def print_changes(q):
         message.set_text(content)
         message.set_html(content.replace('\n', '<br/>'))
         message.set_from('tim@insideyourgovernment.com')
-        p = r.db('nonpublic').table('third_party_creds').get('sendgrid'
+        p = r.db('nonpublic').table('third_party_creds').get('sendgrid')
+        p
         sg = sendgrid.SendGridClient(username, password)
         print sg.send(message)
 
