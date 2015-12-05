@@ -105,13 +105,6 @@ def insert(payload):
 def update(payload):
     pass
 
-def get_field(l, field):
-    results = []
-    for d in l:
-        if field in d:
-            results.append(d[field])
-    return results
-
 class ModifyDBHandler(BaseHandler):
     def post(self):
         # For now user needs to be an admin
