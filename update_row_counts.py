@@ -11,6 +11,7 @@ def update_row_counts(table):
     feed = yield first_part.run(conn)
     while (yield feed.fetch_next()):
         change = yield feed.next()
+        print change
         number_of_rows = r.db('public').table(table).count()
         number_of_rows = yield number_of_rows.run(conn)
         query = r.db('public').table('tables').get(table).update({'number_of_rows': number_of_rows})
