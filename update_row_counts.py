@@ -22,7 +22,7 @@ def main():
     table_list = yield r.db('public').table_list()
     table_list = yield table_list.run(conn)
     for table in table_list:
-        ioloop.IOLoop.current().add_callback(print_changes, table)
+        ioloop.IOLoop.current().add_callback(update_row_counts, table)
     
         
 if __name__ == "__main__":
