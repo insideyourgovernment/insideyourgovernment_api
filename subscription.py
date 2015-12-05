@@ -1,7 +1,7 @@
 import rethinkdb as r
 from tornado import ioloop, gen
 from search import handle_query
-import sendgrid 
+import sendgrid
 
 r.set_loop_type("tornado")
 
