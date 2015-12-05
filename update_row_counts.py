@@ -15,7 +15,7 @@ def update_row_counts(table):
         number_of_rows = yield number_of_rows.run(conn)
         q = r.db('public').table('tables').get(table).update({'number_of_rows': number_of_rows})
         q = yield q.run(conn)
-
+        print table, q
 @gen.coroutine
 def main():
     conn = yield r.connect(host="localhost", port=28015)
