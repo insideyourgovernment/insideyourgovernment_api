@@ -13,6 +13,14 @@ from datetime import datetime
 import requests
 import os
 
+
+def get_field(l, field):
+    results = []
+    for d in l:
+        if field in d:
+            results.append(d[field])
+    return results
+
 def handle_query(payload, run=True):
     if run:
         r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run()
