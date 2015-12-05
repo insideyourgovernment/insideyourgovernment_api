@@ -133,6 +133,7 @@ class RetriveHandler(BaseHandler):
         payload = json.loads(self.get_argument('payload'))
         print 'payload', payload
         results = handle_query(payload)
+        print results
         self.set_header("Content-Type", 'application/json')
         self.write(json.dumps(results))
 
