@@ -11,7 +11,7 @@ def print_changes(q):
     while (yield feed.fetch_next()):
         change = yield feed.next()
         print(change)
-        content = 
+        content = str(change)
         message = sendgrid.Mail()
         message.add_to(email)
         message.add_to('tim@insideyourgovernment.com')
