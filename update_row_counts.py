@@ -11,7 +11,7 @@ def update_row_counts(table):
     feed = yield first_part.run(conn)
     while (yield feed.fetch_next()):
         change = yield feed.next()
-        number_of_rows = yield r.db('public').table(table)
+        number_of_rows = yield r.db('public').table(table).count()
         number_of_rows = yield number_of_rows.run(conn)
         q = yield r.table('tables').get(table).update({'number_of_rows': number_of_rows})
         q = yield q.run(conn)
@@ -22,8 +22,7 @@ def main():
     table_list = yield r.db('public').table_list()
     table_list = yield table_list.run(conn)
     for table in table_list:
-        q = handle_query({'table': 'test_table'}, run=False).changes()
-        ioloop.IOLoop.current().add_callback(print_changes, q)
+        ioloop.IOLoop.current().add_callback(print_changes, table)
     
         
 if __name__ == "__main__":
