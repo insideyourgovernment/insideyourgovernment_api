@@ -17,7 +17,8 @@ def main():
     conn = yield r.connect(host="localhost", port=28015)
     table_list = yield r.db('public').table_list()
     table_list = yield table_list.run(conn)
-    q = handle_query({'table': 'test_table'}, run=False).changes()
+    for table in table_list:
+        q = handle_query({'table': 'test_table'}, run=False).changes()
     ioloop.IOLoop.current().add_callback(print_changes, q)
     
         
