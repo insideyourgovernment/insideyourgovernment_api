@@ -136,7 +136,7 @@ def handle_query(payload, run=True):
                         d[item[payload['field_for_key']]].append(item[payload['field_for_value']])
             results = d
         elif payload['action'] == 'do_row_mapping':
-
+            print 'doing ', payload['action']
             items = list(dbobj.run())
             table_fields = [row.keys() for row in items]
             table_fields = list(set(list(itertools.chain.from_iterable(table_fields))))
