@@ -5,7 +5,7 @@ from search import handle_query
 r.set_loop_type("tornado")
 
 @gen.coroutine
-def print_changes(q):
+def update_row_counts(q):
     conn = yield r.connect(host="localhost", port=28015)
     feed = yield q.run(conn)
     while (yield feed.fetch_next()):
