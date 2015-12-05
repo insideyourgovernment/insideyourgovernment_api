@@ -19,7 +19,7 @@ def main():
     table_list = yield table_list.run(conn)
     for table in table_list:
         q = handle_query({'table': 'test_table'}, run=False).changes()
-     ioloop.IOLoop.current().add_callback(print_changes, q)
+        ioloop.IOLoop.current().add_callback(print_changes, q)
     
         
 if __name__ == "__main__":
