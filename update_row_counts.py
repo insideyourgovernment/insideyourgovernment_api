@@ -26,8 +26,7 @@ def main():
     table_list = yield table_list.run(conn)
     for table in table_list:
         ioloop.IOLoop.current().add_callback(update_row_counts, table)
-    
-        
+
 if __name__ == "__main__":
     ioloop.IOLoop.current().run_sync(main)
     ioloop.IOLoop.current().start()
