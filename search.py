@@ -29,8 +29,9 @@ def handle_query(payload, run=True):
         if key in ['get', 'has_fields', 'doesnt_have_fields', 'match', 'has_string', 'match_any_field', 'has_string_in_any_field']:
             if type(payload[key]) is list and key in ['has_fields']:
                 dbobj = getattr(dbobj, key)(*payload[key])
-            elif 
+            elif type(payload[key]) is list and key in ['doesnt_have_fields']:
                 # 'doesnt_have_fields', 
+                # .filter(lambda row: row.pluck('is_sustained').eq({}))`
             elif key == 'match':
                 dbobj = getattr(dbobj, 'filter')(lambda case: case[payload['match']['field']].match(payload['match']['value']))
             elif key == 'has_string':
