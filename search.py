@@ -64,6 +64,7 @@ def handle_query(payload, run=True):
     modified_joined_data = []
     special_names = {'person': 'people'}
     for field in ids_for_other_tables:
+        
         #print field
         #print field[:-3]+'s'
         # get the fields of the table 
@@ -73,6 +74,8 @@ def handle_query(payload, run=True):
         #right_fields = sorted(list(set(right_fields)))
 
         t = special_names[field[:-3]] if field[:-3] in special_names else field[:-3]+'s'
+        if not t in r.db('public').table_list().run():
+            continue
         print field, t
         dbobj = dbobj.eq_join(field, r.db("public").table(t))
         #d = {"left": r.row["left"], "right": {}}
