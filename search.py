@@ -205,7 +205,10 @@ def handle_query(payload, run=True):
             if not field.endswith('_id'):
                 continue
             t = special_names[field[:-3]] if field[:-3] in special_names else field[:-3]+'s'
+            if not t in r.db('public').table_list().run():
+                continue
             g = r.db('public').table(t).group('id').run()
+            
             results['group_counts'].append([t, [[g[item[0]], item[1]] for item in list(sorted(dbobj.group(field).count().run().items(), key=lambda x:x[1], reverse=True))][:10]])
         results['group_counts'].sort(key=lambda x:x[0])
 
