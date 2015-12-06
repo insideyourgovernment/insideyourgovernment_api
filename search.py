@@ -32,7 +32,7 @@ def handle_query(payload, run=True):
             elif type(payload[key]) is list and key in ['doesnt_have_fields']:
                 # 'doesnt_have_fields', 
                 dbobj.filter(lambda row: row.pluck(*payload[key]).eq({}))`
-            elif key in ['doesnt_have_fields'
+            elif key in ['doesnt_have_fields']:
             elif key == 'match':
                 dbobj = getattr(dbobj, 'filter')(lambda case: case[payload['match']['field']].match(payload['match']['value']))
             elif key == 'has_string':
