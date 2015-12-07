@@ -108,9 +108,9 @@ def handle_query(payload, run=True):
 
     if 'page' in payload:
         if 'rows_per_page' in payload:
-            rows_per_page = payload['rows_per_page']
+            rows_per_page = int(payload['rows_per_page'])
         else:
-            rows_per_page = 10
+            rows_per_page = int(10)
         dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)
         print list(dbobj.run())
         
