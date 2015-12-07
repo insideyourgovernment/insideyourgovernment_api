@@ -55,7 +55,7 @@ def handle_query(payload, run=True):
     fields = [row.keys() for row in results_for_fields]
     fields = list(itertools.chain.from_iterable(fields))
     fields = sorted(list(set(fields)))
-
+    
     #joined_data = list(r.db("public").table("police_internal_affairs_allegations").eq_join("organization_id", r.db("public").table("organizations")).map({"right":{
     #        "organization_id": r.row["right"]["id"],
     #        "organization_name": r.row["right"]["name"]
@@ -99,22 +99,7 @@ def handle_query(payload, run=True):
     #    d.update(new_right_side)
     #    modified_joined_data.append(d)
 
-    if 'order_by' in payload:
-        for o in payload['order_by']:
-            if o['direction'] == 'desc':
-                dbobj = getattr(dbobj, 'order_by')(index=r.desc(o['field']))
-            else:
-                dbobj = getattr(dbobj, 'order_by')(index=o['field'])
 
-    if 'page' in payload:
-        page = int(payload['page'])
-        if 'rows_per_page' in payload:
-            rows_per_page = int(payload['rows_per_page'])
-        else:
-            rows_per_page = int(10)
-        dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)
-        print list(dbobj.run())
-        
     if 'action' in payload:
         if payload['action'] == 'get_fields':
             results = list(dbobj.run())
