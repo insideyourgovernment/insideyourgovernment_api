@@ -154,7 +154,7 @@ class ConvertPDF2TxtHandler(BaseHandler):
         print 'downloading'
         download_file(url, filename)
         print 'downloaded'
-        f = {'results': os.popen('pdf2txt.py %s' % (filename)).read()}
+        f = {'results': os.popen('pdf2txt.py -A %s' % (filename)).read()}
         os.system('rm %s' % (filename))
         self.write(f)
                         
