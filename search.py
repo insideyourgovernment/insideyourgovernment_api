@@ -60,14 +60,14 @@ def handle_query(payload, run=True):
     rows_count = dbobj.count().run()
     if 'page' in payload:
         page = int(payload['page'])
-        if 'rows_per_page' in payload:
-            rows_per_page = int(payload['rows_per_page'])
-        else:
-            rows_per_page = int(10)
-        dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)
-        print list(dbobj.run())
     else:
-        dbobj = dbobj.limit(1000)
+        page = int(1)
+    if 'rows_per_page' in payload:
+        rows_per_page = int(payload['rows_per_page'])
+    else:
+        rows_per_page = int(10)
+    dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)
+    print list(dbobj.run())
             
     results_for_fields = list(dbobj.run())
     fields = [row.keys() for row in results_for_fields]
