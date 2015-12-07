@@ -104,15 +104,15 @@ def handle_query(payload, run=True):
             if o['direction'] == 'desc':
                 dbobj = getattr(dbobj, 'order_by')(r.desc(o['field']))
             else:
-                dbobj = getattr(dbobj, 'order_by')(o['field']) 
-    
+                dbobj = getattr(dbobj, 'order_by')(o['field'])
+
     if 'page' in payload:
         if 'rows_per_page' in payload:
             rows_per_page = payload['rows_per_page']
         else:
             rows_per_page = 10
-        dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)    
-    
+        dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)
+
     if 'action' in payload:
         if payload['action'] == 'get_fields':
             results = list(dbobj.run())
