@@ -108,9 +108,10 @@ def handle_query(payload, run=True):
     
     if 'page' in payload:
         if 'rows_per_page' in payload:
-            
+            rows_per_page = payload['rows_per_page']
         else:
             rows_per_page = 10
+            
     
     if 'action' in payload:
         if payload['action'] == 'get_fields':
