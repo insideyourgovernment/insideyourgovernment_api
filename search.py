@@ -66,7 +66,8 @@ def handle_query(payload, run=True):
             rows_per_page = int(10)
         dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)
         print list(dbobj.run())
-                    
+    else:
+        dbobj = dbobj.limit(1000)
             
     results_for_fields = list(dbobj.run())
     fields = [row.keys() for row in results_for_fields]
