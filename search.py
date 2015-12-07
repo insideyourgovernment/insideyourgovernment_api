@@ -57,7 +57,7 @@ def handle_query(payload, run=True):
                 dbobj = getattr(dbobj, 'order_by')(index=r.desc(o['field']))
             else:
                 dbobj = getattr(dbobj, 'order_by')(index=o['field'])
-    rows_count = dbob
+    rows_count = dbobj.count().run()
     if 'page' in payload:
         page = int(payload['page'])
         if 'rows_per_page' in payload:
