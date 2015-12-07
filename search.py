@@ -61,6 +61,7 @@ def handle_query(payload, run=True):
     if 'page' in payload:
         page = int(payload['page'])
     else:
+        payload['page'] = int(1)
         page = int(1)
     if 'rows_per_page' in payload:
         rows_per_page = int(payload['rows_per_page'])
