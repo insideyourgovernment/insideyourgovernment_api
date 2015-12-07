@@ -106,6 +106,12 @@ def handle_query(payload, run=True):
             else:
                 dbobj = getattr(dbobj, 'order_by')(o['field']) 
     
+    if 'page' in payload:
+        if 'rows_per_page' in payload:
+            
+        else:
+            rows_per_page = 10
+    
     if 'action' in payload:
         if payload['action'] == 'get_fields':
             results = list(dbobj.run())
