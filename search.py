@@ -111,7 +111,7 @@ def handle_query(payload, run=True):
             rows_per_page = payload['rows_per_page']
         else:
             rows_per_page = 10
-        dbobj = dbobj.slice((page - 1) * perPage, pageNumber * perPage)    
+        dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)    
     
     if 'action' in payload:
         if payload['action'] == 'get_fields':
