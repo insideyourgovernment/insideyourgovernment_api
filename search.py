@@ -102,9 +102,9 @@ def handle_query(payload, run=True):
     if 'order_by' in payload:
         for o in payload['order_by']:
             if o['direction'] == 'desc':
-                dbobj = getattr(dbobj, 'order_by')(r.desc(o['field']))
+                dbobj = getattr(dbobj, 'order_by')(index=r.desc(o['field']))
             else:
-                dbobj = getattr(dbobj, 'order_by')(o['field'])
+                dbobj = getattr(dbobj, 'order_by')(index=o['field'])
 
     if 'page' in payload:
         if 'rows_per_page' in payload:
