@@ -51,6 +51,23 @@ def handle_query(payload, run=True):
         else:
             dbobj = getattr(dbobj, 'pluck')(payload['pluck'])
 
+    if 'order_by' in payload:
+        for o in payload['order_by']:
+            if o['direction'] == 'desc':
+                dbobj = getattr(dbobj, 'order_by')(index=r.desc(o['field']))
+            else:
+                dbobj = getattr(dbobj, 'order_by')(index=o['field'])
+
+    if 'page' in payload:
+        page = int(payload['page'])
+        if 'rows_per_page' in payload:
+            rows_per_page = int(payload['rows_per_page'])
+        else:
+            rows_per_page = int(10)
+        dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)
+        print list(dbobj.run())
+                    
+            
     results_for_fields = list(dbobj.run())
     fields = [row.keys() for row in results_for_fields]
     fields = list(itertools.chain.from_iterable(fields))
