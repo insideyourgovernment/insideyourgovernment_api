@@ -1,6 +1,7 @@
 import rethinkdb as r
 r.connect( "localhost", 28015).repl()
 import requests
+r.db('nonpublic').table('third_party_creds').get('socrata')
 t = list(r.db('public').table('police_response_events').order_by(r.desc('socrata_created_at'), index=r.desc('socrata_created_at')).limit(int(1)).run())[0]['socrata_created_at'].isoformat()[:-9]
 data = requests.get('https://data.seattle.gov/resource/pu5n-trf4.json?$select=:*,*&$limit=2000000&$where=:created_at%%20>%%20"%s"&$$app_token=%s' % (t, app_token)).json()
 import dateutil
