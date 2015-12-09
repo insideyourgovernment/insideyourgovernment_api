@@ -13,6 +13,7 @@ def update_row_counts(table):
         change = yield feed.next()
         print change
         if change['new_val']:
+            indexes = yield 
             for key in change['new_val']:
                 try:
                     print r.db('public').table(table).index_create(key).run(conn)
