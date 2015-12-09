@@ -13,7 +13,7 @@ def update_row_counts(table):
         change = yield feed.next()
         print change
         if change['new_val']:
-            for key in change['n
+            for key in change['new_val'
             try:
         r.db('public').table("police_response_events").index_create(key).run(conn)
     except:
