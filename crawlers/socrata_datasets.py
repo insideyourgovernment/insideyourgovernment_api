@@ -4,6 +4,7 @@ import requests
 t = list(r.db('public').table('police_response_events').order_by(r.desc('socrata_created_at'), index=r.desc('socrata_created_at')).limit(int(1)).run())[0]['socrata_created_at'].isoformat()[:-9]
 data = requests.get('https://data.seattle.gov/resource/pu5n-trf4.json?$select=:*,*&$limit=2000000&$where=:created_at%%20>%%20"%s"' % (t)).json()
 import dateutil
+import dateutil.parser
 from pytz import timezone
 from datetime import date
 from datetime import datetime
