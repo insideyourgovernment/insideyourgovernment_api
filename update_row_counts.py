@@ -13,6 +13,7 @@ def update_row_counts(table):
         change = yield feed.next()
         print change
         if change['new_val']:
+            
         if not change['new_val'] or not change['old_val']:
             number_of_rows = r.db('public').table(table).count()
             number_of_rows = yield number_of_rows.run(conn)
