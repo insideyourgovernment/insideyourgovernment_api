@@ -14,10 +14,10 @@ def update_row_counts(table):
         print change
         if change['new_val']:
             for key in change['new_val']:
-            try:
-        r.db('public').table("police_response_events").index_create(key).run(conn)
-    except:
-        pass
+                try:
+                    print r.db('public').table(table).index_create(key).run(conn)
+                except:
+                    pass
         if not change['new_val'] or not change['old_val']:
             number_of_rows = r.db('public').table(table).count()
             number_of_rows = yield number_of_rows.run(conn)
