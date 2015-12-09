@@ -25,4 +25,4 @@ for row in data:
         row[key] = dateutil.parser.parse(row[key])
         if row[key].tzinfo == None:
             row[key] = row[key].replace(tzinfo = tz)
-r.db('public').table('police_response_events').insert(data).run(conflict='update')
+print r.db('public').table('police_response_events').insert(data).run(conflict='update')
