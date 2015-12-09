@@ -13,9 +13,9 @@ def update_row_counts(table):
         change = yield feed.next()
         print change
         if change['new_val']:
-            indexes = yield 
+            indexes = yield r.table(table).index_list().run(conn)
             for key in change['new_val']:
-                try:
+                if not key in indexes:
                     print r.db('public').table(table).index_create(key).run(conn)
                 except:
                     pass
