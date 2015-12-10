@@ -12,7 +12,7 @@ def update_row_counts(table):
     while (yield feed.fetch_next()):
         change = yield feed.next()
         print change
-        if 'new_val' in change:
+        if change.get('new_val'):
             indexes = yield r.db('public').table(table).index_list().run(conn)
             for key in change['new_val']:
                 if not key in indexes and not key == 'id':
