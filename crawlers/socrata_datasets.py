@@ -12,6 +12,7 @@ from datetime import datetime
 tz = timezone('America/Los_Angeles')
 for row in data:
     row['organization_id'] = 'cfee2384-fb23-450a-90bf-2cbfa2912876'
+    row['is_cad_event'] = True
     row['is_rms_event'] = False
     for key in row.keys():
         if key.startswith(':id'):
