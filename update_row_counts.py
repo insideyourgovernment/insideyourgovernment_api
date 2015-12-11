@@ -14,6 +14,7 @@ def update_row_counts(table):
         print change
         if change.get('new_val'):
             indexes = yield r.db('public').table(table).index_list().run(conn)
+            fields = yield r.db('public').table('tables').get(table).run(conn)
             fields = 
             for key in change['new_val']:
                 if not key in indexes and not key == 'id':
