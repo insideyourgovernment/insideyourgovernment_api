@@ -39,6 +39,7 @@ def main():
     table_list = r.db('public').table_list()
     table_list = yield table_list.run(conn)
     for table in table_list:
+        print table
         ioloop.IOLoop.current().add_callback(update_row_counts, table)
 
 if __name__ == "__main__":
