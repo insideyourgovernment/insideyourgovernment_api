@@ -93,6 +93,8 @@ def handle_query(payload, run=True):
         #right_fields = sorted(list(set(right_fields)))
 
         t = special_names[field[:-3]] if field[:-3] in special_names else field[:-3]+'s'
+        if '__' in t:
+            t = t.split('__')[-1]
         if not t in r.db('public').table_list().run():
             continue
         print field, t
