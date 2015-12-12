@@ -31,7 +31,7 @@ for row in data:
 print r.db('public').table('police_response_events').insert(data).run(conflict='update')
 
 t = list(r.db('public').table('police_response_events').order_by(r.desc('socrata_rms_created_at'), index=r.desc('socrata_rms_created_at')).limit(int(1)).run())[0]['socrata_rms_created_at'].isoformat()[:-9]
-data = requests.get('https://data.seattle.gov/resource/y7pv-r3kh.json?$select=:*,*&$limit=2000000&$where=:created_at%%20>%%20"%s"&$$app_token=%s' % (t, app_token)).json()
+data = requests.get('https://data.seattle.gov/resource/y7pv-r3kh.json?$select=:*,*&$limit=2000000&$where=:created_at%%20>=%%20"%s"&$$app_token=%s' % (t, app_token)).json()
 print 'got the data'
 #print data
 import dateutil
