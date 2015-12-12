@@ -196,8 +196,10 @@ def handle_query(payload, run=True):
         results['table'] = r.db('public').table('tables').get(payload['table']).run()
         if 'default_order_by' in results['table']:
             field = results['table']['default_order_by']['field']
-            if field in r.db('public').table(payload['table'])
-            dbobj = getattr(dbobj, 'order_by')(r.desc(results['table']['default_order_by']['field']))
+            if field in r.db('public').table(payload['table']).index_list().run():
+                dbobj = getattr(dbobj, 'order_by')(r.desc(field))
+            else:
+                dbobj = getattr(dbobj, 'order_by')(r.desc(results['table']['default_order_by']['field']))
         special_names_reversed = {value: key for key, value in special_names.items()}
         t = payload['table']
         t = special_names_reversed[t] if t in special_names_reversed else t[:-1]
