@@ -1,3 +1,4 @@
 import os
 dirname, filename = os.path.split(os.path.abspath(__file__))
-for filename in os.s
+for filename in os.listdir(dirname):
+    
