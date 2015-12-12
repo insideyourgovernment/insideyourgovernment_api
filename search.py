@@ -197,7 +197,7 @@ def handle_query(payload, run=True):
         if 'default_order_by' in results['table']:
             field = results['table']['default_order_by']['field']
             if field in r.db('public').table(payload['table']).index_list().run():
-                dbobj = getattr(dbobj, 'order_by')(r.desc(field), index=r.desc(field))
+                dbobj = getattr(dbobj, 'order_by')(r.desc(field), index=r.desc(field)) 
             else:
                 dbobj = getattr(dbobj, 'order_by')(r.desc(field))
         special_names_reversed = {value: key for key, value in special_names.items()}
