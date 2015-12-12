@@ -58,8 +58,8 @@ def handle_query(payload, run=True):
             dbobj = dbobj.get_all(payload['filter'].items()[0][1], index=payload['filter'].items()[0][0])
         else:
             print 'not using index'
-            dbobj = getattr(dbobj, key)(payload[key])            
-            
+            dbobj = getattr(dbobj, key)(payload[key])
+
     if 'order_by' in payload:
         for o in payload['order_by']:
             if o['direction'] == 'desc':
