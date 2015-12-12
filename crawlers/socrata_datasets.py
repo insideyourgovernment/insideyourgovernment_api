@@ -40,7 +40,6 @@ from datetime import date
 from datetime import datetime
 tz = timezone('America/Los_Angeles')
 for i, row in enumerate(data):
-    
     row['organization_id'] = 'cfee2384-fb23-450a-90bf-2cbfa2912876'
     row['is_rms_event'] = True
     #print 'gon', row['general_offense_number']
@@ -50,7 +49,6 @@ for i, row in enumerate(data):
         #print row.keys()
         row['id'] = row[':id']
     for key in row.keys():
-        
         if key.startswith(':'):
             row['socrata_rms_'+key[1:]] = row[key]
             del row[key]
