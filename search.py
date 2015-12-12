@@ -113,7 +113,7 @@ def handle_query(payload, run=True):
             print 'using index'
             dbobj = dbobj.get_all(payload['filter'].items()[0][1], index=payload['filter'].items()[0][0])
         else:
-            print 'not using 
+            print 'not using index'
             dbobj = getattr(dbobj, key)(payload[key])
     if 'page' in payload:
         page = int(payload['page'])
