@@ -51,14 +51,7 @@ def handle_query(payload, run=True):
         else:
             dbobj = getattr(dbobj, 'pluck')(payload['pluck'])
 
-    if 'filter' in payload:
-        key = 'filter'
-        if len(payload['filter'].items()) == 1 and payload['filter'].keys()[0] in r.db('public').table(payload['table']).index_list().run():
-            print 'using index'
-            dbobj = dbobj.get_all(payload['filter'].items()[0][1], index=payload['filter'].items()[0][0])
-        else:
-            print 'not using index'
-            dbobj = getattr(dbobj, key)(payload[key])        
+            
             
     if 'order_by' in payload:
         for o in payload['order_by']:
@@ -75,6 +68,16 @@ def handle_query(payload, run=True):
                 dbobj = getattr(dbobj, 'order_by')(index=r.desc(field)) 
             else:
                 dbobj = getattr(dbobj, 'order_by')(r.desc(field))
+                
+    if 'filter' in payload:
+        key = 'filter'
+        if len(payload['filter'].items()) == 1 and payload['filter'].keys()[0] in r.db('public').table(payload['table']).index_list().run():
+            print 'using index'
+            dbobj = dbobj.get_all(payload['filter'].items()[0][1], index=payload['filter'].items()[0][0])
+        else:
+            print 'not using index'
+            dbobj = getattr(dbobj, key)(payload[key])
+            
     rows_count = dbobj.count().run()
 
             
