@@ -1,5 +1,6 @@
 import os
 dirname, filename = os.path.split(os.path.abspath(__file__))
-for filename in os.listdir(dirname):
-    if filename.endswith('.py'):
+for f in os.listdir(dirname):
+    dirname, filename = os.path.split(f)
+    if f.endswith('.py'):
         if filename not in ['__init__.py', 'run_crawlers.py', 
