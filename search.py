@@ -57,6 +57,13 @@ def handle_query(payload, run=True):
                 dbobj = getattr(dbobj, 'order_by')(index=r.desc(o['field']))
             else:
                 dbobj = getattr(dbobj, 'order_by')(index=o['field'])
+    else:
+        if 'default_order_by' in results['table']:
+            field = results['table']['default_order_by']['field']
+            if field in r.db('public').table(payload['table']).index_list().run():
+                dbobj = getattr(dbobj, 'order_by')(r.desc(field), index=r.desc(field)) 
+            else:
+                dbobj = getattr(dbobj, 'order_by')(r.desc(field))
     rows_count = dbobj.count().run()
     if 'page' in payload:
         page = int(payload['page'])
@@ -194,12 +201,7 @@ def handle_query(payload, run=True):
         #    dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
         results = {}
         results['table'] = r.db('public').table('tables').get(payload['table']).run()
-        if 'default_order_by' in results['table']:
-            field = results['table']['default_order_by']['field']
-            if field in r.db('public').table(payload['table']).index_list().run():
-                dbobj = getattr(dbobj, 'order_by')(r.desc(field), index=r.desc(field)) 
-            else:
-                dbobj = getattr(dbobj, 'order_by')(r.desc(field))
+        
         special_names_reversed = {value: key for key, value in special_names.items()}
         t = payload['table']
         t = special_names_reversed[t] if t in special_names_reversed else t[:-1]
