@@ -58,6 +58,8 @@ def handle_query(payload, run=True):
             else:
                 dbobj = getattr(dbobj, 'order_by')(index=o['field'])
     else:
+        results = {}
+        results['table'] = r.db('public').table('tables').get(payload['table']).run()
         if 'default_order_by' in results['table']:
             field = results['table']['default_order_by']['field']
             if field in r.db('public').table(payload['table']).index_list().run():
