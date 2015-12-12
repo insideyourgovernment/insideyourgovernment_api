@@ -109,6 +109,7 @@ def handle_query(payload, run=True):
 
     if 'filter' in payload:
         key = 'filter'
+        if
         dbobj = getattr(dbobj, key)(payload[key])
     if 'page' in payload:
         page = int(payload['page'])
