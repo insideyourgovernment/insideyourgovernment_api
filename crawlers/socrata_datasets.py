@@ -62,3 +62,4 @@ for i, row in enumerate(data):
         if row[key].tzinfo == None:
             row[key] = row[key].replace(tzinfo = tz)
     change = r.db('public').table('police_response_events').insert(row).run(conflict='update')
+    print change
