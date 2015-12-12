@@ -109,7 +109,7 @@ def handle_query(payload, run=True):
 
     if 'filter' in payload:
         key = 'filter'
-        if len(payload['filter'].items()) == 1 and payload['filter'].keys()[0] in r.db('publ
+        if len(payload['filter'].items()) == 1 and payload['filter'].keys()[0] in r.db('public').table(payload[
         dbobj = getattr(dbobj, key)(payload[key])
     if 'page' in payload:
         page = int(payload['page'])
