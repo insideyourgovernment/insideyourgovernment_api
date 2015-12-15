@@ -29,7 +29,7 @@ def setup_rethinkdb():
     already_known_tables = [row['id'] for row in r.db('public').table('tables').run(conn)]
     for table in dbs_and_tables['public']:
         if table in already_known_tables:
-            
+            continue
         if 'police' in table:
             category = "Policing"
         elif table == 'datasets':
