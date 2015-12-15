@@ -13,7 +13,7 @@ def update_row_counts(table):
     while (yield feed.fetch_next()):
         change = yield feed.next()
         dt = 
-        if not table == 'c
+        if not table == 'changes':
         c = {'table': table, 'datetime': get_dt(), 'change': change}
         r.db('public').table('tables').get(table).run(conn)
         print change
