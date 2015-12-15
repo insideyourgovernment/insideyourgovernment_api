@@ -26,6 +26,7 @@ def setup_rethinkdb():
         tables_to_create = set(tables_needed) - set(existing_tables) # remove existing tables from what we need
         for table in tables_to_create:
             db.table_create(table).run()
+    already_known_tables = [row['id'] for row in r.db('public').table
     for table in dbs_and_tables['public']:
         if table in 
         if 'police' in table:
