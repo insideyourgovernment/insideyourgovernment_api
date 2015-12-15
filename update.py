@@ -27,8 +27,6 @@ def setup_rethinkdb():
         for table in tables_to_create:
             db.table_create(table).run()
     for table in dbs_and_tables['public']:
-        #tables_ids = [item['id'] for item in r.db('public').table('tables').run()]
-        #if not table in tables_ids:
         if 'police' in table:
             category = "Policing"
         elif table == 'datasets':
