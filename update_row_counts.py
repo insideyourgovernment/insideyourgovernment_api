@@ -8,7 +8,8 @@ def changed_keys(change):
     ck = []
     for key in change.get('new_val', default={}):
         if not key in change.get('old_val', default={}):
-            
+            ck.append(key)
+        elif change['new_val'][
 @gen.coroutine
 def update_row_counts(table):
     conn = yield r.connect(host="localhost", port=28015)
