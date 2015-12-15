@@ -39,7 +39,7 @@ def update_row_counts(table):
             fields = table_data.get('fields')
             for key in change['new_val']:
                 if not key in indexes and not key == 'id':
-                    #print r.db('public').table(table).index_create(key).run(conn)
+                    r.db('public').table(table).index_create(key).run(conn)
             if not fields:
                 r.db('public').table('tables').get(table).update({'fields': change['new_val'].keys()}).run(conn)
             else:
