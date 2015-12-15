@@ -7,7 +7,7 @@ r.set_loop_type("tornado")
 def changed_keys(change):
     ck = []
     for key in change.get('new_val', default={}):
-        if not key in change.get('new_val', default=[])
+        if not key in change.get('ne_val', default=[])
 @gen.coroutine
 def update_row_counts(table):
     conn = yield r.connect(host="localhost", port=28015)
