@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import rethinkdb as r
 
 def get_dt():
