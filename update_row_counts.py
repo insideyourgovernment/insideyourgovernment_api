@@ -7,11 +7,13 @@ r.set_loop_type("tornado")
 def changed_keys(change):
     ck = []
     for key in change.get('new_val', {}):
-        if not key in change.get('old_val', {}):
+        old_val = change.get('old_val', {})
+        if not key in old_val:
             ck.append(key)
         elif change['new_val'][key] != change['old_val'][key]:
             ck.append(key)
     for key in change.get('old_val', {}):
+        new_val = change.get('new_val', {})
         if not key in change.get('new_val', {}):
             ck.append(key)
         elif change['new_val'][key] != change['old_val'][key]:
