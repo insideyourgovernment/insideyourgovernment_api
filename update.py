@@ -5,6 +5,7 @@ from utils import update_all_row_counts
 def setup_rethinkdb():
     import rethinkdb as r
     r.connect( "localhost", 28015).repl()
+    conn = r.connect( "localhost", 28015).repl()
     try:
         r.db_create("nonpublic").run()
     except:
