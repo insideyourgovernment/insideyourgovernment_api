@@ -50,3 +50,4 @@ if 'force' in str(sys.argv):
     update(force=True)
 else:
     update()
+    update() # to ensure the new tables are created
