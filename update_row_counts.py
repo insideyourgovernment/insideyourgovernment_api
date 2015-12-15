@@ -18,7 +18,7 @@ def update_row_counts(table):
         if not table == 'changes':
             c = {'table': table, 'datetime': get_dt(), 'change': change}
             r.db('public').table('changes').insert(c).run(conn)
-        print change
+        print table, change
         if change.get('new_val'):
             indexes = yield r.db('public').table(table).index_list().run(conn)
             table_data = yield r.db('public').table('tables').get(table).run(conn)
