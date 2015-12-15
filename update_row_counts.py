@@ -6,13 +6,13 @@ from utils import get_dt
 r.set_loop_type("tornado")
 def changed_keys(change):
     ck = []
-    for key in change.get('new_val', default={}):
-        if not key in change.get('old_val', default={}):
+    for key in change.get('new_val', {}):
+        if not key in change.get('old_val', {}):
             ck.append(key)
         elif change['new_val'][key] != change['old_val'][key]:
             ck.append(key)
-    for key in change.get('old_val', default={}):
-        if not key in change.get('new_val', default={}):
+    for key in change.get('old_val', {}):
+        if not key in change.get('new_val', {}):
             ck.append(key)
         elif change['new_val'][key] != change['old_val'][key]:
             ck.append(key)
