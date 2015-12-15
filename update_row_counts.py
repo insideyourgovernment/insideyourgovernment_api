@@ -16,6 +16,8 @@ def changed_keys(change):
             ck.append(key)
         elif change['new_val'][key] != change['old_val'][key]:
             ck.append(key)
+    return ck
+
 @gen.coroutine
 def update_row_counts(table):
     conn = yield r.connect(host="localhost", port=28015)
