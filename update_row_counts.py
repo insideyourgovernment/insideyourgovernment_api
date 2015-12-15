@@ -14,8 +14,8 @@ def update_row_counts(table):
         change = yield feed.next()
         dt = 
         if not table == 'changes':
-        c = {'table': table, 'datetime': get_dt(), 'change': change}
-        r.db('public').table('tables').get(table).run(conn)
+            c = {'table': table, 'datetime': get_dt(), 'change': change}
+            r.db('public').table('tables').get(table).run(conn)
         print change
         if change.get('new_val'):
             indexes = yield r.db('public').table(table).index_list().run(conn)
