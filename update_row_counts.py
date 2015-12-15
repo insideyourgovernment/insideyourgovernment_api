@@ -17,7 +17,7 @@ def update_row_counts(table):
                 ioloop.IOLoop.current().add_callback(update_row_counts, change['new_val']['id'])
         if not table == 'changes':
             c = {'table': table, 'datetime': get_dt(), 'change': change}
-            print 'r.db('public').table('changes').insert(c).run(conn)
+            print 'added change', r.db('public').table('changes').insert(c).run(conn)
         print table, change
         if change.get('new_val'):
             indexes = yield r.db('public').table(table).index_list().run(conn)
