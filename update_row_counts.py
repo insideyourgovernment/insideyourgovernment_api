@@ -12,7 +12,7 @@ def changed_keys(change):
         elif change['new_val'][key] != change['old_val'][key]:
             ck.append(key)
     for key in change.get('old_val', default={}):
-        if not key in change.get('old_val', default={}):
+        if not key in change.get('new_val', default={}):
             ck.append(key)
         elif change['new_val'][key] != change['old_val'][key]:
             ck.append(key)
