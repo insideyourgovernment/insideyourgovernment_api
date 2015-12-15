@@ -1,5 +1,6 @@
 import os
 import sys
+from utils import update_all_row_counts
 
 def setup_rethinkdb():
     import rethinkdb as r
@@ -49,6 +50,8 @@ def update(force=False):
     print git_pull
     os.system('sudo pip install -r requirements.txt')
     setup_rethinkdb()
+    update_all_row_counts()
+    
 if 'force' in str(sys.argv):
     update(force=True)
 else:
