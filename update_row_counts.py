@@ -18,7 +18,7 @@ def changed_keys(change):
     for key in change.get('old_val', {}):
         new_val = change.get('new_val', {})
         if not new_val:
-            old_val = {}
+            new_val = {}
         print 'new_val', new_val
         if not key in change.get('new_val', {}):
             ck.append(key)
