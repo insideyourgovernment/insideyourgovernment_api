@@ -5,6 +5,7 @@ def get_dt():
     return r.expr(datetime.now(r.make_timezone('-07:00')))
 
 def update_all_row_counts():
+    r.connect( "localhost", 28015).repl()
     tables = list(r.db('public').table('tables').run())
     for table in tables:
         the_count = r.db('public').table(table['id']).count().run()
