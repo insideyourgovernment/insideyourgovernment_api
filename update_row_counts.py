@@ -24,7 +24,7 @@ def changed_keys(change):
             ck.append(key)
         elif change['new_val'][key] != change['old_val'][key]:
             ck.append(key)
-    return ck
+    return list(set(ck))
 
 @gen.coroutine
 def update_row_counts(table):
