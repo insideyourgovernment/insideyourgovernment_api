@@ -1,6 +1,7 @@
 import rethinkdb as r
 from tornado import ioloop, gen
 from search import handle_query
+from utils import get_dt
 
 r.set_loop_type("tornado")
 
@@ -12,7 +13,9 @@ def update_row_counts(table):
     while (yield feed.fetch_next()):
         change = yield feed.next()
         dt = 
-        c = {'table': table, 'datetime': dt, 'change': change}
+        if not table == 'c
+        c = {'table': table, 'datetime': get_dt(), 'change': change}
+        r.db('public').table('tables').get(table).run(conn)
         print change
         if change.get('new_val'):
             indexes = yield r.db('public').table(table).index_list().run(conn)
