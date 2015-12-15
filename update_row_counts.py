@@ -4,7 +4,9 @@ from search import handle_query
 from utils import get_dt
 
 r.set_loop_type("tornado")
-
+def changed_keys(change):
+    ck = []
+    for 
 @gen.coroutine
 def update_row_counts(table):
     conn = yield r.connect(host="localhost", port=28015)
