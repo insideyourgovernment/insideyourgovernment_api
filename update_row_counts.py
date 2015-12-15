@@ -9,7 +9,7 @@ def changed_keys(change):
     for key in change.get('new_val', {}):
         old_val = change.get('old_val', {}) # ugh default = {} not working
         if not old_val:
-            
+            old_val
         print 'old_val', old_val
         if not key in old_val:
             ck.append(key)
