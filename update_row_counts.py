@@ -29,7 +29,7 @@ def changed_keys(change):
 @gen.coroutine
 def update_row_counts(table):
     conn = yield r.connect(host="localhost", port=28015)
-    first_part = r.db('public').table(table).changes(squash=True)
+    first_part = r.db('public').table(table).changes(squash=False)
     feed = yield first_part.run(conn)
     while (yield feed.fetch_next()):
         change = yield feed.next()
