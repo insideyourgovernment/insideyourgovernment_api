@@ -18,11 +18,11 @@ for row in data:
     # use permalink
     d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
     # ?$select=count(*)&$$app_token=%s' 
-    
+    count_url = '%s?$select=count(*)&$$app_token=%s' % (d['api_url'], app_token)
     try:
     
-    count_data = requests.get(count_url).json()
-    d['number_of_rows'] = count_data[0]['count']
+        count_data = requests.get(count_url).json()
+        d['number_of_rows'] = count_data[0]['count']
     except:
         print count_url
     modified_data.append(d)
