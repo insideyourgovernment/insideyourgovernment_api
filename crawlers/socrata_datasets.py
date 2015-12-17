@@ -22,6 +22,7 @@ for row in data:
     count_url = '%s?$select=count(*)&$$app_token=%s' % (d['api_url'], app_token)
     count_data = requests.get(count_url).json()
     d['number_of_rows'] = count_data[0]['count']
+    
     modified_data.append(d)
 print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
 import rethinkdb as r
