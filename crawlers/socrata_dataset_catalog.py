@@ -24,7 +24,7 @@ def run_count(i, theid, api_url):
         print count_url
         print traceback.print_exc()
     conn = r.connect( "localhost", 28015).repl()
-    r.db('public').table('
+    r.db('public').table('datasets').get(theid).update({"number_of_rows": number_of_rows}).run(conn)
     print i
     return number_of_rows
 
