@@ -15,7 +15,7 @@ for row in data:
     # https://data.cityofnewyork.us/Public-Safety/Disposition-Of-Offensive-Language-Allegations-2007/xah7-gu5w
     # https://data.cityofnewyork.us/resource/xah7-gu5w.json
     # use permalink
-    d['api_url'] = d['permalink'].replace('/d/', 'resource') + '.json'
+    d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
     
     modified_data.append(d)
 print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
