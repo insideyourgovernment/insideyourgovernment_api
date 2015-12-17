@@ -7,7 +7,7 @@ num_cores = multiprocessing.cpu_count()*10
 import rethinkdb as r
 
 def run_count(i, theid, api_url, app_token, tables_list, d):
-    table = 'socrata_dataset_'+theid.replace('-', '_') 
+    table = 'socrata_dataset_'+theid.replace('-', '_') # rethinkdb
     if not table in tables_list:
         conn = r.connect( "localhost", 28015).repl()
         r.db('public').table_create(table).run(conn)
