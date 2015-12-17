@@ -1,4 +1,20 @@
 import rethinkdb as r
+r.connect( "localhost", 24455).repl()
+import requests
+results = []
+for i in range(10):
+    results.extend(requests.get('http://api.us.socrata.com/api/catalog/v1?only=datasets&limit=10000&offset='+str(10000*i)).json()['results'])
+data = results
+modified_data = []
+for row in data:
+    d = {}
+    d.update(row)
+    d.update(row['resource'])
+    d.update(row['resource']['view_count'])
+    d.update(row['classification'])
+    modified_data.append(d)
+r.db('public').table('datasets').insert(modified_data).run(conflict='update')
+import rethinkdb as r
 r.connect( "localhost", 28015).repl()
 import requests
 app_token = r.db('nonpublic').table('third_party_creds').get('socrata').run()['app_token']
