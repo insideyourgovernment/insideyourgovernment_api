@@ -39,7 +39,7 @@ def do():
     print 'number_of_datasets', len(data)
     modified_data = []
     inputs = []
-    tables_list = r.db('public').table_list().run()
+    tables_list = r.db('public').table_list().run(conn)
     for i, row in enumerate(data):
         d = {}
         d.update(row)
