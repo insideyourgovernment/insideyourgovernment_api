@@ -18,7 +18,7 @@ for row in data:
     # use permalink
     d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
     # ?$select=count(*)&$$app_token=%s' 
-    count_url = '%s?$select=count(*)&$$app_token=%s' % (d['api_url'], 
+    count_url = '%s?$select=count(*)&$$app_token=%s' % (d['api_url'], app_token)
     d['number_of_rows'] = 
     modified_data.append(d)
 print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
