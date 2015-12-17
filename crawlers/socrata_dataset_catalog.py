@@ -9,8 +9,8 @@ num_cores = multiprocessing.cpu_count()*10
 
 import rethinkdb as r
 
-def run_count(i, theid, api_url, app_token):
-    
+def run_count(i, theid, api_url, app_token, tables_list):
+    if not 'socrata_dataset_'+theid
     count_url = '%s?$select=count(*)&$$app_token=%s' % (api_url, app_token)
     try:
         count_data = requests.get(count_url, verify=False).json()
@@ -50,7 +50,8 @@ def do():
         # use permalink
         d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
         # ?$select=count(*)&$$app_token=%s' 
-        inputs.append([i, d['id'], d['api_url'], app_token])
+        tables_list = r.db('public').table_list().run()
+        inputs.append([i, d['id'], d['api_url'], app_token, tables_list])
         modified_data.append(d)
     print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
     results = Parallel(n_jobs=num_cores)(delayed(run_count)(*inp) for inp in inputs)
