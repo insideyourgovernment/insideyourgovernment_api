@@ -21,7 +21,7 @@ for row in data:
     # ?$select=count(*)&$$app_token=%s' 
     count_url = '%s?$select=count(*)&$$app_token=%s' % (d['api_url'], app_token)
     try:
-        count_data = requests.get(count_url).json()
+        count_data = requests.get(count_url, verify=False).json()
         d['number_of_rows'] = count_data[0]['count']
     except Exception, err:
         print count_url
