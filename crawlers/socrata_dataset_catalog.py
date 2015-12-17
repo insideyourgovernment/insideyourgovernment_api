@@ -30,3 +30,6 @@ def do():
             print traceback.print_exc()
         modified_data.append(d)
     print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
+    
+while True:
+    do()
