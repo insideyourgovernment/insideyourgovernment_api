@@ -15,13 +15,14 @@ def run_count(i, theid, api_url, app_token):
     try:
         count_data = requests.get(count_url, verify=False).json()
         number_of_rows = count_data[0]['count']
+        conn = r.connect( "localhost", 28015).repl()
+        r.db('public').table('datasets').get(theid).update({"number_of_rows": number_of_rows}).run(conn)
+        print i
+        return number_of_rows
     except Exception, err:
         print count_url
         print traceback.print_exc()
-    conn = r.connect( "localhost", 28015).repl()
-    r.db('public').table('datasets').get(theid).update({"number_of_rows": number_of_rows}).run(conn)
-    print i
-    return number_of_rows
+        return None
 
 def do():
     import rethinkdb as r
