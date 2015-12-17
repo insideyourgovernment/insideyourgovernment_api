@@ -1,6 +1,7 @@
 import rethinkdb as r
 r.connect( "localhost", 28015).repl()
 import requests
+app_token = r.db('nonpublic').table('third_party_creds').get('socrata').run()['app_token']
 results = []
 for i in range(10):
     results.extend(requests.get('http://api.us.socrata.com/api/catalog/v1?only=datasets&limit=10000&offset='+str(10000*i)).json()['results'])
@@ -16,7 +17,8 @@ for row in data:
     # https://data.cityofnewyork.us/resource/xah7-gu5w.json
     # use permalink
     d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
-    # ?$select=count(*)
+    # ?$select=count(*) 
+    
     d['number_of_rows'] = 
     modified_data.append(d)
 print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
