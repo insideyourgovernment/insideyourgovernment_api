@@ -12,6 +12,8 @@ for row in data:
     d.update(row['resource']) 
     d.update(row['resource']['view_count'])
     d.update(row['classification'])
+    # https://data.cityofnewyork.us/Public-Safety/Disposition-Of-Offensive-Language-Allegations-2007/xah7-gu5w
+    d['api_url'] = 
     modified_data.append(d)
 r.db('public').table('datasets').insert(modified_data).run(conflict='update')
 import rethinkdb as r
