@@ -3,7 +3,7 @@ import multiprocessing
 import traceback
 import requests
 
-num_cores = multiprocessing.cpu_count()
+num_cores = multiprocessing.cpu_count()*500
 import rethinkdb as r
 
 def run_count(i, theid, api_url, app_token, tables_list, d):
