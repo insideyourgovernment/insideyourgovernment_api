@@ -63,7 +63,7 @@ def handle_query(payload, run=True):
     if 'order_by' in payload:
         for o in payload['order_by']:
             if o['direction'] == 'desc':
-                dbobj = getattr(dbobj, 'order_by')(index=r.desc(o['field']))
+                dbobj = getattr(dbobj, 'order_by')(r.desc(o['field']), index=r.desc(o['field']))
             else:
                 dbobj = getattr(dbobj, 'order_by')(index=o['field'])
     else:
