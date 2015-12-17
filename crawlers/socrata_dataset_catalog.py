@@ -47,7 +47,7 @@ def do():
         # use permalink
         d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
         # ?$select=count(*)&$$app_token=%s' 
-        inputs.append([i, d['id'], d['api_url']
+        inputs.append([i, d['id'], d['api_url']])
         modified_data.append(d)
     print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
     results = Parallel(n_jobs=num_cores)(delayed(processInput)(*inp) for inp in inputs)
