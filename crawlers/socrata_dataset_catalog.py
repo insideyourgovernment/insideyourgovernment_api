@@ -35,6 +35,7 @@ def do():
         results.extend(requests.get('http://api.us.socrata.com/api/catalog/v1?only=datasets&limit=10000&offset='+str(10000*i)).json()['results'])
     data = results
     modified_data = []
+    inputs = []
     for i, row in enumerate(data):
         d = {}
         d.update(row)
@@ -46,9 +47,9 @@ def do():
         # use permalink
         d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
         # ?$select=count(*)&$$app_token=%s' 
-        
+        inputs.append([i, 
         modified_data.append(d)
     print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
-    results = Parallel(n_jobs=num_cores)(delayed(processInput)(i) for i in inputs)
+    results = Parallel(n_jobs=num_cores)(delayed(processInput)(*in) for i in inputs)
 while True:
     do()
