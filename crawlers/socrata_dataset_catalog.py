@@ -58,7 +58,8 @@ def do():
         inputs.append([i, d['id'], d['api_url'], app_token, tables_list, d])
         modified_data.append(d)
     print 'trying insert'
-    t = r.db('public').table('datasets').insert(modified_data).run(conn, conflict='update', noreply=True)
+    for i in range(len(data)/200+1):
+        t = r.db('public').table('datasets').insert(modified_data).run(conn, conflict='update', noreply=True)
     results = Parallel(n_jobs=num_cores)(delayed(run_count)(*inp) for inp in inputs)
     
 while True:
