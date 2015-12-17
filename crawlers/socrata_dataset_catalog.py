@@ -10,8 +10,8 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
     table = 'socrata_dataset_'+theid.replace('-', '_') # rethinkdb doesn't allow -
     if not table in tables_list:
         
-        t = r.db('public').table_create(table).run(conn)
-        t = r.db('public').table('tables').insert({'id': table, 'name': d['name'], 'categories': ['Socrata datasets']}).run(conn)
+        t = r.db('public').table_create(table).run(conn, noreply=True)
+        t = r.db('public').table('tables').insert({'id': table, 'name': d['name'], 'categories': ['Socrata datasets']}).run(conn, noreply=True)
     count_url = '%s?$select=count(*)&$$app_token=%s' % (api_url, app_token)
     try:
         count_data = requests.get(count_url, verify=False).json()
