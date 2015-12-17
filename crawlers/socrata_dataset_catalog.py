@@ -15,7 +15,6 @@ def run_count(i, theid, api_url):
     try:
         count_data = requests.get(count_url, verify=False).json()
         number_of_rows = count_data[0]['count']
-        print i, d['id'], d['number_of_rows']
     except Exception, err:
         print count_url
         print traceback.print_exc()
