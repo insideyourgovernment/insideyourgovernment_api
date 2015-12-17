@@ -4,15 +4,12 @@ import traceback
 import requests
 
 num_cores = multiprocessing.cpu_count()*10
-
-  
-
 import rethinkdb as r
 
 def run_count(i, theid, api_url, app_token, tables_list):
     table = 'socrata_dataset_'+theid
     if not table in tables_list:
-        r.db('public').table_create(table)
+        r.db('public').table_create(table).run(conn)
     count_url = '%s?$select=count(*)&$$app_token=%s' % (api_url, app_token)
     try:
         count_data = requests.get(count_url, verify=False).json()
