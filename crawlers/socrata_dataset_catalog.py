@@ -11,7 +11,10 @@ num_cores = multiprocessing.cpu_count()
 
 results = Parallel(n_jobs=num_cores)(delayed(processInput)(i) for i in inputs)  
 
+import rethinkdb as r
+
 def run_count(i, theid, api_url):
+    
     count_url = '%s?$select=count(*)&$$app_token=%s' % (d['api_url'], app_token)
     try:
         count_data = requests.get(count_url, verify=False).json()
@@ -20,6 +23,8 @@ def run_count(i, theid, api_url):
     except Exception, err:
         print count_url
         print traceback.print_exc()
+    conn = r.connect( "localhost", 28015).repl()
+    r.db('public').table('
     print i
     return number_of_rows
 
