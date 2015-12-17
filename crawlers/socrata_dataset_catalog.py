@@ -11,7 +11,7 @@ num_cores = multiprocessing.cpu_count()
 
 results = Parallel(n_jobs=num_cores)(delayed(processInput)(i) for i in inputs)  
 
-def run_count(i, ):
+def run_count(i, theid, api_url):
     count_url = '%s?$select=count(*)&$$app_token=%s' % (d['api_url'], app_token)
     try:
         count_data = requests.get(count_url, verify=False).json()
@@ -20,6 +20,7 @@ def run_count(i, ):
     except Exception, err:
         print count_url
         print traceback.print_exc()
+    print i
     return number_of_rows
 
 def do():
