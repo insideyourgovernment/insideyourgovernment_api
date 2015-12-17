@@ -9,7 +9,7 @@ num_cores = multiprocessing.cpu_count()
 
 import rethinkdb as r
 
-def run_count(i, theid, api_url):
+def run_count(i, theid, api_url, app_token):
     
     count_url = '%s?$select=count(*)&$$app_token=%s' % (api_url, app_token)
     try:
