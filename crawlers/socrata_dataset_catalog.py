@@ -37,6 +37,7 @@ def do():
     data = results
     modified_data = []
     inputs = []
+    tables_list = r.db('public').table_list().run()
     for i, row in enumerate(data):
         d = {}
         d.update(row)
@@ -51,7 +52,7 @@ def do():
         # use permalink
         d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
         # ?$select=count(*)&$$app_token=%s' 
-        tables_list = r.db('public').table_list().run()
+        
         inputs.append([i, d['id'], d['api_url'], app_token, tables_list, d])
         modified_data.append(d)
     print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
