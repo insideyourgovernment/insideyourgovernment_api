@@ -29,7 +29,7 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
 def do():
     import rethinkdb as r
     import traceback
-    r.connect( "localhost", 28015).repl()
+    conn = r.connect( "localhost", 28015).repl()
     import requests
     app_token = r.db('nonpublic').table('third_party_creds').get('socrata').run()['app_token']
     results = []
@@ -56,7 +56,7 @@ def do():
         
         inputs.append([i, d['id'], d['api_url'], app_token, tables_list, d])
         modified_data.append(d)
-    t = r.db('public').table('datasets').insert(modified_data).run(conflict='update', noreply=True)
+    t = r.db('public').table('datasets').insert(modified_data).run(conn, conflict='update', noreply=True)
     results = Parallel(n_jobs=num_cores)(delayed(run_count)(*inp) for inp in inputs)
     
 while True:
