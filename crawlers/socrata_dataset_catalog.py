@@ -39,7 +39,9 @@ def do():
     for i, row in enumerate(data):
         d = {}
         d.update(row)
-        for key in 
+        for key in d:
+            if isinstance(d[key], dict):
+                    
         #d.update(row['resource'])
         #d.update(row['resource']['view_count'])
         #d.update(row['classification'])
