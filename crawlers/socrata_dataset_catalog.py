@@ -11,7 +11,7 @@ import rethinkdb as r
 
 def run_count(i, theid, api_url):
     
-    count_url = '%s?$select=count(*)&$$app_token=%s' % (d['api_url'], app_token)
+    count_url = '%s?$select=count(*)&$$app_token=%s' % (api_url, app_token)
     try:
         count_data = requests.get(count_url, verify=False).json()
         number_of_rows = count_data[0]['count']
@@ -46,7 +46,7 @@ def do():
         # use permalink
         d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
         # ?$select=count(*)&$$app_token=%s' 
-        inputs.append([i, d['id'], d['api_url']])
+        inputs.append([i, d['id'], d['api_url'], app_token])
         modified_data.append(d)
     print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
     results = Parallel(n_jobs=num_cores)(delayed(run_count)(*inp) for inp in inputs)
