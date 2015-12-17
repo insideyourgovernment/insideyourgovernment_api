@@ -19,7 +19,8 @@ for row in data:
     d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
     # ?$select=count(*)&$$app_token=%s' 
     count_url = '%s?$select=count(*)&$$app_token=%s' % (d['api_url'], app_token)
-    d['number_of_rows'] = 
+    count_data = requests.get(count_url).json()
+    d['number_of_rows'] = count_data['count']
     modified_data.append(d)
 print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
 import rethinkdb as r
