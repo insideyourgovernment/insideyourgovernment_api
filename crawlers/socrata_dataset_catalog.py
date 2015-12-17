@@ -10,7 +10,7 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
     table = 'socrata_dataset_'+theid
     if not table in tables_list:
         r.db('public').table_create(table).run(conn)
-        r.db('public').table('tables').insert({'id': table, 'name': d['name']}).run(conn)
+        r.db('public').table('tables').insert({'id': table, 'name': d['name'], 'categories': ['Socrata datasets']}).run(conn)
     count_url = '%s?$select=count(*)&$$app_token=%s' % (api_url, app_token)
     try:
         count_data = requests.get(count_url, verify=False).json()
