@@ -16,8 +16,9 @@ for row in data:
     # https://data.cityofnewyork.us/resource/xah7-gu5w.json
     # use permalink
     d['api_url'] = d['permalink'].replace('/d/', 'resource') + '.json'
+    
     modified_data.append(d)
-r.db('public').table('datasets').insert(modified_data).run(conflict='update')
+print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
 import rethinkdb as r
 r.connect( "localhost", 28015).repl()
 import requests
