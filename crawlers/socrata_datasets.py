@@ -13,7 +13,9 @@ for row in data:
     d.update(row['resource']['view_count'])
     d.update(row['classification'])
     # https://data.cityofnewyork.us/Public-Safety/Disposition-Of-Offensive-Language-Allegations-2007/xah7-gu5w
-    d['api_url'] = 
+    # https://data.cityofnewyork.us/resource/xah7-gu5w.json
+    # use permalink
+    d['api_url'] = d['p
     modified_data.append(d)
 r.db('public').table('datasets').insert(modified_data).run(conflict='update')
 import rethinkdb as r
