@@ -1,4 +1,5 @@
 import rethinkdb as r
+import traceback
 r.connect( "localhost", 28015).repl()
 import requests
 app_token = r.db('nonpublic').table('third_party_creds').get('socrata').run()['app_token']
@@ -22,8 +23,9 @@ for row in data:
     try:
         count_data = requests.get(count_url).json()
         d['number_of_rows'] = count_data[0]['count']
-    except:
+    except Exception, err:
         print count_url
+        traceback.print_exc()
     modified_data.append(d)
 print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
 import rethinkdb as r
