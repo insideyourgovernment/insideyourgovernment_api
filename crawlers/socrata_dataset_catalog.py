@@ -17,7 +17,7 @@ def run_count(i, theid, api_url, app_token):
         number_of_rows = count_data[0]['count']
         conn = r.connect( "localhost", 28015).repl()
         r.db('public').table('datasets').get(theid).update({"number_of_rows": int(number_of_rows)}).run(conn, noreply=True)
-        print i, theid, number_of_rows
+        print i, theid, int(number_of_rows)
         return number_of_rows
     except Exception, err:
         print count_url
