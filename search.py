@@ -220,7 +220,7 @@ def handle_query(payload, run=True):
         t = special_names_reversed[t] if t in special_names_reversed else t[:-1]
         t = t + '_id'
         results['data'] = list(dbobj.run(time_format="raw"))
-        results['expression'] = dbobj.__repr__()
+        results['expression'] = dbobj
         if 'linked_tables' in results['table']:
 
             for linked_table in results['table']['linked_tables']:
