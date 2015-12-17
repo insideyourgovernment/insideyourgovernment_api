@@ -39,7 +39,7 @@ def do():
     for i, row in enumerate(data):
         d = {}
         d.update(row)
-        d.update(row['resource']) 
+        d.update(row['resource'])
         d.update(row['resource']['view_count'])
         d.update(row['classification'])
         # https://data.cityofnewyork.us/Public-Safety/Disposition-Of-Offensive-Language-Allegations-2007/xah7-gu5w
