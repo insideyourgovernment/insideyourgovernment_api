@@ -57,5 +57,6 @@ def do():
         modified_data.append(d)
     t = r.db('public').table('datasets').insert(modified_data).run(conflict='update', noreply=True)
     results = Parallel(n_jobs=num_cores)(delayed(run_count)(*inp) for inp in inputs)
+    
 while True:
     do()
