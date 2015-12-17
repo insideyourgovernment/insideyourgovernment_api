@@ -25,7 +25,7 @@ for row in data:
         d['number_of_rows'] = count_data[0]['count']
     except Exception, err:
         print count_url
-        traceback.print_exc()
+        print traceback.print_exc()
     modified_data.append(d)
 print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
 import rethinkdb as r
