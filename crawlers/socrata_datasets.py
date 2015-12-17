@@ -1,5 +1,5 @@
 import rethinkdb as r
-r.connect( "localhost", 24455).repl()
+r.connect( "localhost", 28015).repl()
 import requests
 results = []
 for i in range(10):
