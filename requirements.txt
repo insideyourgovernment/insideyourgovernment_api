@@ -6,3 +6,4 @@ ipython
 rethinkdb
 python-dateutil
 BeautifulSoup4
+joblib
