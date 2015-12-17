@@ -23,7 +23,7 @@ for row in data:
     count_data = requests.get(count_url).json()
     d['number_of_rows'] = count_data[0]['count']
     except:
-        print cour
+        print count_url
     modified_data.append(d)
 print r.db('public').table('datasets').insert(modified_data).run(conflict='update')
 import rethinkdb as r
