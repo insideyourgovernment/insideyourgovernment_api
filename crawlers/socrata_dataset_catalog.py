@@ -36,6 +36,7 @@ def do():
     for i in range(10):
         results.extend(requests.get('http://api.us.socrata.com/api/catalog/v1?only=datasets&limit=10000&offset='+str(10000*i)).json()['results'])
     data = results
+    print 'number_of_datasets', len(data)
     modified_data = []
     inputs = []
     tables_list = r.db('public').table_list().run()
