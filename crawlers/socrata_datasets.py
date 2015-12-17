@@ -9,7 +9,7 @@ modified_data = []
 for row in data:
     d = {}
     d.update(row)
-    d.update(row['resource'])
+    d.update(row['resource']) 
     d.update(row['resource']['view_count'])
     d.update(row['classification'])
     modified_data.append(d)
