@@ -3,7 +3,7 @@ import multiprocessing
 import traceback
 import requests
 
-num_cores = multiprocessing.cpu_count()*100
+num_cores = multiprocessing.cpu_count()*10
 
   
 
