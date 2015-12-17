@@ -41,7 +41,7 @@ def do():
         d.update(row)
         for key in d:
             if isinstance(d[key], dict):
-                    
+                d    
         #d.update(row['resource'])
         #d.update(row['resource']['view_count'])
         #d.update(row['classification'])
