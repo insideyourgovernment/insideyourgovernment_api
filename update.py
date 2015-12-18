@@ -26,6 +26,7 @@ def setup_rethinkdb():
         tables_needed = dbs_and_tables[database]
         existing_tables = db.table_list().run()
         tables_to_create = set(tables_needed) - set(existing_tables) # remove existing tables from what we need
+        print existing_tables, ta
         print len(tables_to_create)
         for table in tables_to_create:
             print table, 'create', db.table_create(table).run()
