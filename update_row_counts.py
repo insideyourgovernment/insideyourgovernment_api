@@ -42,7 +42,7 @@ def update_row_counts(table):
                 index_name = "dataset_id&"+key
                 if not index_name in indexes and not key == 'id':
                     r.db('public').table(table).index_create(
-                        index_name, [r.row["dataset_id"], r.row["first_name"]]
+                        index_name, [r.row["dataset_id"], r.row[key]]
                     ).run(conn)
         print 'table', table, changed_keys(change)
         if not table == 'changes' and not (table == 'tables' and changed_keys(change) == 'number_of_rows'):
