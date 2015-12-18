@@ -39,7 +39,8 @@ def update_row_counts(table):
         if table == 'data_from_socrata':
             indexes = yield r.db('public').table(table).index_list().run(conn)
             for key in change['new_val']:
-                if not key in indexes and not key == 'id':
+                index_name = "dataset_id&"+key
+                if not index_name in indexes and not key == 'id':
                     r.db('public').table(table).index_create(key).run(conn)
         print 'table', table, changed_keys(change)
         if not table == 'changes' and not (table == 'tables' and changed_keys(change) == 'number_of_rows'):
