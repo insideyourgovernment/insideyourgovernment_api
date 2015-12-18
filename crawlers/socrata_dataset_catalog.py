@@ -39,7 +39,7 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
             data_url = '%s?$select=:*,*&$limit=%s&$offset=%s&$$app_token=%s' % (api_url, per_page, per_page * i, app_token)
             data = requests.get(data_url, verify=False).json()
             modified_data = []
-            print data_url'data', data
+            print data_url, 'data', data
             for row in data:
                 print row
                 for key in row.keys():
