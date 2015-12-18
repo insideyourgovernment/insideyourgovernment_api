@@ -42,7 +42,7 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
             for row in data:
                 for key in row.keys():
                     if key.startswith(':id'):
-                        row['id'] = theid+row[':id']
+                        row['id'] = theid+'_"row[':id']
                         del row[':id']
                     elif key.startswith(':'):
                         row['socrata_'+key[1:]] = row[key]
