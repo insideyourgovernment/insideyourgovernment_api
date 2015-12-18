@@ -32,11 +32,6 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
             data_url = '%s?$select=count(*)&$limit=%s&$offset=%s&$$app_token=%s' % (api_url, per_page, per_page * i, app_token)
             data = requests.get(count_url, verify=False).json()
             
-        count_data = requests.get(count_url, verify=False).json()
-        number_of_rows = count_data[0]['count']
-        
-        r.db('public').table('datasets').get(theid).update({"number_of_rows": int(number_of_rows)}).run(conn, noreply=True)
-        print i, theid, int(number_of_rows)
         return None
     except Exception, err:
         print count_url
