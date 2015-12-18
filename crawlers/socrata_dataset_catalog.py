@@ -29,6 +29,8 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
     per_page = 1000
     for i in range(number_of_rows/per_page):
     try:
+        per_page = 1000
+        for i in range(number_of_rows/per_page):
         count_data = requests.get(count_url, verify=False).json()
         number_of_rows = count_data[0]['count']
         
