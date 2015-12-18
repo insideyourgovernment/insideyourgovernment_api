@@ -37,7 +37,10 @@ def update_row_counts(table):
             if not change.get('old_val'):
                 ioloop.IOLoop.current().add_callback(update_row_counts, change['new_val']['id'])
         if table == 'data_from_socrata':
-            
+            indexes = yield r.db('public').table(table).index_list().run(conn)
+            for key in change['new_val']:
+                if not key in indexes and not key == 'id':
+                    r.db('public').table(table).index_create(key).run(conn)
         print 'table', table, changed_keys(change)
         if not table == 'changes' and not (table == 'tables' and changed_keys(change) == 'number_of_rows'):
             c = {'table': table, 'datetime': get_dt(), 'change': change}
