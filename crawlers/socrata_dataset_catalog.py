@@ -40,7 +40,20 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
             data = requests.get(count_url, verify=False).json()
             modified_data = []
             for row in data:
-                
+                for key in row.keys():
+                    if key.startswith(':id'):
+                        row['id'] = row[':id']
+                        del row[':id']
+                    elif key.startswith(':'):
+                        row['socrata_'+key[1:]] = row[key]
+                        del row[key]
+                for key in row.keys():
+                    if not '_at' in key and not 'date' in key and not 'time' in key:
+                        continue
+
+                    row[key] = dateutil.parser.parse(row[key])
+                    if row[key].tzinfo == None:
+                        row[key] = row[key].replace(tzinfo = tz)
         return None
     except Exception, err:
         print count_url
