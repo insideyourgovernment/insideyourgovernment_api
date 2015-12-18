@@ -40,6 +40,7 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
             data = requests.get(data_url, verify=False).json()
             modified_data = []
             for row in data:
+                print row
                 for key in row.keys():
                     if key.startswith(':id'):
                         row['id'] = theid+'_'+row[':id']
