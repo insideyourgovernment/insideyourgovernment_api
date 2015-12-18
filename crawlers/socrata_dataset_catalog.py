@@ -59,7 +59,7 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
                     if row[key].tzinfo == None:
                         row[key] = row[key].replace(tzinfo = tz)
                 modified_data.append(row)
-            r.db('public').table('data_from_socrata').insert(modified_data).run(conflict='u
+            r.db('public').table('data_from_socrata').insert(modified_data).run(conflict='update')
         return None
     except Exception, err:
         print count_url
