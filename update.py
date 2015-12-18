@@ -33,7 +33,7 @@ def setup_rethinkdb():
     for table in dbs_and_tables['public']:
         if table in already_known_tables:
             continue
-        if 'police' in table:
+        if 'police' in table: 
             category = "Policing"
         elif table == 'datasets':
             category = "Information Technology"
