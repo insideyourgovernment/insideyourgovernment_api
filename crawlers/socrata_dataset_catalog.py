@@ -6,6 +6,13 @@ import requests
 num_cores = multiprocessing.cpu_count()*20
 import rethinkdb as r
 
+import dateutil
+import dateutil.parser
+from pytz import timezone
+from datetime import date
+from datetime import datetime
+tz = timezone('America/Los_Angeles')
+
 def run_count(i, theid, api_url, app_token, tables_list, d):
     conn = r.connect( "localhost", 28015).repl()
     #table = 'socrata_dataset_'+theid.replace('-', '_') # rethinkdb doesn't allow -
