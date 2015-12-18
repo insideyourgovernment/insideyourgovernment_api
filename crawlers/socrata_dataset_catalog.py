@@ -54,7 +54,8 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
                     row[key] = dateutil.parser.parse(row[key])
                     if row[key].tzinfo == None:
                         row[key] = row[key].replace(tzinfo = tz)
-                modified_
+                modified_data.append(row)
+                
         return None
     except Exception, err:
         print count_url
