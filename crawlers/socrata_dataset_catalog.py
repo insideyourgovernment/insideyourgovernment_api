@@ -27,11 +27,11 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
         
         r.db('public').table('datasets').get(theid).update({"number_of_rows": int(number_of_rows)}).run(conn, noreply=True)
         print i, theid, int(number_of_rows)
-        return number_of_rows
+        #return number_of_rows
     except Exception, err:
         print count_url
         print traceback.print_exc()
-        return None
+        #return None
     
     try:
         per_page = 1000
