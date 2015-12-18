@@ -52,6 +52,7 @@ def update(force=False):
     git_pull = os.popen('git pull').read()
     print git_pull
     os.system('sudo pip install -r requirements.txt')
+    print 'test'
     setup_rethinkdb()
     #update_all_row_counts()
     
