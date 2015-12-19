@@ -15,7 +15,7 @@ def setup_rethinkdb():
     #except:
     #    pass
     db = r.db("public")
-    dbs_and_tables = {'nonpublic': ['third_party_creds', 'subscribers', 'subscriptions', 'users', 'sessions'], 'public': ['crawling_instructions', 'apps', 'police_internal_affairs_cases', 'police_internal_affairs_allegations', 'organizations', 'tables', 'queries', 'people', 'datasets', 'police_response_events', 'changes', 'crawler_log', 'data_from_socrata']}
+    dbs_and_tables = {'nonpublic': ['third_party_creds', 'subscribers', 'subscriptions', 'users', 'sessions'], 'public': ['crawling_instructions', 'apps', 'police_internal_affairs_cases', 'police_internal_affairs_allegations', 'organizations', 'tables', 'queries', 'people', 'datasets', 'police_response_events', 'changes', 'crawler_log', 'data_from_socrata', 'records']}
     
     for database in dbs_and_tables.keys():
         try:
@@ -34,7 +34,7 @@ def setup_rethinkdb():
     for table in dbs_and_tables['public']:
         if table in already_known_tables:
             continue
-        if 'police' in table: 
+        if 'police' in table or 'records' in table: 
             category = "Policing"
         elif table == 'datasets':
             category = "Information Technology"
