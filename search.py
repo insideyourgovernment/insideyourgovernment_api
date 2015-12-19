@@ -18,7 +18,8 @@ def is_number_field(field):
     for indicator in indicators:
         if indicator in field:
             return True
-    return F
+    return False
+
 def get_field(l, field):
     results = []
     for d in l:
