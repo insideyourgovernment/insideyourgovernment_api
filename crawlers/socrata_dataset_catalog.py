@@ -33,38 +33,6 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
         print traceback.print_exc()
         #return None
     
-    try:
-        per_page = 1000
-        api_url = api_url[:-14]+d['id']+'.json'
-        for i in range(number_of_rows/per_page):
-            
-            data_url = '%s?$select=:*,*&$limit=%s&$offset=%s&$$app_token=%s' % (api_url, per_page, per_page * i, app_token)
-            data = requests.get(data_url, verify=False).json()
-            modified_data = []
-            print data_url, 'data', data
-            for row in data:
-                print row
-                for key in row.keys():
-                    if key.startswith(':id'):
-                        row['id'] = theid+'_'+row[':id']
-                        del row[':id']
-                    elif key.startswith(':'):
-                        row['socrata_'+key[1:]] = row[key]
-                        del row[key]
-                for key in row.keys():
-                    if not '_at' in key and not 'date' in key and not 'time' in key:
-                        continue
-
-                    row[key] = dateutil.parser.parse(row[key])
-                    if row[key].tzinfo == None:
-                        row[key] = row[key].replace(tzinfo = tz)
-                modified_data.append(row)
-            r.db('public').table('data_from_socrata').insert(modified_data).run(conflict='update')
-        return None
-    except Exception, err:
-        print count_url
-        print traceback.print_exc()
-        return None
 
 def do():
     import rethinkdb as r
