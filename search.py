@@ -234,6 +234,7 @@ def handle_query(payload, run=True):
         results['fields'] = [row.keys() for row in results['data']]
         results['fields'] = list(set(list(itertools.chain.from_iterable(results['fields']))))
         results['number_of_rows'] = rows_count
+        results['sums_by_field'
         results['percentages'] = []
         results['group_counts'] = []
         for field in results['fields']:
