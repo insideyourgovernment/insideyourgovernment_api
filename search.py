@@ -236,7 +236,7 @@ def handle_query(payload, run=True):
         results['number_of_rows'] = rows_count
         results['sums_by_field'] = {}
         for field in results['fields']:
-            if is_numbefield
+            if is_number_field(field
         results['percentages'] = []
         results['group_counts'] = []
         for field in results['fields']:
