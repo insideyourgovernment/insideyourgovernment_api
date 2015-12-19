@@ -14,7 +14,7 @@ import requests
 import os
 
 def is_number_field(field):
-    indicators = ['number', '
+    indicators = ['number', 'num', 'views', 
 def get_field(l, field):
     results = []
     for d in l:
