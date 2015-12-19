@@ -237,7 +237,7 @@ def handle_query(payload, run=True):
         results['sums_by_field'] = {}
         for field in results['fields']:
             if is_number_field(field):
-                results['sums_by_field'] = 
+                results['sums_by_field'][field] = r.db('public').table(payload['table'])
         results['percentages'] = []
         results['group_counts'] = []
         for field in results['fields']:
