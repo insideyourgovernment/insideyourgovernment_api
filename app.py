@@ -127,6 +127,9 @@ class RetriveHandler(BaseHandler):
         print 'payload', payload
         results = handle_query(payload)
         print results
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "accept, cache-control, origin, x-requested-with, x-file-name, content-type")  
+        
         self.set_header("Content-Type", 'application/json')
         self.write(json.dumps(results))
 
