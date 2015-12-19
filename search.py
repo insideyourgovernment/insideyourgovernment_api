@@ -17,7 +17,8 @@ def is_number_field(field):
     indicators = ['number', 'num', 'views', 'total']
     for indicator in indicators:
         if indicator in field:
-            return Tr
+            return True
+    return F
 def get_field(l, field):
     results = []
     for d in l:
