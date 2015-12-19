@@ -29,7 +29,7 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
         print i, theid, int(number_of_rows)
         #return number_of_rows
     except Exception, err:
-        r.db('public').table('datasets').get(theid).update({"is_number_of_rows_error": True, "number_of_rows_error": traceback.print_exc()}).run(conn, noreply=True)
+        r.db('public').table('datasets').get(theid).update({"is_number_of_rows_error": True, "number_of_rows_error": traceback.format_exc()}).run(conn, noreply=True)
         print count_url
         print traceback.print_exc()
         #return None
