@@ -13,7 +13,8 @@ from datetime import datetime
 import requests
 import os
 
-def is_number_field():
+def is_number_field(field):
+    
 def get_field(l, field):
     results = []
     for d in l:
