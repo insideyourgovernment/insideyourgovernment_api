@@ -64,7 +64,7 @@ def handle_query(payload, run=True):
                     results['data'] = results['data'][0]
                 for sentence_rule in rules['sentences']:
                     if test_rule(sentence_rule['not_none'], results['data']):
-                        results['sentence'] = sentence_rule['se
+                        results['sentence'] = sentence_rule['sentence']
             return results
         else:
             return None
