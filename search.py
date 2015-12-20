@@ -40,6 +40,7 @@ def replace_star(d, groups):
     return new_d
 
 def run_query(groups, query):
+    print 'GROUPS ***', groups
     query = replace_star(query, groups)
     return handle_query(query)
 
