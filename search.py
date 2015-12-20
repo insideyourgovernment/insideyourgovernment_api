@@ -52,7 +52,7 @@ def handle_query(payload, run=True):
             if m:
                 break
         if m:
-            results = run_query(m.groups(), r.db('public').table('rules_for_global_search').get(row['id']).pluck('query').run()['query'])
+            results = run_query(m.groupdict(), r.db('public').table('rules_for_global_search').get(row['id']).pluck('query').run()['query'])
             return results
         else:
             return None
