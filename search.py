@@ -48,7 +48,8 @@ def run_query(groups, query):
     print 'after', query
     return handle_query(query)
 
-def test_rule(not_nones,
+def test_rule(not_nones, data):
+    
 
 def handle_query(payload, run=True):
     if run:
