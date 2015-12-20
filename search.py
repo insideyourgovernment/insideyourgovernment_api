@@ -60,7 +60,7 @@ def handle_query(payload, run=True):
             rules = r.db('public').table('rules_for_global_search').get(row['id']).run()
             results = run_query(m.groupdict(), rules['query'])
             if 'sentences' in rules:
-                for sentence_rule in 
+                for sentence_rule in rules['sentenc
             return results
         else:
             return None
