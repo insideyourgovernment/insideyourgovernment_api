@@ -66,7 +66,7 @@ def handle_query(payload, run=True):
             rules = r.db('public').table('rules_for_global_search').get(row['id']).run()
             results = run_query(m.groupdict(), rules['query'])
             if len(results['data']) == 1:
-                    results['data'] = results['data'][0]
+                results['data'] = results['data'][0]
             if 'sentences' in rules:
                 
                 for sentence_rule in rules['sentences']:
