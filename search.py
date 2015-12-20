@@ -36,7 +36,8 @@ def handle_query(payload, run=True):
             m = re.search(row['id'], payload['global_search_query'])
             if m:
                 break
-          
+        if m:
+            
     
     dbobj = r.db('public').table(payload['table'])
     for key in payload.keys():
