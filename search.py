@@ -28,10 +28,11 @@ def get_field(l, field):
     return results
 
 def handle_query(payload, run=True):
-    if 'global_search_query' in payload:
-        for row in r.db('public').table('
     if run:
         r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run()
+    if 'global_search_query' in payload:
+        for row in r.db('public').table('rules_for_global_search').order_by(
+    
     dbobj = r.db('public').table(payload['table'])
     for key in payload.keys():
         if key in ['get', 'has_fields', 'doesnt_have_fields', 'match', 'has_string', 'match_any_field', 'has_string_in_any_field']:
