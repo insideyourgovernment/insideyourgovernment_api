@@ -88,9 +88,9 @@ def handle_query(payload, run=True):
 
             
     results_for_fields = list(dbobj.run())
-    fields = [row.keys() for row in results_for_fields]
-    fields = list(itertools.chain.from_iterable(fields))
-    fields = sorted(list(set(fields)))
+    #fields = [row.keys() for row in results_for_fields]
+    #fields = list(itertools.chain.from_iterable(fields))
+    #fields = sorted(list(set(fields)))
     
     #joined_data = list(r.db("public").table("police_internal_affairs_allegations").eq_join("organization_id", r.db("public").table("organizations")).map({"right":{
     #        "organization_id": r.row["right"]["id"],
@@ -139,7 +139,9 @@ def handle_query(payload, run=True):
     else:
         rows_per_page = int(10)
     dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)
-    
+    fields = [row.keys() for row in results_for_fields]
+    fields = list(itertools.chain.from_iterable(fields))
+    fields = sorted(list(set(fields)))
     print dbobj    
     #for data in joined_data:
     #    d = {}
