@@ -34,7 +34,9 @@ def replace_star(d, groups):
         if isinstance(v, dict):
             new_d[k] = replace_star(v, groups)
         elif isinstance(v, str):
+            
             new_d[k] = groups[v[1:]] if v.startswith('*') else v
+            print ne
         else:
             new_d[k] = v
     return new_d
