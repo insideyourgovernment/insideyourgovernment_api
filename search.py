@@ -12,6 +12,7 @@ import itertools
 from datetime import datetime
 import requests
 import os
+import re
 
 def is_number_field(field):
     indicators = ['number', 'num', 'views', 'total']
