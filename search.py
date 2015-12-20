@@ -28,6 +28,9 @@ def get_field(l, field):
             results.append(d[field])
     return results
 
+def run_query(groups, query):
+    
+
 def handle_query(payload, run=True):
     if run:
         r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run()
@@ -37,7 +40,7 @@ def handle_query(payload, run=True):
             if m:
                 break
         if m:
-            results = run_query(m.groups(), r.db('public').table('rules_for_global_search').get(row['id']).pluck('query')
+            results = run_query(m.groups(), r.db('public').table('rules_for_global_search').get(row['id']).pluck('query').run()['query'])
             return results
         else:
             return None
