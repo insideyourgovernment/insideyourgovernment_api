@@ -37,7 +37,7 @@ def handle_query(payload, run=True):
             if m:
                 break
         if m:
-            
+            results = run_query(
     
     dbobj = r.db('public').table(payload['table'])
     for key in payload.keys():
