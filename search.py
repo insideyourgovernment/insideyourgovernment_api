@@ -139,9 +139,9 @@ def handle_query(payload, run=True):
     else:
         rows_per_page = int(10)
     dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)
-    fields = [row.keys() for row in results_for_fields]
-    fields = list(itertools.chain.from_iterable(fields))
-    fields = sorted(list(set(fields)))
+    #fields = [row.keys() for row in results_for_fields]
+    #fields = list(itertools.chain.from_iterable(fields))
+    #fields = sorted(list(set(fields)))
     print dbobj    
     #for data in joined_data:
     #    d = {}
