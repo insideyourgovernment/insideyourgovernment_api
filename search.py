@@ -29,7 +29,7 @@ def get_field(l, field):
     return results
 
 def run_query(groups, query):
-    
+    return handle_query(
 
 def handle_query(payload, run=True):
     if run:
