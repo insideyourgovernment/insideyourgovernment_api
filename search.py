@@ -49,7 +49,6 @@ def run_query(groups, query):
     return handle_query(query)
 
 def test_rule(not_nones, data):
-    passed = True
     for k in data:
         if not data[k]:
             return False
