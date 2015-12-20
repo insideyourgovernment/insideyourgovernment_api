@@ -63,7 +63,7 @@ def handle_query(payload, run=True):
                 if len(results['data']) == 1:
                     results['data'] = results['data'][0]
                 for sentence_rule in rules['sentences']:
-                    if 
+                    if test_rule(sentence_rule['not_none'], 
             return results
         else:
             return None
