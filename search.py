@@ -33,7 +33,7 @@ def replace_star(d, groups):
     for k, v in d.items():
         if isinstance(v, dict):
             new_d[k] = replace_star(v, groups)
-        elif isinstance(v, str):
+        elif isinstance(v, str) or isinstance(v, unicode):
             
             new_d[k] = groups[v[1:]] if v.startswith('*') else v
             print v, new_d[k]
