@@ -100,7 +100,7 @@ def handle_query(payload, run=True):
     modified_joined_data = []
     special_names = {'person': 'people'}
     if not 'do_auto_join' in payload:
-        payload['do_auto_join'] = True
+        payload['do_auto_join'] = False # turn it off for now due to performance issues
     if payload['do_auto_join']:
         for field in ids_for_other_tables:
 
