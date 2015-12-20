@@ -57,9 +57,9 @@ def handle_query(payload, run=True):
             if m:
                 break
         if m:
-            rules = r.db('public').table('rules_for_global_search').get(row['id']).plu.run()
+            rules = r.db('public').table('rules_for_global_search').get(row['id']).run()
             results = run_query(m.groupdict(), rules['query'])
-            if 
+            if 'sentences' 
             return results
         else:
             return None
