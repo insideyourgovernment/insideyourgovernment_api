@@ -87,7 +87,7 @@ def handle_query(payload, run=True):
     rows_count = dbobj.count().run()
 
             
-    results_for_fields = list(dbobj.run())
+    #results_for_fields = list(dbobj.run())
     #fields = [row.keys() for row in results_for_fields]
     #fields = list(itertools.chain.from_iterable(fields))
     #fields = sorted(list(set(fields)))
