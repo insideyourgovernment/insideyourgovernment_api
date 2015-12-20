@@ -28,6 +28,17 @@ def get_field(l, field):
             results.append(d[field])
     return results
 
+def replace_star(d, groups):
+    new_d = {}
+    for k, v in d.items():
+        if isinstance(v, dict):
+            new_d[k] = myprint(v, groups)
+        elif isinstance(v, str):
+            new_d[k] = groups[v[1:]] if v.startswith('*') else v
+        else:
+            new_d[k] = v
+    return new_d
+
 def run_query(groups, query):
     
     return handle_query(query)
