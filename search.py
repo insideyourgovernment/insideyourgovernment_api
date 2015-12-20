@@ -29,7 +29,7 @@ def get_field(l, field):
 
 def handle_query(payload, run=True):
     if 'global_search_query' in payload:
-        
+        for row in r.db('public').table('
     if run:
         r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run()
     dbobj = r.db('public').table(payload['table'])
