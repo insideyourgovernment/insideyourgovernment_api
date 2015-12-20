@@ -32,7 +32,7 @@ def replace_star(d, groups):
     new_d = {}
     for k, v in d.items():
         if isinstance(v, dict):
-            new_d[k] = myprint(v, groups)
+            new_d[k] = replace_star(v, groups)
         elif isinstance(v, str):
             new_d[k] = groups[v[1:]] if v.startswith('*') else v
         else:
@@ -40,7 +40,7 @@ def replace_star(d, groups):
     return new_d
 
 def run_query(groups, query):
-    
+    query = replace_star(query, groups)
     return handle_query(query)
 
 def handle_query(payload, run=True):
