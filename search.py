@@ -48,6 +48,8 @@ def run_query(groups, query):
     print 'after', query
     return handle_query(query)
 
+def test_rule(not_nones,
+
 def handle_query(payload, run=True):
     if run:
         r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run()
@@ -64,7 +66,7 @@ def handle_query(payload, run=True):
                     results['data'] = results['data'][0]
                 for sentence_rule in rules['sentences']:
                     if test_rule(sentence_rule['not_none'], results['data']):
-                        results['sentence'] = sentence_rule['sentence']Template('$who $action $what $when').safe_substitute(d)
+                        results['sentence'] = Template(sentence_rule['sentence']).safe_substitute(results['data'])
             return results
         else:
             return None
