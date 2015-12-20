@@ -96,8 +96,8 @@ def handle_query(payload, run=True):
     #        "organization_id": r.row["right"]["id"],
     #        "organization_name": r.row["right"]["name"]
     #    }, "left": r.row["left"]}).zip().run())
-    ids_for_other_tables = [field for field in fields if field.endswith('_id')]
-    modified_joined_data = []
+    #ids_for_other_tables = [field for field in fields if field.endswith('_id')]
+    modified_joined_data = [] 
     special_names = {'person': 'people'}
     if not 'do_auto_join' in payload:
         payload['do_auto_join'] = False # turn it off for now due to performance issues
