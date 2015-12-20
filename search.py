@@ -99,6 +99,10 @@ def handle_query(payload, run=True):
     ids_for_other_tables = [field for field in fields if field.endswith('_id')]
     modified_joined_data = []
     special_names = {'person': 'people'}
+    if not 'do_auto_join' in payload:
+        payload['do_auto_join'] = False
+    else:
+        
     for field in ids_for_other_tables:
         
         #print field
