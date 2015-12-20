@@ -37,7 +37,7 @@ def setup_rethinkdb():
         if 'police' in table or 'records' in table: 
             category = "Policing"
         elif table == 'datasets':
-            category = "Information Technology"
+            category = "Information Technology" 
         elif 'people' in table:
             category = "Human resources"
         else:
