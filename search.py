@@ -87,6 +87,13 @@ def handle_query(payload, run=True):
             print 'not using index'
             dbobj = getattr(dbobj, key)(payload[key])
 
+
+    if 'pluck' in payload:
+        if type(payload['pluck']) is list:
+            dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
+        else:
+            dbobj = getattr(dbobj, 'pluck')(payload['pluck'])            
+            
     if 'order_by' in payload:
         for o in payload['order_by']:
             if o['direction'] == 'desc':
