@@ -37,8 +37,10 @@ def handle_query(payload, run=True):
             if m:
                 break
         if m:
-            results = run_query(
-    
+            results = run_query(m.groups(), r.db('
+            return results
+        else:
+            return None
     dbobj = r.db('public').table(payload['table'])
     for key in payload.keys():
         if key in ['get', 'has_fields', 'doesnt_have_fields', 'match', 'has_string', 'match_any_field', 'has_string_in_any_field']:
