@@ -77,11 +77,6 @@ def handle_query(payload, run=True):
             else:
                 dbobj = getattr(dbobj, key)(payload[key])
 
-    if 'pluck' in payload:
-        if type(payload['pluck']) is list:
-            dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
-        else:
-            dbobj = getattr(dbobj, 'pluck')(payload['pluck'])
 
     if 'filter' in payload:
         key = 'filter'
