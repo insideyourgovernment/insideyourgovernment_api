@@ -59,14 +59,14 @@ def handle_query(payload, run=True):
     
     conn = r.connect( "localhost", 28015).repl()
     if run:
-        r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run()
+        r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run(conn)
     if 'global_search_query' in payload:
-        for row in r.db('public').table('rules_for_global_search').pluck('id').order_by('order').run():
+        for row in r.db('public').table('rules_for_global_search').pluck('id').order_by('order').run(conn):
             m = re.search(row['id'], payload['global_search_query'])
             if m:
                 break
         if m:
-            rules = r.db('public').table('rules_for_global_search').get(row['id']).run()
+            rules = r.db('public').table('rules_for_global_search').get(row['id']).run(conn)
             results = run_query(m.groupdict(), rules['query'])
             if len(results['data']) == 1:
                 results['data'] = results['data'][0]
@@ -81,7 +81,7 @@ def handle_query(payload, run=True):
     dbobj = r.db('public').table(payload['table'])
     if 'get' in payload:
         results = {'data': dbobj.get(payload['get']).run(time_format="raw"), 'payload': payload}
-        table_data = r.db('public').table('tables').get(payload['table']).run()
+        table_data = r.db('public').table('tables').get(payload['table']).run(conn)
         if 'title_template' in table_data:
             d = dict([(item[0].lower().replace(' ', '_'), item[1]) for item in results['data'].items()])
             results['title'] = Template(table_data['title_template']).safe_substitute(d)
@@ -111,7 +111,7 @@ def handle_query(payload, run=True):
 
     if 'filter' in payload:
         key = 'filter'
-        if len(payload['filter'].items()) == 1 and payload['filter'].keys()[0] in r.db('public').table(payload['table']).index_list().run():
+        if len(payload['filter'].items()) == 1 and payload['filter'].keys()[0] in r.db('public').table(payload['table']).index_list().run(conn):
             print 'using index'
             dbobj = dbobj.get_all(payload['filter'].items()[0][1], index=payload['filter'].items()[0][0])
         else:
@@ -133,20 +133,20 @@ def handle_query(payload, run=True):
                 dbobj = getattr(dbobj, 'order_by')(index=o['field'])
     else:
         results = {}
-        results['table'] = r.db('public').table('tables').get(payload['table']).run()
+        results['table'] = r.db('public').table('tables').get(payload['table']).run(conn)
         if 'default_order_by' in results['table']:
             field = results['table']['default_order_by']['field']
-            if field in r.db('public').table(payload['table']).index_list().run():
+            if field in r.db('public').table(payload['table']).index_list().run(conn):
                 dbobj = getattr(dbobj, 'order_by')(index=r.desc(field)) 
             else:
                 dbobj = getattr(dbobj, 'order_by')(r.desc(field))
                 
     
             
-    rows_count = dbobj.count().run()
+    rows_count = dbobj.count().run(conn)
 
             
-    #results_for_fields = list(dbobj.run())
+    #results_for_fields = list(dbobj.run(conn))
     #fields = [row.keys() for row in results_for_fields]
     #fields = list(itertools.chain.from_iterable(fields))
     #fields = sorted(list(set(fields)))
@@ -154,7 +154,7 @@ def handle_query(payload, run=True):
     #joined_data = list(r.db("public").table("police_internal_affairs_allegations").eq_join("organization_id", r.db("public").table("organizations")).map({"right":{
     #        "organization_id": r.row["right"]["id"],
     #        "organization_name": r.row["right"]["name"]
-    #    }, "left": r.row["left"]}).zip().run())
+    #    }, "left": r.row["left"]}).zip().run(conn))
     #ids_for_other_tables = [field for field in fields if field.endswith('_id')]
     modified_joined_data = [] 
     special_names = {'person': 'people'}
@@ -166,7 +166,7 @@ def handle_query(payload, run=True):
             #print field
             #print field[:-3]+'s'
             # get the fields of the table 
-            #results_for_fields = r.db('public').table(field[:-3]+'s').run()
+            #results_for_fields = r.db('public').table(field[:-3]+'s').run(conn)
             #right_fields = [row.keys() for row in results_for_fields]
             #right_fields = list(itertools.chain.from_iterable(right_fields))
             #right_fields = sorted(list(set(right_fields)))
@@ -174,7 +174,7 @@ def handle_query(payload, run=True):
             t = special_names[field[:-3]] if field[:-3] in special_names else field[:-3]+'s'
             if '__' in t:
                 t = t.split('__')[-1]
-            if not t in r.db('public').table_list().run():
+            if not t in r.db('public').table_list().run(conn):
                 continue
             print field, t
             dbobj = dbobj.eq_join(field, r.db("public").table(t))
@@ -213,21 +213,21 @@ def handle_query(payload, run=True):
 
     if 'action' in payload:
         if payload['action'] == 'get_fields':
-            results = list(dbobj.run())
+            results = list(dbobj.run(conn))
             fields = [row.keys() for row in results]
             fields = list(itertools.chain.from_iterable(fields))
             results = sorted(list(set(fields)))
         elif payload['action'] == 'count':
-            results = {'count': dbobj.count().run()}
+            results = {'count': dbobj.count().run(conn)}
         elif payload['action'] == 'percentage_simple_matching':
             if 'match' in payload:
                 base = r.db('public').table(payload['table']).filter(lambda case: case[payload['match']['field']].match(payload['match']['value']))
 
             else:
                 base = r.db('public').table(payload['table']).filter(lambda case: case[payload['has_string']['field']].match('.*?'+payload['has_string']['value']+'.*?'))
-            denominator = base.count().run()
+            denominator = base.count().run(conn)
 
-            numerator = base.filter({payload['numerator']['field']: payload['numerator']['value']}).count().run() 
+            numerator = base.filter({payload['numerator']['field']: payload['numerator']['value']}).count().run(conn) 
 
             if denominator:
                 percentage = float(numerator)/denominator
@@ -236,12 +236,12 @@ def handle_query(payload, run=True):
                 percentage = 'Error: No denominator'    
             results = {'numerator': numerator, 'denominator': denominator, 'percentage': percentage}
         elif payload['action'] == 'get_list':
-            results = [item[payload['field']] for item in list(r.db('public').table(payload['table']).pluck(payload['field']).run())]
+            results = [item[payload['field']] for item in list(r.db('public').table(payload['table']).pluck(payload['field']).run(conn))]
         elif payload['action'] == 'get_set':
-            results = list(set([item[payload['field']] for item in list(r.db('public').table(payload['table']).pluck(payload['field']).run())]))
+            results = list(set([item[payload['field']] for item in list(r.db('public').table(payload['table']).pluck(payload['field']).run(conn))]))
         elif payload['action'] == 'do_basic_mapping':
             dbobj = getattr(dbobj, 'pluck')(payload['field_for_key'], payload['field_for_value'])
-            items = dbobj.run()
+            items = dbobj.run(conn)
             d = {}
             for item in items:
                 if type(item[payload['field_for_key']]) is list:
@@ -258,7 +258,7 @@ def handle_query(payload, run=True):
             results = d
         elif payload['action'] == 'do_row_mapping':
             print 'doing ', payload['action']
-            items = list(dbobj.run())
+            items = list(dbobj.run(conn))
             table_fields = [row.keys() for row in items]
             table_fields = list(set(list(itertools.chain.from_iterable(table_fields))))
             d = {}
@@ -283,7 +283,7 @@ def handle_query(payload, run=True):
         #if type(payload['pluck']) is list:
         #    dbobj = getattr(dbobj, 'pluck')(*payload['pluck'])
         results = {}
-        results['table'] = r.db('public').table('tables').get(payload['table']).run()
+        results['table'] = r.db('public').table('tables').get(payload['table']).run(conn)
         
         special_names_reversed = {value: key for key, value in special_names.items()}
         t = payload['table']
@@ -298,7 +298,7 @@ def handle_query(payload, run=True):
                 for i, row in enumerate(results['data']):
                     print i
                     row[linked_table] = [item for item in linked_table_data if item.get(t) == row['id']]
-                    # consider using group e.g. r.db('public').table('police_internal_affairs_allegations').group('person_id').run()
+                    # consider using group e.g. r.db('public').table('police_internal_affairs_allegations').group('person_id').run(conn)
                     #row[linked_table] = list(r.db('public').table(linked_table).filter({t: row['id']}).run(time_format="raw"))
 
         results['fields'] = [row.keys() for row in results['data']]
@@ -307,18 +307,18 @@ def handle_query(payload, run=True):
         #results['sums_by_field'] = {}
         #for field in results['fields']:
         #    if is_number_field(field):
-        #        results['sums_by_field'][field] = r.db('public').table(payload['table']).sum(field).run()
+        #        results['sums_by_field'][field] = r.db('public').table(payload['table']).sum(field).run(conn)
         results['percentages'] = []
         results['group_counts'] = []
         #for field in results['fields']:
         #    if not field.endswith('_id'):
         #        continue
         #    t = special_names[field[:-3]] if field[:-3] in special_names else field[:-3]+'s'
-        #    if not t in r.db('public').table_list().run():
+        #    if not t in r.db('public').table_list().run(conn):
         #        continue
-        #    g = r.db('public').table(t).group('id').run()
+        #    g = r.db('public').table(t).group('id').run(conn)
         #    
-        #    results['group_counts'].append([t, [[g[item[0]], item[1]] for item in list(sorted(dbobj.group(field).count().run().items(), key=lambda x:x[1], reverse=True))][:10]]) 
+        #    results['group_counts'].append([t, [[g[item[0]], item[1]] for item in list(sorted(dbobj.group(field).count().run(conn).items(), key=lambda x:x[1], reverse=True))][:10]]) 
         results['group_counts'].sort(key=lambda x:x[0])
 
         likely_boolean_fields = [field for field in results['fields'] if field.startswith('is_')]
