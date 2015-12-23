@@ -81,7 +81,7 @@ def handle_query(payload, run=True):
         results = {'data': dbobj.get(payload['get']).run(time_format="raw"), 'payload': payload}
         table_data = r.db('public').table('tables').get(payload['table']).run()
         if 'title_template' in table_data:
-            d = [(item[0], item[1]) for item in results['data'].items()])
+            d = dict([(item[0].lower().replace(' ', '_'), item[1]) for item in results['data'].items()])
             results['title'] = Template(table_data['title_template']).safe_substitute(d)
         else:
             results['title'] = payload['table'] + ' ' + results['data']['id']
