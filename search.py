@@ -230,7 +230,7 @@ def handle_query(payload, run=True):
                 base = r.db('public').table(payload['table']).filter(lambda case: case[payload['has_string']['field']].match('.*?'+payload['has_string']['value']+'.*?'))
             denominator = base.count().run(conn)
 
-            numerator = base.filter({payload['numerator']['field']: payload['numerator']['value']}).count().run(conn) 
+            numerator = base.filter({payload['numerator']['field']: payload['numerator']['value']}).pluck('id').count().run(conn) 
 
             if denominator:
                 percentage = float(numerator)/denominator
