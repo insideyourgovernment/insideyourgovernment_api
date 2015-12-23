@@ -143,8 +143,8 @@ def handle_query(payload, run=True):
                 
     
             
-    rows_count = dbobj.count().run(conn)
-
+    #rows_count = dbobj.count().run(conn)
+    rows_count
             
     #results_for_fields = list(dbobj.run(conn))
     #fields = [row.keys() for row in results_for_fields]
