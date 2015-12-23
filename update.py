@@ -8,14 +8,14 @@ def setup_rethinkdb():
     conn = r.connect( "localhost", 28015).repl()
     #try:
     #    r.db_create("nonpublic").run()
-    #except:
+    #except: 
     #    pass
     #try:
     #    r.db_create("public").run()
     #except:
     #    pass
     db = r.db("public")
-    dbs_and_tables = {'nonpublic': ['third_party_creds', 'subscribers', 'subscriptions', 'users', 'sessions'], 'public': ['crawling_instructions', 'apps', 'police_internal_affairs_cases', 'police_internal_affairs_allegations', 'organizations', 'tables', 'queries', 'people', 'datasets', 'police_response_events', 'changes', 'crawler_log', 'data_from_socrata', 'records', 'records_audit_trails', 'rules_for_global_search']}
+    dbs_and_tables = {'nonpublic': ['third_party_creds', 'subscribers', 'subscriptions', 'users', 'sessions'], 'public': ['crawling_instructions', 'apps', 'police_internal_affairs_cases', 'police_internal_affairs_allegations', 'organizations', 'tables', 'queries', 'people', 'datasets', 'police_response_events', 'changes', 'crawler_log', 'data_from_socrata', 'records', 'records_audit_trails', 'rules_for_global_search', 'site_content']}
     
     for database in dbs_and_tables.keys():
         try:
