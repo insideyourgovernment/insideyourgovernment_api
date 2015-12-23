@@ -221,7 +221,7 @@ def handle_query(payload, run=True):
             fields = list(itertools.chain.from_iterable(fields))
             results = sorted(list(set(fields)))
         elif payload['action'] == 'count':
-            results = {'count': dbobj.count().run(conn)}
+            results = {'count': rows_count}
         elif payload['action'] == 'percentage_simple_matching':
             if 'match' in payload:
                 base = r.db('public').table(payload['table']).filter(lambda case: case[payload['match']['field']].match(payload['match']['value']))
