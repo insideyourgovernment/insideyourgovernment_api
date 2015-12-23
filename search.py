@@ -146,7 +146,7 @@ def handle_query(payload, run=True):
     
     if len(payload) < 3:
     else:
-    rows_count = 0
+     
             
     #results_for_fields = list(dbobj.run(conn))
     #fields = [row.keys() for row in results_for_fields]
