@@ -80,8 +80,8 @@ def handle_query(payload, run=True):
     if 'get' in payload:
         results = {'data': dbobj.get(payload['get']).run(time_format="raw"), 'payload': payload}
         table_data = r.db('public').table('tables').get(payload['table']).run()
-        if 'table_template' in table_data:
-            results['title'] = Template(table_data['table_template']).safe_substitute(results['data'])
+        if 'title_template' in table_data:
+            results['title'] = Template(table_data['title_template']).safe_substitute(results['data'])
         else:
             results['title'] = payload['table'] + ' ' + results['data']['id']
         return results
