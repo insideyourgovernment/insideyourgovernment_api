@@ -145,7 +145,7 @@ def handle_query(payload, run=True):
             
     
     if len(payload) < 3 and not 'filter' in payload:
-        rows_count = r.db('public').table(payload['table']).info().r
+        rows_count = r.db('public').table(payload['table']).info().run(conn)[
     else:
         rows_count = dbobj.count().run(conn)
             
