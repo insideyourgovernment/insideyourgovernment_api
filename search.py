@@ -57,7 +57,7 @@ def test_rule(not_nones, data):
 
 def handle_query(payload, run=True):
     
-    r.connect( "localhost", 28015).repl()
+    conn = r.connect( "localhost", 28015).repl()
     if run:
         r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run()
     if 'global_search_query' in payload:
