@@ -147,7 +147,7 @@ def handle_query(payload, run=True):
     if len(payload) < 3 and not 'filter' in payload:
         rows_count = r.db('public').table(payload['table']).info().run(conn)["doc_count_estimates"]
     else:
-        rows_count = dbobj.count().run(conn)
+        rows_count = dbobj.pluck('id').count().run(conn)
             
     #results_for_fields = list(dbobj.run(conn))
     #fields = [row.keys() for row in results_for_fields]
