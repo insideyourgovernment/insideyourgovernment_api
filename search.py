@@ -80,6 +80,8 @@ def handle_query(payload, run=True):
     if 'get' in payload:
         results = {'data': dbobj.get(payload['get']).run(time_format="raw"), 'payload': payload}
         table_data = r.db('public').table('tables').get(payload['table']).run()
+        if 'table_template' in table_data:
+            
         return results
     for key in payload.keys():
         if key in ['get', 'has_fields', 'doesnt_have_fields', 'match', 'has_string', 'match_any_field', 'has_string_in_any_field']:
