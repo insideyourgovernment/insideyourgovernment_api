@@ -83,7 +83,7 @@ def handle_query(payload, run=True):
         if 'table_template' in table_data:
             results['title'] = Template(table_data['table_template']).safe_substitute(results['data'])
         else:
-            results['title'] = results['data']['id']
+            results['title'] = payload['table'] + ' ' + results['data']['id']
         return results
     for key in payload.keys():
         if key in ['get', 'has_fields', 'doesnt_have_fields', 'match', 'has_string', 'match_any_field', 'has_string_in_any_field']:
