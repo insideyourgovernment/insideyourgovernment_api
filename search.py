@@ -78,7 +78,7 @@ def handle_query(payload, run=True):
             return None
     dbobj = r.db('public').table(payload['table'])
     if 'get' in payload:
-        return dbobj.get(payload['get']).run(time_format="raw")
+        return {'data': dbobj.get(payload['get']).run(time_format="raw"), 'payload': payload}
     for key in payload.keys():
         if key in ['get', 'has_fields', 'doesnt_have_fields', 'match', 'has_string', 'match_any_field', 'has_string_in_any_field']:
             if type(payload[key]) is list and key in ['has_fields']:
