@@ -122,12 +122,13 @@ class ModifyDBHandler(BaseHandler):
 class RetriveHandler(BaseHandler):
     def get(self):
         
-        conn = r.connect( "localhost", 28015).repl()
-        r.db('public').table('queries').insert({'ip_address': self.request.headers.get("X-Real-IP"), 'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run(conn, noreply=True)
+        
         print 'params', params
         payload = json.loads(self.get_argument('payload'))
         print 'payload', payload
         results = handle_query(payload)
+        conn = r.connect( "localhost", 28015).repl()
+        r.db('public').table('queries').insert({'ip_address': self.request.headers.get("X-Real-IP"), 'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run(conn, noreply=True)
         print results
         self.set_header("Access-Control-Allow-Origin", "*")
         self.set_header("Access-Control-Allow-Headers", "accept, cache-control, origin, x-requested-with, x-file-name, content-type")  
