@@ -330,7 +330,7 @@ def handle_query(payload, run=True):
             for field in payload['filter'].keys():
                 if field in likely_boolean_fields:
                     likely_boolean_fields.remove(field)
-        for field in lik
+        for field in []:
         #for field in likely_boolean_fields:
             items_in_field = get_field(results['data'], field)
             numerator = items_in_field.count(True)
