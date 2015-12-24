@@ -125,7 +125,7 @@ class RetriveHandler(BaseHandler):
         x_real_ip = self.request.headers.get("X-Real-IP")
         remote_ip = x_real_ip or self.request.remote_ipparams = urlparse.parse_qs(self.request.body)
         conn = r.connect( "localhost", 28015).repl()
-        r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run(conn)
+        r.db('public').table('queries').insert({'datetime': r.expr(datetime.now(r.make_timezone('-07:00'))), 'payload': payload}).run(conn, noreply=True)
         print 'params', params
         payload = json.loads(self.get_argument('payload'))
         print 'payload', payload
