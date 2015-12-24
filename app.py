@@ -2,6 +2,7 @@ from datetime import date
 import tornado.escape
 import tornado.ioloop
 import tornado.web
+from tornado import web
 import rethinkdb as r
 r.connect( "localhost", 28015).repl()
 import json
