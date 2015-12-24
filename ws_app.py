@@ -9,6 +9,7 @@ define("port", default=8888, type=int)
 
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
+        print 'rendering'
         self.render("ws_index.html")
 
 
