@@ -121,7 +121,9 @@ class ModifyDBHandler(BaseHandler):
             
 class RetriveHandler(BaseHandler):
     def get(self):
-        params = urlparse.parse_qs(self.request.body)
+        
+        x_real_ip = self.request.headers.get("X-Real-IP")
+        remote_ip = x_real_ip or self.request.remote_ipparams = urlparse.parse_qs(self.request.body)
         print 'params', params
         payload = json.loads(self.get_argument('payload'))
         print 'payload', payload
