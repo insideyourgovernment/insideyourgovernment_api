@@ -121,6 +121,8 @@ class ModifyDBHandler(BaseHandler):
             self.write(actions[action](payload))
             
 class RetriveHandler(BaseHandler):
+    
+    @web.asynchronous
     def get(self):
         
         
