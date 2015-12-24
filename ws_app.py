@@ -1,7 +1,7 @@
 import tornado.ioloop
 import tornado.web
 import tornado.websocket
-
+import rethinkdb as r
 from tornado.options import define, options, parse_command_line
 
 define("port", default=8888, type=int)
@@ -19,8 +19,10 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         self.write_message("Welcome!")
 
     def on_message(self, message):
+        conn = r.connect( "localhost", 28015).repl()
         print "New message {}".format(message)
-        self.write_message(message.upper())
+        response = r.db('public').table(message).limit
+        self.write_message(response)
 
     def on_close(self):
         print "Connection closed"
