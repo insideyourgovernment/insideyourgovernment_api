@@ -124,7 +124,7 @@ class RetriveHandler(BaseHandler):
     
     @web.asynchronous
     def get(self):
-        
+        print 
         
         payload = json.loads(self.get_argument('payload'))
         print 'payload', payload
