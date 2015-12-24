@@ -123,7 +123,6 @@ class RetriveHandler(BaseHandler):
     def get(self):
         
         
-        print 'params', params
         payload = json.loads(self.get_argument('payload'))
         print 'payload', payload
         results = handle_query(payload)
