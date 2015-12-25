@@ -20,7 +20,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     
     def open(self, *args):
         print "New connection"
-        self.write_message({'text': "Welcome!"})
+        #self.write_message({'text': "Welcome!"})
 
     def on_message(self, message):
         conn = r.connect( "localhost", 28015).repl()
@@ -28,7 +28,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         
         self.write_message({'table_name': r.db('public').table('tables').get(message).run(conn, time_format="raw")['name']})
         rows = list(r.db('public').table(message).limit(10).run(conn, time_format="raw"))
-        response = {'table': message, 'rows': rows}
+        response = {'component': 'data', 'rows': rows}
         print response
         self.write_message(response)
 
