@@ -26,7 +26,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         conn = r.connect( "localhost", 28015).repl()
         print "New message {}".format(message)
         
-        self.write_message({'component': 'table_data', 'table_name': r.db('public').table('tables').get(message).run(conn, time_format="raw")['name']})
+        self.write_message({'component': 'table_info', 'table_name': r.db('public').table('tables').get(message).run(conn, time_format="raw")['name']})
         rows = list(r.db('public').table(message).limit(10).run(conn, time_format="raw"))
         response = {'component': 'data', 'rows': rows}
         print response
