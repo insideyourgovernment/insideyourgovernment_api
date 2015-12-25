@@ -20,7 +20,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     
     def open(self, *args):
         print "New connection"
-        self.write_message("Welcome!")
+        self.write_message({'text': "Welcome!"})
 
     def on_message(self, message):
         conn = r.connect( "localhost", 28015).repl()
