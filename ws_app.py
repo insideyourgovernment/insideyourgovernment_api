@@ -31,7 +31,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         response = list(response)
         print response
         print 'c'
-        response = {'table': message, 'rows': response}
+        response = {'table': message, 'rows': ro}
         print 'd'
         print response
         self.write_message(response)
