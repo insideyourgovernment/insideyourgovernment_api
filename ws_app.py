@@ -27,6 +27,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print "New message {}".format(message)
         print 'a'
         response = r.db('public').table(message).limit(10).run(conn, time_format="raw")
+        
         print 'b'
         response = list(response)
         print response
