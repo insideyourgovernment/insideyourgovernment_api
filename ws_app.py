@@ -25,8 +25,12 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         conn = r.connect( "localhost", 28015).repl()
         print "New message {}".format(message)
+        print 'a'
         response = r.db('public').table(message).limit(10).run(conn, time_format="raw")
+        print 'b'
         response = list(response)
+        print 'c'
+        
         response = {'table': message, 'rows': response}
         self.write_message(response)
 
