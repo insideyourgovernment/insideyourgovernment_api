@@ -14,6 +14,10 @@ class IndexHandler(tornado.web.RequestHandler):
 
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
+    
+    def check_origin(self, origin):
+        return True
+    
     def open(self, *args):
         print "New connection"
         self.write_message("Welcome!")
