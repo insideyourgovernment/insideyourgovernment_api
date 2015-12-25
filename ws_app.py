@@ -29,7 +29,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         response = r.db('public').table(message).limit(10).run(conn, time_format="raw")
         print 'b'
         response = list(response)
-        print r
+        print response
         print 'c'
         response = {'table': message, 'rows': response}
         print 'd'
