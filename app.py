@@ -177,6 +177,8 @@ def run_query(query, ws_for, ws):
     print query
     conn = yield r.connect(host="localhost", port=28015)
     results = yield query.run(conn)
+    if isinstance(results, int):
+        results = {'count': results
     results['ws_for'] = ws_for
     print query, results
     ws.write_message(results)
