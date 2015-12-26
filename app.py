@@ -177,13 +177,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         conn = r.connect( "localhost", 28015).repl()
-        print "New message {}".format(message)
-        
-        self.write_message({'component': 'table_info', 'table_name': r.db('public').table('tables').get(message).run(conn, time_format="raw")['name']})
-        rows = list(r.db('public').table(message).limit(10).run(conn, time_format="raw"))
-        response = {'component': 'table_rows', 'rows': rows}
-        print response
-        self.write_message(response)
+        response = 
+        self.write_message()
 
     def on_close(self):
         print "Connection closed"
