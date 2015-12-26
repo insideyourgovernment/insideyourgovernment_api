@@ -191,8 +191,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print message
         message = json.loads(message)
         response = r.db('public').table(message['table']).get(message['get']).run(conn)
-        response['ws_for'] = message['ws_for']
-        self.write_message(response)
+        #response['ws_for'] = message['ws_for']
+        #self.write_message(response)
 
     def on_close(self):
         print "Connection closed"
