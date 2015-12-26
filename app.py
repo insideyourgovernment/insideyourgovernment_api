@@ -177,7 +177,7 @@ def run_query(query, ws_for, ws):
     conn = yield r.connect(host="localhost", port=28015)
     results = yield query.run(conn)
     results['ws_for'] = ws_for
-    ws.write_message({key: results})
+    ws.write_message(results)
         
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     
