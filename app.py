@@ -166,6 +166,11 @@ class ConvertPDF2TxtHandler(BaseHandler):
         f = {'results': os.popen('pdf2txt.py %s' % (filename)).read()}
         os.system('rm %s' % (filename))
         self.write(f)
+
+import rethinkdb as r
+from tornado import ioloop, gen
+
+r.set_loop_type("tornado")
         
 @gen.coroutine
 def run_query(query, key, ws):
