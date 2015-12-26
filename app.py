@@ -165,7 +165,30 @@ class ConvertPDF2TxtHandler(BaseHandler):
         f = {'results': os.popen('pdf2txt.py %s' % (filename)).read()}
         os.system('rm %s' % (filename))
         self.write(f)
-                        
+
+class WebSocketHandler(tornado.websocket.WebSocketHandler):
+    
+    def check_origin(self, origin):
+        return True
+    
+    def open(self, *args):
+        print "New connection"
+        #self.write_message({'text': "Welcome!"})
+
+    def on_message(self, message):
+        conn = r.connect( "localhost", 28015).repl()
+        print "New message {}".format(message)
+        
+        self.write_message({'component': 'table_info', 'table_name': r.db('public').table('tables').get(message).run(conn, time_format="raw")['name']})
+        rows = list(r.db('public').table(message).limit(10).run(conn, time_format="raw"))
+        response = {'component': 'table_rows', 'rows': rows}
+        print response
+        self.write_message(response)
+
+    def on_close(self):
+        print "Connection closed"
+
+        
 app = tornado.web.Application([
     (r"/get_session_info/", SessionHandler),
     (r"/login/", LoginHandler),
