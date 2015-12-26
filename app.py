@@ -194,7 +194,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         self.callback = PeriodicCallback(self.send_ping, 30)
         self.callback.start()
     
-    
+    def send_pi
     
     def on_message(self, message):
         print message
