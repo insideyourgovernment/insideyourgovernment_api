@@ -197,6 +197,7 @@ app = tornado.web.Application([
     (r"/retrive/", RetriveHandler),
     (r"/convert_all_pdfs_to_txt/", ConvertAllPDFs2TxtHandler),
     (r"/convert_pdf_to_txt/", ConvertPDF2TxtHandler),
+    (r'/ws/', WebSocketHandler),
 ])
 
 if __name__ == "__main__":
