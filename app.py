@@ -173,7 +173,7 @@ from tornado import ioloop, gen
 r.set_loop_type("tornado")
         
 @gen.coroutine
-def run_query(query, key, ws):
+def run_query(query, key, ws_for, ws):
     conn = yield r.connect(host="localhost", port=28015)
     results = yield query.run(conn)
     ws.write_message({key: results})
@@ -190,7 +190,6 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         print message
         message = json.loads(message)
-        conn = r.connect( "localhost", 28015).repl()
         response = r.db('public').table(message['table']).get(message['get']).run(conn)
         response['ws_for'] = message['ws_for']
         self.write_message(response)
