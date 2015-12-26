@@ -191,6 +191,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def open(self, *args):
         print "New connection"
         #self.write_message({'text': "Welcome!"})
+        self.callback = PeriodicCallback(self.send_ping, 120)
+        self.callback.start()
 
     def on_message(self, message):
         print message
