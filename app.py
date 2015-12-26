@@ -1,6 +1,7 @@
 from datetime import date
 import tornado.escape
 import tornado.ioloop
+import tornado.websocket
 import tornado.web
 from tornado import web
 import rethinkdb as r
