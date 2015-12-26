@@ -177,6 +177,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         #self.write_message({'text': "Welcome!"})
 
     def on_message(self, message):
+        message = json.loads(message)
         conn = r.connect( "localhost", 28015).repl()
         response = r.db('public').table(message['table']).get(message['get']).run(conn)
         response['ws_for'] = message['ws_for']
