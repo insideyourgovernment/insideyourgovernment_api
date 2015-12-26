@@ -177,7 +177,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         conn = r.connect( "localhost", 28015).repl()
-        response = r.db('
+        response = r.db('public').table
         self.write_message()
 
     def on_close(self):
