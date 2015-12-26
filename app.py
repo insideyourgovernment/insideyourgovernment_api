@@ -195,7 +195,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         self.callback.start()
     
     def send_ping(self):
-        self.write_message({
+        self.write_message({'ws_for': 'ping'
     
     def on_message(self, message):
         print message
