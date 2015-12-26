@@ -190,7 +190,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         print message
         message = json.loads(message)
-        response = r.db('public').table(message['table']).get(message['get']).run(conn)
+        r.db('public').table(message['table']).get(message['get']).run(conn)
         #response['ws_for'] = message['ws_for']
         #self.write_message(response)
 
