@@ -166,7 +166,13 @@ class ConvertPDF2TxtHandler(BaseHandler):
         f = {'results': os.popen('pdf2txt.py %s' % (filename)).read()}
         os.system('rm %s' % (filename))
         self.write(f)
-
+        
+@gen.coroutine
+def run_query(query, key, ws):
+    conn = yield r.connect(host="localhost", port=28015)
+    results = yield query.run(conn)
+    ws.write_message({key: results})
+        
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     
     def check_origin(self, origin):
