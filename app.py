@@ -191,7 +191,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         print message
         message = json.loads(message)
-        ioloop.IOLoop.current().add_callback(run_query, r.db('public').table(message['table']).get(message['get']), message['ws_for'], self)
+        if message['ws_for'] == 'page':
+          ioloop.IOLoop.current().add_callback(run_query, r.db('public').table(message['table']).get(message['get']), message['ws_for'], self)
         #response['ws_for'] = message['ws_for']
         #self.write_message(response)
 
