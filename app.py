@@ -173,7 +173,7 @@ from tornado import ioloop, gen
 r.set_loop_type("tornado")
         
 @gen.coroutine
-def run_query(query, key, ws_for, ws):
+def run_query(query, ws_for, ws):
     conn = yield r.connect(host="localhost", port=28015)
     results = yield query.run(conn)
     results['ws_for'] = ws_for
