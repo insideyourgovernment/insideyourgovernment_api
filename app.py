@@ -176,7 +176,7 @@ r.set_loop_type("tornado")
 def run_query(query, key, ws_for, ws):
     conn = yield r.connect(host="localhost", port=28015)
     results = yield query.run(conn)
-    results.update(
+    results['ws_for'] = ws_for
     ws.write_message({key: results})
         
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
