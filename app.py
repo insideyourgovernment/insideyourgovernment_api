@@ -210,6 +210,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         #self.write_message(response)
 
     def on_close(self):
+        self.callback.stop()
         print "Connection closed"
 
         
