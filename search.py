@@ -146,30 +146,12 @@ def get_dbobj(payload):
     else:
         rows_count = dbobj.pluck('id').count().run(conn)
             
-    #results_for_fields = list(dbobj.run(conn))
-    #fields = [row.keys() for row in results_for_fields]
-    #fields = list(itertools.chain.from_iterable(fields))
-    #fields = sorted(list(set(fields)))
-    
-    #joined_data = list(r.db("public").table("police_internal_affairs_allegations").eq_join("organization_id", r.db("public").table("organizations")).map({"right":{
-    #        "organization_id": r.row["right"]["id"],
-    #        "organization_name": r.row["right"]["name"]
-    #    }, "left": r.row["left"]}).zip().run(conn))
-    #ids_for_other_tables = [field for field in fields if field.endswith('_id')]
     modified_joined_data = [] 
     special_names = {'person': 'people'}
     if not 'do_auto_join' in payload:
         payload['do_auto_join'] = False # turn it off for now due to performance issues
     if payload['do_auto_join']:
         for field in ids_for_other_tables:
-
-            #print field
-            #print field[:-3]+'s'
-            # get the fields of the table 
-            #results_for_fields = r.db('public').table(field[:-3]+'s').run(conn)
-            #right_fields = [row.keys() for row in results_for_fields]
-            #right_fields = list(itertools.chain.from_iterable(right_fields))
-            #right_fields = sorted(list(set(right_fields)))
 
             t = special_names[field[:-3]] if field[:-3] in special_names else field[:-3]+'s'
             if '__' in t:
@@ -178,14 +160,9 @@ def get_dbobj(payload):
                 continue
             print field, t
             dbobj = dbobj.eq_join(field, r.db("public").table(t))
-            #d = {"left": r.row["left"], "right": {}}
-            #for right_field in right_fields:
-            #    d["right"][field[:-2]+right_field] = r.row["right"][right_field]
-            #dbobj = dbobj.map(d)
             dbobj = dbobj.merge(  lambda row: {'left': row['right'].coerce_to('array').map(
                           lambda pair: [r.expr(field[:-2]) + pair[0], pair[1]]
                         ).coerce_to('object')}).without({'right': True}).zip()
-            #dbobj = dbobj
 
     
     if 'page' in payload:
