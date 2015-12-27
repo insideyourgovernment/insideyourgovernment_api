@@ -169,7 +169,16 @@ def get_dbobj(payload):
     dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)
     return dbobj
     
-def process_table_get(payload):    
+def process_table_get(payload):
+    if 'get' in payload:
+        results = {'data': dbobj.get(payload['get']).run(time_format="raw"), 'payload': payload}
+        table_data = r.db('public').table('tables').get(payload['table']).run(conn)
+        if 'title_template' in table_data:
+            d = dict([(item[0].lower().replace(' ', '_'), item[1]) for item in results['data'].items()])
+            results['title'] = Template(table_data['title_template']).safe_substitute(d)
+        else:
+            results['title'] = payload['table'] + ' ' + results['data']['id']
+        return results
     
 def handle_query(payload, run=True):
     
