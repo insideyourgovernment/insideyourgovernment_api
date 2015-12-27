@@ -169,6 +169,8 @@ def get_dbobj(payload):
     dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)
     return dbobj
     
+    
+    
 def handle_query(payload, run=True):
     
     conn = r.connect( "localhost", 28015).repl()
