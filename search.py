@@ -74,11 +74,15 @@ def global_search(payload):
     else:
         return None
 
+def get_dbobj(payload)    
+    
 def handle_query(payload, run=True):
     
     conn = r.connect( "localhost", 28015).repl()
     if 'global_search_query' in payload:
         return global_search(payload)
+    
+    dbobj = get_dbobj(payload)
     
     #fields = [row.keys() for row in results_for_fields]
     #fields = list(itertools.chain.from_iterable(fields))
