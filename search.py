@@ -169,7 +169,7 @@ def get_dbobj(payload):
     dbobj = dbobj.slice((page - 1) * rows_per_page, page * rows_per_page)
     return dbobj
     
-def process    
+def process_table_get(payload):    
     
 def handle_query(payload, run=True):
     
