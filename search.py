@@ -180,7 +180,7 @@ def process_table_get(payload):
             results['title'] = payload['table'] + ' ' + results['data']['id']
         return results
     
-def handle_query(payload, run=True):
+def handle_query(payload, run=True, ws=):
     
     conn = r.connect( "localhost", 28015).repl()
     if 'global_search_query' in payload:
