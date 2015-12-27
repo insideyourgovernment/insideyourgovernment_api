@@ -76,15 +76,7 @@ def global_search(payload):
 
 def get_dbobj(payload):
     dbobj = r.db('public').table(payload['table'])
-    if 'get' in payload:
-        results = {'data': dbobj.get(payload['get']).run(time_format="raw"), 'payload': payload}
-        table_data = r.db('public').table('tables').get(payload['table']).run(conn)
-        if 'title_template' in table_data:
-            d = dict([(item[0].lower().replace(' ', '_'), item[1]) for item in results['data'].items()])
-            results['title'] = Template(table_data['title_template']).safe_substitute(d)
-        else:
-            results['title'] = payload['table'] + ' ' + results['data']['id']
-        return results
+    
     for key in payload.keys():
         if key in ['get', 'has_fields', 'doesnt_have_fields', 'match', 'has_string', 'match_any_field', 'has_string_in_any_field']:
             if type(payload[key]) is list and key in ['has_fields']:
