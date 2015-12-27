@@ -59,23 +59,7 @@ def handle_query(payload, run=True):
     
     conn = r.connect( "localhost", 28015).repl()
     if 'global_search_query' in payload:
-        for row in r.db('public').table('rules_for_global_search').pluck('id').order_by('order').run(conn):
-            m = re.search(row['id'], payload['global_search_query'])
-            if m:
-                break
-        if m:
-            rules = r.db('public').table('rules_for_global_search').get(row['id']).run(conn)
-            results = run_query(m.groupdict(), rules['query'])
-            if len(results['data']) == 1:
-                results['data'] = results['data'][0]
-            if 'sentences' in rules:
-                
-                for sentence_rule in rules['sentences']:
-                    if test_rule(sentence_rule['not_none'], results['data']):
-                        results['sentence'] = Template(sentence_rule['sentence']).safe_substitute(results['data'])
-            return results
-        else:
-            return None
+        return 
     dbobj = r.db('public').table(payload['table'])
     if 'get' in payload:
         results = {'data': dbobj.get(payload['get']).run(time_format="raw"), 'payload': payload}
