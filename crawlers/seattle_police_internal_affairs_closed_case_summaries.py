@@ -23,7 +23,7 @@ def parse_txt_files(txt_files=None):
             continue
         print opa_file
         opa_file_dict = {'organization_id': organization_id, 'parsed_txt': parsed_txt}
-        opa_file_dict['links'] = [{'url': 'http://www.seattle.gov/Documents/Departments/OPA/ClosedCaseSummaries/'+filename[:-4]+, 'name': 'Closed case summary'}]
+        opa_file_dict['links'] = [{'url': 'http://www.seattle.gov/Documents/Departments/OPA/ClosedCaseSummaries/'+filename[:-4]+'.pdf', 'name': 'Closed case summary'}]
         regex =  re.search('Complaint Number(?P<num>.*?)Issued', opa_file)
 
         opa_file_dict['Complaint number'] = regex.group('num').strip(' :').replace(' ', '') if regex else filename[:filename.find('ccs')]
