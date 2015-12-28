@@ -120,7 +120,7 @@ def parse_txt_files(txt_files=None):
     from dateutil.parser import parse
     import datetime
     mindate = datetime.date(datetime.MINYEAR, 1, 1)
-    opa_files = sorted(opa_files, key=lambda x: parse(x['Issued date']).date() if '/' in x['Issued date'] else mindate, reverse=True)
+    #opa_files = sorted(opa_files, key=lambda x: parse(x['Issued date']).date() if '/' in x['Issued date'] else mindate, reverse=True)
 
 
 def download():
