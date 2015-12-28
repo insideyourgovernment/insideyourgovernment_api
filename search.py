@@ -179,6 +179,26 @@ def process_table_get(payload):
         results['title'] = payload['table'] + ' ' + results['data']['id']
     return results
     
+def action_do_row_mapping(payload, items):
+    #items = list(dbobj.run(conn))
+    table_fields = [row.keys() for row in items]
+    table_fields = list(set(list(itertools.chain.from_iterable(table_fields))))
+    d = {}
+    for item in items:
+        if type(item[payload['field_for_key']]) is list:
+            for k in item[payload['field_for_key']]:
+                if not k in d:
+                    d[k] = [item]
+                else:
+                    d[k].append(item)
+        else:
+            if not item[payload['field_for_key']] in d:
+                d[item[payload['field_for_key']]] = [item]
+            else:
+                d[item[payload['field_for_key']]].append(item)
+    results = {'data': d, 'table_fields': table_fields, 'keys': d.keys()}
+    return results
+    
 def handle_query(payload, run=True, ws=None):
     
     conn = r.connect( "localhost", 28015).repl()

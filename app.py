@@ -16,6 +16,8 @@ from datetime import datetime
 import requests
 import os
 from search import handle_query
+import inspect
+import search
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -203,6 +205,11 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         message = json.loads(message)
         if message['ws_for'] != 'count':
             ioloop.IOLoop.current().add_callback(run_query, r.db('public').table(message['table']).get(message['get']), message['ws_for'], self)
+            if action in message:
+                all_functions = dict(inspect.getmembers(search, inspect.isfunction))
+                f = 'action_'+message['action']
+                if f in all_functions:
+                    all_functions[f]()
         elif message['ws_for'] == 'count':
             print '***', message
             ioloop.IOLoop.current().add_callback(run_query, r.db('public').table(message['table']).count(), message['ws_for'], self)
