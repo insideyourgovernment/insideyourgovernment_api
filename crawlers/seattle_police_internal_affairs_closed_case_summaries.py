@@ -35,7 +35,7 @@ def parse_txt_files(txt_files=None):
             opa_file_dict['Issued date'] = regex.group('date').strip(' :')
             print opa_file_dict['Issued date']
             opa_file_dict['Issued date'] = opa_file_dict['Issued date'][:2]+'/'+opa_file_dict['Issued date'][2:4]+'/'+opa_file_dict['Issued date'][4:]
-            print print opa_file_dict['Issued date']
+            print opa_file_dict['Issued date']
         if opa_file_dict['Issued date']:
             from pytz import timezone
             from datetime import date
