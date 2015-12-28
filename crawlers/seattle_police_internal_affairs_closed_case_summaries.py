@@ -33,10 +33,13 @@ def parse_txt_files(txt_files=None):
         regex = re.search('lssued Date(?P<date>.*?)Named', opa_file)
         if regex:
             opa_file_dict['Issued date'] = regex.group('date').strip(' :')
+            opa_file_dict['Issued date'] = 
         if opa_file_dict['Issued date']:
             from pytz import timezone
             from datetime import date
             from datetime import datetime
+            import dateutil
+            import dateutil.parser
             tz = timezone('America/Los_Angeles')
             try:
                 opa_file_dict['Issued date'] = dateutil.parser.parse(opa_file_dict['Issued date'])
