@@ -30,6 +30,9 @@ def parse_txt_files(txt_files=None):
         opa_file_dict['id'] = organization_id+'_'+opa_file_dict['Complaint number']
         regex = re.search('Issued Date(?P<date>.*?)Named', opa_file)
         opa_file_dict['Issued date'] = regex.group('date').strip(' :') if regex else None
+        regex = re.search('lssued Date(?P<date>.*?)Named', opa_file)
+        if regex:
+            opa_file_dict['Issued date'] = regex.group('date').strip(' :')
         if regex:
             from pytz import timezone
             from datetime import date
@@ -39,9 +42,7 @@ def parse_txt_files(txt_files=None):
                 opa_file_dict['Issued date'] = dateutil.parser.parse(opa_file_dict['Issued date'])
             except:
                 pass
-        #regex = re.search('lssued Date(?P<date>.*?)Named', opa_file)
-        #if regex:
-        #    opa_file_dict['Issued date'] = regex.group('date').strip(' :')
+        
 
         regex = re.search('OPA Finding(?P<findings>.*?)Final', opa_file)
         opa_file_dict['OPA finding'] = regex.group('findings').strip(' :') if regex else None
