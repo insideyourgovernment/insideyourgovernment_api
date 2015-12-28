@@ -21,7 +21,7 @@ def parse_txt_files(txt_files=None):
         opa_file = str(parsed_txt).replace('\n', ' ').replace('  ', ' ')
         if not opa_file:
             continue
-        print opa_file
+        #print opa_file
         opa_file_dict = {'organization_id': organization_id, 'parsed_txt': parsed_txt}
         opa_file_dict['links'] = [{'url': 'http://www.seattle.gov/Documents/Departments/OPA/ClosedCaseSummaries/'+filename[:-4]+'.pdf', 'name': 'Closed case summary'}]
         regex =  re.search('Complaint Number(?P<num>.*?)Issued', opa_file)
@@ -33,7 +33,9 @@ def parse_txt_files(txt_files=None):
         regex = re.search('lssued Date(?P<date>.*?)Named', opa_file)
         if regex:
             opa_file_dict['Issued date'] = regex.group('date').strip(' :')
+            print opa_file_dict['Issued date']
             opa_file_dict['Issued date'] = opa_file_dict['Issued date'][:2]+'/'+opa_file_dict['Issued date'][2:4]+'/'+opa_file_dict['Issued date'][4:]
+            print print opa_file_dict['Issued date']
         if opa_file_dict['Issued date']:
             from pytz import timezone
             from datetime import date
@@ -111,7 +113,7 @@ def parse_txt_files(txt_files=None):
 
     reload(sys)  
     sys.setdefaultencoding('utf8')
-    print opa_files
+    #print opa_files
     
     
     db.table('police_internal_affairs_cases').insert(opa_files, conflict='replace').run(conn)
@@ -132,7 +134,7 @@ def download():
     html = requests.get('http://www.seattle.gov/opa/closed-case-summaries').text
     os.system('mkdir pdfs')
     files = re.findall('ClosedCaseSummaries/(?P<filename>.*?)\.pdf', html)
-    print files
+    #print files
     for f in files:
         if not f+'.pdf' in os.listdir(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs'):
             os.system('wget -O %s.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs/%s.pdf http://www.seattle.gov/Documents/Departments/OPA/ClosedCaseSummaries/%s.pdf' % (base, f, f))
@@ -140,9 +142,9 @@ def download():
     files = sorted([f for f in os.listdir(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs')])
     new_files = []
     for filename in files:
-        print filename
+        #print filename
         if not filename[:-4]+'.txt' in os.listdir(base+'.crawler_data/seattle_police_internal_affairs_closed_cases/txts'):
-            print 'converting'
+            #print 'converting'
             os.system('pdf2txt.py -A %s.crawler_data/seattle_police_internal_affairs_closed_cases/pdfs/%s > %s.crawler_data/seattle_police_internal_affairs_closed_cases/txts/%s' % (base, filename, base, filename[:-4]+'.txt'))
             new_files.append(filename[:-4]+'.txt')
     parse_txt_files(new_files)
@@ -153,6 +155,6 @@ if __name__ == "__main__":
         if sys.argv[1] == 'start_over':
             db.table('police_internal_affairs_cases').delete().run(conn)
         parse_txt_files()
-        print 'parsed txt'
+        #print 'parsed txt'
     else:
         download()
