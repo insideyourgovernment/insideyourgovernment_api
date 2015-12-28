@@ -42,7 +42,7 @@ def parse_txt_files(txt_files=None):
             import dateutil.parser
             tz = timezone('America/Los_Angeles')
             try:
-                opa_file_dict['Issued date'] = dateutil.parser.parse(opa_file_dict['Issued date'])
+                opa_file_dict['Issued date'] = tz.localize(dateutil.parser.parse(opa_file_dict['Issued date']))
             except:
                 pass
         
