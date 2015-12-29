@@ -189,6 +189,8 @@ def run_query(query, ws_for, ws):
 @gen.coroutine
 def get_items(payload, action_function, ws):
     dbobj = search.get_dbobj(payload)
+    conn = yield r.connect(host="localhost", port=28015)
+    items = yield dbobj.run(conn)
     results = action_function
     ws.write_message(results)
         
