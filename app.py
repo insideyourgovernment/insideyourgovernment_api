@@ -188,6 +188,8 @@ def run_query(query, ws_for, ws):
     
 @gen.coroutine
 def get_items(payload, action_function, ws):
+    dbobj = search.get_dbobj(payload)
+    results = action_function
     ws.write_message(results)
         
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
