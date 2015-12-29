@@ -191,7 +191,7 @@ def get_items(payload, action_function, ws):
     dbobj = search.get_dbobj(payload)
     conn = yield r.connect(host="localhost", port=28015)
     items = yield dbobj.run(conn)
-    results = action_function
+    results = action_function(payload, items)
     ws.write_message(results)
         
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
