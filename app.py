@@ -209,7 +209,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 all_functions = dict(inspect.getmembers(search, inspect.isfunction))
                 f = 'action_'+message['action']
                 if f in all_functions:
-                    all_functions[f]()
+                    all_functions[f](payload, items)
             else:
                 ioloop.IOLoop.current().add_callback(run_query, r.db('public').table(message['table']).get(message['get']), message['ws_for'], self)
         elif message['ws_for'] == 'count':
