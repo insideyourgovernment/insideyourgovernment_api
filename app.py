@@ -218,7 +218,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 f = 'action_'+message['action']
                 if f in all_functions:
                     action_function = all_functions[f]
-                    ioloop.IOLoop.current().add_callback(get_items, payload, action_function, self)
+                    ioloop.IOLoop.current().add_callback(get_items, message, action_function, self)
                     
             else:
                 ioloop.IOLoop.current().add_callback(run_query, r.db('public').table(message['table']).get(message['get']), message['ws_for'], self)
