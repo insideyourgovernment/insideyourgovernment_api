@@ -204,12 +204,14 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print message
         message = json.loads(message)
         if message['ws_for'] != 'count':
-            ioloop.IOLoop.current().add_callback(run_query, r.db('public').table(message['table']).get(message['get']), message['ws_for'], self)
+            
             if action in message:
                 all_functions = dict(inspect.getmembers(search, inspect.isfunction))
                 f = 'action_'+message['action']
                 if f in all_functions:
                     all_functions[f]()
+            else:
+                ioloop.IOLoop.current().add_callback(run_query, r.db('public').table(message['table']).get(message['get']), message['ws_for'], self)
         elif message['ws_for'] == 'count':
             print '***', message
             ioloop.IOLoop.current().add_callback(run_query, r.db('public').table(message['table']).count(), message['ws_for'], self)
