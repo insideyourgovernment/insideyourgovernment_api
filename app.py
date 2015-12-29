@@ -185,6 +185,9 @@ def run_query(query, ws_for, ws):
     results['ws_for'] = ws_for
     print query, results
     ws.write_message(results)
+    
+@gen.coroutine
+
         
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     
