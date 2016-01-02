@@ -185,7 +185,7 @@ def run_query(query, ws_for, ws):
         results = {'count': results}
     results['ws_for'] = ws_for
     print query, results
-    ws.write_message(results)
+    ws.send(results)
     
 @gen.coroutine
 def get_items(payload, action_function, ws):
@@ -193,7 +193,7 @@ def get_items(payload, action_function, ws):
     conn = yield r.connect(host="localhost", port=28015)
     items = yield dbobj.run(conn)
     results = action_function(payload, items)
-    ws.write_message(results)
+    ws.send(results)
         
 class WebSocketHandler(SockJSConnection):
     
@@ -202,12 +202,12 @@ class WebSocketHandler(SockJSConnection):
     
     def open(self, *args):
         print "New connection"
-        #self.write_message({'text': "Welcome!"})
+        #self.send({'text': "Welcome!"})
         self.callback = PeriodicCallback(self.send_ping, 30)
         self.callback.start()
     
     def send_ping(self):
-        self.write_message({'ws_for': 'ping'})
+        self.send({'ws_for': 'ping'})
     
     def on_message(self, message):
         print message
@@ -227,7 +227,7 @@ class WebSocketHandler(SockJSConnection):
             print '***', message
             ioloop.IOLoop.current().add_callback(run_query, r.db('public').table(message['table']).count(), message['ws_for'], self)
         #response['ws_for'] = message['ws_for']
-        #self.write_message(response)
+        #self.send(response)
 
     def on_close(self):
         self.callback.stop()
