@@ -18,6 +18,7 @@ import os
 from search import handle_query
 import inspect
 import search
+from sockjs.tornado import SockJSRouter, SockJSConnection
 
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
