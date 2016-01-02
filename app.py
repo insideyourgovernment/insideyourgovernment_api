@@ -233,7 +233,7 @@ class WebSocketHandler(SockJSConnection):
         self.callback.stop()
         print "Connection closed"
         
-EchoRouter = SockJSRouter(EchoConnection, '/ws/')
+EchoRouter = SockJSRouter(WebSocketHandler, '/ws/')
         
 app = tornado.web.Application([
     (r"/get_session_info/", SessionHandler),
