@@ -243,9 +243,11 @@ app = tornado.web.Application([
     (r"/convert_all_pdfs_to_txt/", ConvertAllPDFs2TxtHandler),
     (r"/convert_pdf_to_txt/", ConvertPDF2TxtHandler),
     (r'/ws/', WebSocketHandler),
-])
+]+EchoRouter.urls)
 
 if __name__ == "__main__":
-    
+    EchoRouter = SockJSRouter(EchoConnection, '/ws/')
+
+    app = web.Application(EchoRouter.urls)
     app.listen(8000) 
     tornado.ioloop.IOLoop.current().start()
