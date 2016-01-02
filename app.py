@@ -244,6 +244,7 @@ urls = [
     (r"/convert_pdf_to_txt/", ConvertPDF2TxtHandler),
     
 ]+EchoRouter.urls
+print urls
 app = tornado.web.Application(urls)
 
 if __name__ == "__main__":
