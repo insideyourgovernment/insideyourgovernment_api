@@ -232,7 +232,8 @@ class WebSocketHandler(SockJSConnection):
     def on_close(self):
         self.callback.stop()
         print "Connection closed"
-
+        
+EchoRouter = SockJSRouter(EchoConnection, '/ws/')
         
 app = tornado.web.Application([
     (r"/get_session_info/", SessionHandler),
@@ -246,8 +247,6 @@ app = tornado.web.Application([
 ]+EchoRouter.urls)
 
 if __name__ == "__main__":
-    EchoRouter = SockJSRouter(EchoConnection, '/ws/')
-
-    app = web.Application(EchoRouter.urls)
+    
     app.listen(8000) 
     tornado.ioloop.IOLoop.current().start()
