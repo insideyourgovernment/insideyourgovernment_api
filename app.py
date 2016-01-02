@@ -233,7 +233,7 @@ class WebSocketHandler(SockJSConnection):
         self.callback.stop()
         print "Connection closed"
         
-EchoRouter = SockJSRouter(WebSocketHandler, '/ws')
+WSRouter = SockJSRouter(WebSocketHandler, '/ws')
 urls = [
     (r"/get_session_info/", SessionHandler),
     (r"/login/", LoginHandler),
@@ -243,7 +243,7 @@ urls = [
     (r"/convert_all_pdfs_to_txt/", ConvertAllPDFs2TxtHandler),
     (r"/convert_pdf_to_txt/", ConvertPDF2TxtHandler),
     
-]+EchoRouter.urls
+]+WS.urls
 print urls
 app = tornado.web.Application(urls)
 
