@@ -7,3 +7,4 @@ rethinkdb
 python-dateutil
 BeautifulSoup4
 joblib
+sockjs-tornado

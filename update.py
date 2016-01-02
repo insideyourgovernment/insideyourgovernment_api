@@ -42,7 +42,7 @@ def setup_rethinkdb():
             category = "Human resources"
         else:
             category = "Inside Your Government"
-        r.db('public').table('tables').insert({'id': table, 'name': table.replace('_', ' ').capitalize(), 'number_of_rows': 0, 'categories': [category]}, conflict='update').run()
+        r.db('public').table('tables').insert({'id': table, 'name': table.replace('_', ' ').capitalize(), 'number_of_rows': 0, 'categories': [category]}, conflict='update').run() 
     
 def update(force=False):
     #fetch_dry_run_results = os.popen('git fetch --dry-run').read()
