@@ -234,7 +234,7 @@ class WebSocketHandler(SockJSConnection):
         print "Connection closed"
         
 EchoRouter = SockJSRouter(WebSocketHandler, '/ws/')
-urls 
+ur
 app = tornado.web.Application(urls)
 
 if __name__ == "__main__":
