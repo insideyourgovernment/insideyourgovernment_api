@@ -195,7 +195,7 @@ def get_items(payload, action_function, ws):
     results = action_function(payload, items)
     ws.write_message(results)
         
-class WebSocketHandler(tornado.websocket.WebSocketHandler):
+class WebSocketHandler(SockJSConnection):
     
     def check_origin(self, origin):
         return True
