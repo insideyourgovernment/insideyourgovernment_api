@@ -12,7 +12,7 @@ for case_type in ['BURGLARY', 'ROBBERY', 'ASSUALT']:
     base_url = 'http://web1.seattle.gov/police/records/PoliceReports/'
     links = re.findall('<a class="med_blue" href=\'(?P<url>PoliceReport.ashx\?go=\d+)\' target="_blank">.*\*</a', results)
     for link in links:
-        os.system('mdkir /home/ubuntu/spd_police_reports/')
+        os.system('mkdir /home/ubuntu/spd_police_reports/')
         if link[link.find('=')+1:]+".pdf" in os.listdir('/home/ubuntu/spd_police_reports/'):
             #print  link[link.find('=')+1:]+".pdf", os.listdir('.')
             continue
