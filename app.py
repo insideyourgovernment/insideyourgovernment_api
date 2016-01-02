@@ -233,7 +233,7 @@ class WebSocketHandler(SockJSConnection):
         self.callback.stop()
         print "Connection closed"
         
-EchoRouter = SockJSRouter(WebSocketHandler, '/ws/')
+EchoRouter = SockJSRouter(WebSocketHandler, '/ws')
 urls = [
     (r"/get_session_info/", SessionHandler),
     (r"/login/", LoginHandler),
