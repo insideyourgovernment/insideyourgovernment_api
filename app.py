@@ -243,7 +243,7 @@ urls = [
     (r"/convert_all_pdfs_to_txt/", ConvertAllPDFs2TxtHandler),
     (r"/convert_pdf_to_txt/", ConvertPDF2TxtHandler),
     
-]+WS.urls
+]+WSRouter.urls
 print urls
 app = tornado.web.Application(urls)
 
