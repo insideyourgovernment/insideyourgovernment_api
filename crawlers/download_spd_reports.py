@@ -16,7 +16,7 @@ for case_type in ['BURGLARY', 'ROBBERY', 'ASSUALT']:
         if link[link.find('=')+1:]+".pdf" in os.listdir('/home/ubuntu/spd_police_reports/'):
             #print  link[link.find('=')+1:]+".pdf", os.listdir('.')
             continue
-        cmd = "curl -s --cookie /tmp/cookiefile '"+base_url+link+"' -k > /home/ubuntu/redactvideodotorg/static/police_reports/"+link[link.find('=')+1:]+".pdf"
+        cmd = "curl -s --cookie /tmp/cookiefile '"+base_url+link+"' -k > /home/ubuntu/spd_police_reports/"+link[link.find('=')+1:]+".pdf"
         print cmd
         results = os.popen(cmd).read()
         print results
