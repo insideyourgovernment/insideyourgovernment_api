@@ -214,7 +214,7 @@ class WebSocketHandler(SockJSConnection):
         message = json.loads(message)
         if message['ws_for'] != 'count':
             
-            if action in message:
+            if "action" in message:
                 all_functions = dict(inspect.getmembers(search, inspect.isfunction))
                 f = 'action_'+message['action']
                 if f in all_functions:
