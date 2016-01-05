@@ -47,7 +47,7 @@ def do():
         d = {}
         for key in row.keys():
             if isinstance(row[key], dict):
-                d.update(d[key])
+                d.update(row[key])
             else:
                 d[key] = row[key]
         d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
