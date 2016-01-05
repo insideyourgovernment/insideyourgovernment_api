@@ -50,7 +50,7 @@ def do():
             if isinstance(row[key], dict):
                 d.update(d[key])
             else:
-                d[key
+                d[key] = row[
         d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
         d['api_url'] = d['api_url'][:-14]+d['id']+'.json'
         
