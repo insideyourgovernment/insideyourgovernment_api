@@ -54,7 +54,7 @@ def do():
         d['api_url'] = d['api_url'][:-14]+d['id']+'.json'
         url = '%s?$select=:created_at&$order=:created_at&$limit=1&$$app_token=%s' % (d['api_url'], app_token)
         try:
-            d['created_at'] = requests.get(url).json()[':created_at']
+            d['created_at'] = requests.get(url).json()[0][':created_at']
         except:
             print url, 'created_at error'
         inputs.append([i, d['id'], d['api_url'], app_token, tables_list, d])
