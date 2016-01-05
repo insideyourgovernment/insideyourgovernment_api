@@ -53,7 +53,7 @@ def do():
         d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
         d['api_url'] = d['api_url'][:-14]+d['id']+'.json'
         try:
-            d['created_at'] = requests.get('%s?$select=:created_at&$order=:created_at&$limit=1' % (d['api_url']).json()['results']
+            d['created_at'] = requests.get('%s?$select=:created_at&$order=:created_at&$limit=1&$$app_token=%s' % (d['api_url'], app_token).json()[':created_at']
         except:
             print 'created_at error'
         inputs.append([i, d['id'], d['api_url'], app_token, tables_list, d])
