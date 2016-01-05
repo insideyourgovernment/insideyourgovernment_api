@@ -15,11 +15,6 @@ tz = timezone('America/Los_Angeles')
 
 def run_count(i, theid, api_url, app_token, tables_list, d):
     conn = r.connect( "localhost", 28015).repl()
-    #table = 'socrata_dataset_'+theid.replace('-', '_') # rethinkdb doesn't allow -
-    #if not table in tables_list:
-        
-    #    t = r.db('public').table_create(table).run(conn, noreply=True)
-    #    t = r.db('public').table('tables').insert({'id': table, 'name': d['name'], 'categories': ['Socrata datasets']}).run(conn, noreply=True)
     count_url = '%s?$select=count(*)&$$app_token=%s' % (api_url, app_token)
     try:
         count_data = requests.get(count_url, verify=False).json()
@@ -27,12 +22,10 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
         
         r.db('public').table('datasets').get(theid).update({"number_of_rows": int(number_of_rows), "is_number_of_rows_error": False}).run(conn, noreply=True)
         print i, theid, int(number_of_rows)
-        #return number_of_rows
     except Exception, err:
         r.db('public').table('datasets').get(theid).update({"is_number_of_rows_error": True, "number_of_rows_error": traceback.format_exc()}).run(conn, noreply=True)
         print count_url
         print traceback.print_exc()
-        #return None
     
 
 def do():
