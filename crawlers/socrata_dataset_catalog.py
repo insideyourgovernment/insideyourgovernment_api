@@ -30,7 +30,7 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
     url = '%s?$select=:created_at&$order=:created_at&$limit=1&$$app_token=%s' % (api_url, app_token)
     try:
         created_at = requests.get(url).json()[0][':created_at']
-        r.db('public').table('datasets').get(theid).update({"created_at": c}).run(conn, noreply=True)
+        r.db('public').table('datasets').get(theid).update({"created_at": created_at}).run(conn, noreply=True)
     except Exception, err:
         print url, traceback.print_exc()
 
