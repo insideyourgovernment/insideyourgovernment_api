@@ -27,7 +27,11 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
         r.db('public').table('datasets').get(theid).update({"is_number_of_rows_error": True, "number_of_rows_error": traceback.format_exc()}).run(conn, noreply=True)
         print count_url
         print count_data, traceback.print_exc()
-    
+    url = '%s?$select=:created_at&$order=:created_at&$limit=1&$$app_token=%s' % (d['api_url'], app_token)
+    try:
+        d['created_at'] = requests.get(url).json()[0][':created_at']
+    except Exception, err:
+        print url, traceback.print_exc()
 
 def do():
     import rethinkdb as r
@@ -52,11 +56,7 @@ def do():
                 d[key] = row[key]
         d['api_url'] = d['permalink'].replace('https', 'http').replace('/d/', '/resource/') + '.json'
         d['api_url'] = d['api_url'][:-14]+d['id']+'.json'
-        url = '%s?$select=:created_at&$order=:created_at&$limit=1&$$app_token=%s' % (d['api_url'], app_token)
-        try:
-            d['created_at'] = requests.get(url).json()[0][':created_at']
-        except Exception, err:
-            print url, traceback.print_exc()
+        
         inputs.append([i, d['id'], d['api_url'], app_token, tables_list, d])
         modified_data.append(d)
     print 'trying insert'
