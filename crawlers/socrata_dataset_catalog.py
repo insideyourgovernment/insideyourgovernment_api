@@ -54,16 +54,9 @@ def do():
         d.update(row)
         for key in d.keys():
             if isinstance(d[key], dict):
-                d.update(d[key])    
-        #d.update(row['resource'])
-        #d.update(row['resource']['view_count'])
-        #d.update(row['classification'])
-        # https://data.cityofnewyork.us/Public-Safety/Disposition-Of-Offensive-Language-Allegations-2007/xah7-gu5w
-        # https://data.cityofnewyork.us/resource/xah7-gu5w.json
-        # use permalink
+                d.update(d[key])
         d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
         d['api_url'] = d['api_url'][:-14]+d['id']+'.json'
-        # ?$select=count(*)&$$app_token=%s' 
         
         inputs.append([i, d['id'], d['api_url'], app_token, tables_list, d])
         modified_data.append(d)
