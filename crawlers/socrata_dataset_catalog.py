@@ -50,7 +50,7 @@ def do():
                 d.update(row[key])
             else:
                 d[key] = row[key]
-        d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
+        d['api_url'] = d['permalink'].replace('https', 'http').replace('/d/', '/resource/') + '.json'
         d['api_url'] = d['api_url'][:-14]+d['id']+'.json'
         url = '%s?$select=:created_at&$order=:created_at&$limit=1&$$app_token=%s' % (d['api_url'], app_token)
         try:
