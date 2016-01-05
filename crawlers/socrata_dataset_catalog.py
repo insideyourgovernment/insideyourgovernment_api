@@ -16,6 +16,7 @@ tz = timezone('America/Los_Angeles')
 def run_count(i, theid, api_url, app_token, tables_list, d):
     conn = r.connect( "localhost", 28015).repl()
     count_url = '%s?$select=count(*)&$$app_token=%s' % (api_url, app_token)
+    count_data = None
     try:
         count_data = requests.get(count_url, verify=False).json()
         
