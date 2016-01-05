@@ -46,11 +46,11 @@ def do():
     for i, row in enumerate(data):
         d = {}
         d.update(row)
-        for key in d.keys():
-            if isinstance(d[key], dict):
+        for key in row.keys():
+            if isinstance(row[key], dict):
                 d.update(d[key])
             else:
-                
+                d[key
         d['api_url'] = d['permalink'].replace('/d/', '/resource/') + '.json'
         d['api_url'] = d['api_url'][:-14]+d['id']+'.json'
         
