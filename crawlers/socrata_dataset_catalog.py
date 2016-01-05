@@ -18,6 +18,7 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
     count_url = '%s?$select=count(*)&$$app_token=%s' % (api_url, app_token)
     try:
         count_data = requests.get(count_url, verify=False).json()
+        
         number_of_rows = int(count_data[0][count_data[0].keys()[0]]) # sometimes key is count_1 instead of count
         
         r.db('public').table('datasets').get(theid).update({"number_of_rows": int(number_of_rows), "is_number_of_rows_error": False}).run(conn, noreply=True)
@@ -25,7 +26,7 @@ def run_count(i, theid, api_url, app_token, tables_list, d):
     except Exception, err:
         r.db('public').table('datasets').get(theid).update({"is_number_of_rows_error": True, "number_of_rows_error": traceback.format_exc()}).run(conn, noreply=True)
         print count_url
-        print traceback.print_exc()
+        print count_data, traceback.print_exc()
     
 
 def do():
