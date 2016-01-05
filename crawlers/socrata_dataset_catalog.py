@@ -3,7 +3,7 @@ import multiprocessing
 import traceback
 import requests
 
-num_cores = multiprocessing.cpu_count()*2
+num_cores = multiprocessing.cpu_count()*20
 import rethinkdb as r
 
 import dateutil
