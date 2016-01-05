@@ -45,7 +45,6 @@ def do():
     tables_list = r.db('public').table_list().run(conn)
     for i, row in enumerate(data):
         d = {}
-        d.update(row)
         for key in row.keys():
             if isinstance(row[key], dict):
                 d.update(d[key])
